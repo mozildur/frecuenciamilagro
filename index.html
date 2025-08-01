@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -78,19 +79,21 @@
   <p>Transmisión 24/7 para tu paz interior ✨</p>
 
   <div id="player-container">
-    <!-- Reproductor -->
+    <!-- 🎶 Reproductor visible -->
+    <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012"
+            height="110" width="100%" scrolling="no" style="border:none;"></iframe>
+
+    <!-- 🧠 Script para títulos, carátula e historial -->
     <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=946'></script>
 
-    <!-- Título actual -->
+    <!-- 🎵 Título de la canción -->
     <div id='sonic_title'></div>
 
-    <!-- Carátula -->
+    <!-- 🖼️ Imagen del álbum o pista -->
     <div id='sonic_art'></div>
 
-    <!-- Título para historial -->
+    <!-- 📜 Historial de canciones -->
     <div class="history-title">Las últimas 20 canciones:</div>
-
-    <!-- Historial -->
     <div id='sonic_history'></div>
   </div>
 
