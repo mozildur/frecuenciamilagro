@@ -21,7 +21,7 @@
     }
 
     .header-logo-title img {
-      height: 50px;
+      height: 65px;
       border-radius: 10px;
     }
 
@@ -64,6 +64,41 @@
       color: #555;
     }
 
+    .players {
+      margin-top: 30px;
+    }
+
+    .players img {
+      margin: 0 10px;
+      height: 40px;
+      vertical-align: middle;
+    }
+
+    .button-container {
+      margin-top: 30px;
+    }
+
+    .button-container a {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .whatsapp-btn {
+      background-color: #25D366;
+      color: white;
+    }
+
+    .paypal-btn {
+      background-color: #0070ba;
+      color: white;
+    }
+
     footer {
       margin-top: 50px;
       font-size: 0.9em;
@@ -86,19 +121,32 @@
   <p><em>Música que cambia tu percepción</em></p>
 
   <div id="player-container">
-    <!-- 🎶 Reproductor visible -->
     <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012"
             height="110" width="100%" scrolling="no" style="border:none;"></iframe>
 
-    <!-- 🧠 Script para títulos e historial -->
     <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=946'></script>
 
-    <!-- 🎵 Título de la canción -->
     <div id='sonic_title'></div>
 
-    <!-- 📜 Historial de canciones -->
     <div class="history-title">Las últimas 20 canciones:</div>
     <div id='sonic_history'></div>
+
+    <div class="players">
+      <a href="https://play.wrhradios.com/cp/links.php?p=8012&m=pls">
+        <img src="https://play.wrhradios.com/cp/inc/images/players/winamp2.png" border="0">
+      </a>
+      <a href="https://play.wrhradios.com/cp/links.php?p=8012&m=pls">
+        <img src="https://play.wrhradios.com/cp/inc/images/players/itunes.png" border="0">
+      </a>
+      <a href="https://play.wrhradios.com/cp/links.php?p=8012&m=asx">
+        <img src="https://play.wrhradios.com/cp/inc/images/players/mediaplayer.png" border="0">
+      </a>
+    </div>
+
+    <div class="button-container">
+      <a class="whatsapp-btn" href="https://wa.me/525522721399" target="_blank">📱 Contáctame por WhatsApp</a>
+      <a class="paypal-btn" href="https://paypal.me/primerotupaz" target="_blank">💖 Haz una donación vía PayPal</a>
+    </div>
   </div>
 
   <footer>
