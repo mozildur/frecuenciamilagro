@@ -48,8 +48,15 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
+    .history-title {
+      margin-top: 50px;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #444;
+    }
+
     #sonic_history {
-      margin-top: 40px;
+      margin-top: 10px;
       text-align: left;
       max-width: 600px;
       margin-left: auto;
@@ -71,10 +78,19 @@
   <p>Transmisión 24/7 para tu paz interior ✨</p>
 
   <div id="player-container">
+    <!-- Reproductor -->
     <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=946'></script>
 
+    <!-- Título actual -->
     <div id='sonic_title'></div>
+
+    <!-- Carátula -->
     <div id='sonic_art'></div>
+
+    <!-- Título para historial -->
+    <div class="history-title">Las últimas 20 canciones:</div>
+
+    <!-- Historial -->
     <div id='sonic_history'></div>
   </div>
 
