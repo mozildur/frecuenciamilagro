@@ -27,6 +27,8 @@
     #logo {
       width: 200px;
       margin-bottom: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
     #player-container {
@@ -67,6 +69,29 @@
 </head>
 <body>
 
-  <img id="logo" src="logo.png" alt="Frecuencia Milagro logo">
+  <img id="logo" src="https://static.mytuner.mobi/media/tvos_radios/255/frecuencia-milagro.ea9f0fc2.png" alt="Frecuencia Milagro logo">
   <h1>🎧 Frecuencia Milagro</h1>
-  <p
+  <p>Transmisión 24/7 para tu paz interior ✨</p>
+
+  <div id="player-container">
+    <!-- 🎶 Reproductor visible -->
+    <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012"
+            height="110" width="100%" scrolling="no" style="border:none;"></iframe>
+
+    <!-- 🧠 Script para títulos e historial -->
+    <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=946'></script>
+
+    <!-- 🎵 Título de la canción -->
+    <div id='sonic_title'></div>
+
+    <!-- 📜 Historial de canciones -->
+    <div class="history-title">Las últimas 20 canciones:</div>
+    <div id='sonic_history'></div>
+  </div>
+
+  <footer>
+    <p>🌐 www.frecuenciamilagro.com | Una estación para el alma 💫</p>
+  </footer>
+
+</body>
+</html>
