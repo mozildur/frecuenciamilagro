@@ -13,15 +13,26 @@
       padding: 50px 20px;
     }
 
-    h1 {
+    .header-logo-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .header-logo-title img {
+      height: 50px;
+      border-radius: 10px;
+    }
+
+    .header-logo-title h1 {
       font-size: 2.5em;
-      margin: 20px 0 10px 0;
+      margin: 0;
     }
 
     p {
       font-size: 1.2em;
-      margin-top: 0;
-      margin-bottom: 40px;
+      margin: 10px 0 40px 0;
     }
 
     #player-container {
@@ -68,7 +79,10 @@
 </head>
 <body>
 
-  <h1>🎧 Frecuencia Milagro</h1>
+  <div class="header-logo-title">
+    <img src="logo.png" alt="Frecuencia Milagro logo">
+    <h1>🎧 Frecuencia Milagro</h1>
+  </div>
   <p><em>Música que cambia tu percepción</em></p>
 
   <div id="player-container">
