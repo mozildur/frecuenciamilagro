@@ -30,12 +30,23 @@
     .reproductor {
       margin: 2rem 0;
     }
+    .reproductor iframe {
+      width: 100%;
+      max-width: 700px;
+      height: 180px;
+    }
     .historial {
       margin-top: 2rem;
       background: #fff;
       padding: 1rem;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .testimonios {
+      margin-top: 2rem;
+      background: #e0e0e0;
+      padding: 2rem;
+      border-radius: 10px;
     }
     footer {
       background: #eee;
@@ -57,6 +68,14 @@
       text-decoration: none;
       color: #6a1b9a;
     }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+      .reproductor iframe {
+        height: 200px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -68,7 +87,7 @@
 
   <main>
     <div class="reproductor">
-      <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" height="110" width="100%" scrolling="no" style="border:none;"></iframe>
+      <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012&autoplay=true" scrolling="no" style="border:none;"></iframe>
     </div>
 
     <div id='sonic_title'></div>
@@ -96,6 +115,13 @@
     </section>
 
     <a class="boton-donar" href="http://paypal.me/primerotupaz" target="_blank">🙏 Apoya con una donación</a>
+
+    <section class="testimonios">
+      <h2>💬 Testimonios</h2>
+      <p>"Desde que escucho Frecuencia Milagro, siento paz incluso en el tráfico." — Ana C.</p>
+      <p>"Mi gatito ronronea más con esta música. ¡Milagro en casa!" — Paco M.</p>
+      <p>"No sabía que necesitaba esta frecuencia hasta que la escuché." — Lidia G.</p>
+    </section>
   </main>
 
   <footer>
