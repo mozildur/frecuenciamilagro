@@ -104,56 +104,11 @@
   <main>
     <div class="player">
       <h2>Música que cambia tu percepción 🎶</h2>
-      <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" height="300" width="100%" scrolling="no" style="border:none;"></iframe>
+      <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" height="110" width="100%" scrolling="no" style="border:none;"></iframe>
+      <div id='sonic_art'></div>
       <div id='sonic_title'></div>
-      <h3>Las últimas 5 canciones:</h3>
       <div id='sonic_history'></div>
     </div>
-
-    <div class="reproductores">
-      <p>📻 También puedes escuchar en tu reproductor favorito:</p>
-      <a href="https://play.wrhradios.com/cp/links.php?p=8012&m=pls"><img src="https://play.wrhradios.com/cp/inc/images/players/winamp2.png" alt="Winamp"></a>
-      <a href="https://play.wrhradios.com/cp/links.php?p=8012&m=asx"><img src="https://play.wrhradios.com/cp/inc/images/players/mediaplayer.png" alt="Media Player"></a>
-      <a href="https://play.wrhradios.com/cp/links.php?p=8012&m=pls"><img src="https://play.wrhradios.com/cp/inc/images/players/itunes.png" alt="iTunes"></a>
-      <a href="https://play.wrhradios.com/8012/stream" target="_blank"><img src="https://play.wrhradios.com/cp/inc/images/players/sslplay.png" alt="Reproductor SSL"></a>
-    </div>
-
-    <section class="eventos">
-      <h2>⏰ Programas en Vivo</h2>
-      <ul>
-        <li><strong>Lunes:</strong> 13:00 hrs (México) - <em>Explorando Un Curso de Milagros</em></li>
-        <li><strong>Lunes:</strong> 19:30 hrs (México) - <em>Clase colaborativa de UCDM</em></li>
-        <li><strong>Martes:</strong> 13:00 hrs (México) - <em>Explorando Un Curso de Milagros</em></li>
-        <li><strong>Jueves:</strong> 13:00 hrs (México) - <em>Explorando Un Curso de Milagros</em></li>
-        <li><strong>Viernes:</strong> 13:00 hrs (México) - <em>Viernes Íntimo</em></li>
-      </ul>
-      <p>✨ Transmisión en vivo desde <a href="https://www.youtube.com/@MoZIldur" target="_blank">YouTube</a></p>
-    </section>
-
-    <section class="testimonios">
-      <h2>💬 Testimonios</h2>
-      <div id="testimonio"></div>
-    </section>
-
-    <section class="donar">
-      <a href="http://paypal.me/primerotupaz" target="_blank">💖 Donar</a>
-    </section>
-
-    <section class="contacto">
-      <h2>📬 Contacto</h2>
-      <p>Email: <a href="mailto:moz@primerotupaz.com">moz@primerotupaz.com</a></p>
-      <p>WhatsApp: <a href="https://wa.me/525522721399" target="_blank">+52 552 272 1399</a></p>
-    </section>
-
-    <section class="redes">
-      <h2>🌐 Sígueme en redes</h2>
-      <ul>
-        <li>Instagram: <a href="https://instagram.com/primeratencion" target="_blank">@primeratencion</a></li>
-        <li>TikTok: <a href="https://tiktok.com/@mozildur" target="_blank">@mozildur</a></li>
-        <li>Spotify: <a href="https://open.spotify.com/intl-es/artist/4p4F27OWj29qjfBJXB2uJQ?si=ZB0S4Ry1TPq2ErobXKZc8w" target="_blank">MoZ en Spotify</a></li>
-        <li>YouTube: <a href="https://www.youtube.com/@MoZIldur" target="_blank">MoZ en YouTube</a></li>
-      </ul>
-    </section>
   </main>
 
   <footer>
@@ -163,11 +118,8 @@
   <script>
     const frases = Array.from({length: 100}, (_, i) => `Frase milagrosa número ${i + 1}`);
     document.getElementById("frase").innerText = frases[Math.floor(Math.random() * frases.length)];
-
-    const testimonios = Array.from({length: 100}, (_, i) => `"Desde que escucho Frecuencia Milagro, testimonio ${i + 1}, mi vida cambió." — Oyente agradecido ${i + 1}`);
-    document.getElementById("testimonio").innerText = testimonios[Math.floor(Math.random() * testimonios.length)];
   </script>
 
-  <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=946'></script>
+  <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=306'></script>
 </body>
 </html>
