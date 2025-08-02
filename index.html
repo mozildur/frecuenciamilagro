@@ -13,125 +13,71 @@
       min-height: 100vh;
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f8f9fa, #e0f7fa);
+      background: linear-gradient(135deg, #f0f8ff, #e0eafc);
       color: #3e006b;
       text-align: center;
       padding: 20px;
     }
     h1 {
-      font-size: 4rem;
+      font-size: 3rem;
       margin-bottom: 10px;
       font-weight: bold;
       color: #6200ea;
       text-shadow: 1px 1px 2px #ccc;
     }
     #logo {
-      max-width: 100%;
-      width: 320px;
+      max-width: 90%;
+      width: 300px;
       margin-bottom: 20px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       border-radius: 12px;
     }
-    #sonic_title {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #d500f9;
-      margin-top: 30px;
-      text-shadow: 1px 1px 3px #fff;
+    #sonic_art {
+      margin-top: 20px;
     }
-    .playlist-link {
-      font-size: 1.2rem;
-      margin-top: 10px;
-      color: #00796b;
-    }
-    iframe {
-      max-width: 100%;
-      width: 100%;
-      height: 120px;
+    #escuchar-btn {
+      font-size: 1.5rem;
+      background-color: #ff4081;
+      color: white;
+      padding: 15px 30px;
       border: none;
       border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      margin: 20px 0;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    #escuchar-btn:hover {
+      background-color: #e91e63;
+    }
+    #sonic_title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #d500f9;
+      margin-top: 10px;
+      text-shadow: 1px 1px 3px #fff;
     }
     #sonic_history {
       margin-top: 10px;
       width: 100%;
-      max-width: 700px;
-      font-size: 1.5rem;
+      max-width: 600px;
+      font-size: 1.2rem;
       background-color: #ffffffcc;
       padding: 10px;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    p.subtitle {
-      font-size: 2rem;
+    .subtitle {
+      font-size: 1.4rem;
       font-weight: 600;
       color: #4a148c;
       margin-top: 30px;
-      margin-bottom: 10px;
     }
-    .credits {
-      margin-top: 40px;
-      font-size: 1.1rem;
-      color: #444;
-      font-style: italic;
+    .playlist-link {
+      font-size: 1.2rem;
+      margin-top: 10px;
     }
-    .social-links {
-      margin-top: 30px;
-      font-size: 1.5rem;
-    }
-    .social-links a {
-      margin: 0 10px;
-      color: #3e006b;
-      text-decoration: none;
-    }
-    .social-links a:hover {
-      text-decoration: underline;
-    }
-    #mensaje-bienvenida {
-      margin: 30px 0;
-      font-size: 1.8rem;
-      font-weight: 500;
-    }
-    .frase, .testimonio {
-      font-size: 1.6rem;
-      margin: 20px auto;
-      max-width: 700px;
-      background: #ffffffaa;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .horarios {
-      margin-top: 30px;
-      font-size: 1.5rem;
-      background: #f3e5f5;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 700px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    }
-    @media screen and (max-width: 600px) {
-      body {
-        padding: 10px;
-      }
-      h1 {
-        font-size: 2.5rem;
-      }
-      #sonic_title {
-        font-size: 1.5rem;
-      }
-      .playlist-link {
-        font-size: 1.1rem;
-      }
-      p.subtitle {
-        font-size: 1.4rem;
-      }
-      #sonic_history {
-        font-size: 1.2rem;
-      }
-      .frase, .testimonio, .horarios {
-        font-size: 1.2rem;
-      }
+    .credits, .social-links, .horarios, .frase, .testimonio, #mensaje-bienvenida {
+      font-size: 1.2rem;
     }
   </style>
   <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=306'></script>
@@ -142,9 +88,13 @@
 
   <div id="mensaje-bienvenida"></div>
 
-  <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" scrolling="no"></iframe>
-  <div id='sonic_title'><a href="https://www.youtube.com/playlist?list=PLMepX0V6b8PGvI7NrXaTty9g7UT-I0rtl" target="_blank" style="text-decoration:none; color:inherit;">Título de la canción actual</a></div>
-  <div class="playlist-link">🎧 Puedes escuchar todas las canciones en nuestra <a href="https://www.youtube.com/playlist?list=PLMepX0V6b8PGvI7NrXaTty9g7UT-I0rtl" target="_blank">Playlist de YouTube Music</a></div>
+  <div id="sonic_art"></div>
+
+  <button id="escuchar-btn" onclick="document.getElementById('audioPlayer').play()">▶️ Escuchar ahora</button>
+  <audio id="audioPlayer" src="https://play.wrhradios.com/8012/stream"></audio>
+
+  <div id='sonic_title'></div>
+  <div class="playlist-link">🎼 Escucha todas las canciones en nuestra <a href="https://www.youtube.com/playlist?list=PLMepX0V6b8PGvI7NrXaTty9g7UT-I0rtl" target="_blank">playlist de YouTube Music</a>.</div>
 
   <p class="subtitle">🎵 Las últimas 5 canciones:</p>
   <div id='sonic_history'></div>
