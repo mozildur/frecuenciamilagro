@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Frecuencia Milagro</title>
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       display: flex;
       flex-direction: column;
@@ -13,30 +16,30 @@
       min-height: 100vh;
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f2f5fc, #e9f0fa);
+      background: linear-gradient(135deg, #fafcff, #e8f0ff);
       color: #3e006b;
       text-align: center;
       padding: 20px;
     }
     h1 {
-      font-size: 3.5rem;
-      margin-bottom: 20px;
+      font-size: 3rem;
+      margin-bottom: 10px;
       font-weight: bold;
       color: #6200ea;
       text-shadow: 1px 1px 2px #ccc;
     }
     #logo {
-      max-width: 100%;
-      width: 340px;
-      margin-bottom: 25px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+      max-width: 90%;
+      width: 300px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
       border-radius: 12px;
     }
     #sonic_title {
       font-size: 1.4rem;
       font-weight: bold;
       color: #d500f9;
-      margin-top: 25px;
+      margin-top: 20px;
       text-shadow: 1px 1px 3px #fff;
     }
     iframe {
@@ -47,34 +50,34 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
     #sonic_history {
-      margin-top: 15px;
+      margin-top: 10px;
       width: 100%;
       max-width: 600px;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       background-color: #ffffffcc;
-      padding: 15px;
+      padding: 10px;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
     p.subtitle {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 600;
       color: #4a148c;
-      margin-top: 35px;
-      margin-bottom: 15px;
+      margin-top: 30px;
+      margin-bottom: 10px;
     }
     .credits {
-      margin-top: 45px;
-      font-size: 1.1rem;
+      margin-top: 40px;
+      font-size: 1rem;
       color: #444;
       font-style: italic;
     }
     .social-links {
-      margin-top: 35px;
+      margin-top: 30px;
       font-size: 1.3rem;
     }
     .social-links a {
-      margin: 0 12px;
+      margin: 0 10px;
       color: #3e006b;
       text-decoration: none;
     }
@@ -82,27 +85,40 @@
       text-decoration: underline;
     }
     #mensaje-bienvenida {
-      margin: 25px 0;
-      font-size: 1.5rem;
+      margin: 20px 0 30px 0;
+      font-size: 1.6rem;
       font-weight: 600;
     }
     .frase, .testimonio {
-      font-size: 1.3rem;
-      margin: 15px auto;
-      max-width: 700px;
+      font-size: 1.4rem;
+      margin: 10px auto;
+      max-width: 600px;
       background: #ffffffaa;
-      padding: 18px;
+      padding: 15px;
       border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
     .horarios {
-      margin-top: 35px;
+      margin-top: 30px;
       font-size: 1.3rem;
       background: #f3e5f5;
-      padding: 18px;
+      padding: 15px;
       border-radius: 12px;
-      max-width: 650px;
+      max-width: 600px;
       box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    #btn-escuchar {
+      background-color: #8e24aa;
+      color: white;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.4rem;
+      cursor: pointer;
+      margin-bottom: 30px;
+    }
+    #btn-escuchar:hover {
+      background-color: #6a1b9a;
     }
   </style>
   <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=306'></script>
@@ -111,12 +127,16 @@
   <img id="logo" src="https://raw.githubusercontent.com/mozildur/frecuenciamilagro/main/logo.png" alt="Logo Frecuencia Milagro">
   <h1>📻✨ Frecuencia Milagro ✨🎶</h1>
 
+  <button id="btn-escuchar" onclick="document.getElementById('reproductor').scrollIntoView({behavior: 'smooth'})">🎧 Escuchar Ahora</button>
+
   <div id="mensaje-bienvenida"></div>
 
-  <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" height="110" width="100%" scrolling="no"></iframe>
-  <div id='sonic_title'></div>
-  <p class="subtitle">🎵 Las últimas 5 canciones:</p>
-  <div id='sonic_history'></div>
+  <div id="reproductor">
+    <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" height="110" width="100%" scrolling="no"></iframe>
+    <div id='sonic_title'>🎶 Ahora estás escuchando:</div>
+    <p class="subtitle">🎵 Las últimas 5 canciones:</p>
+    <div id='sonic_history'></div>
+  </div>
 
   <div class="frase" id="fraseAleatoria"></div>
   <div class="testimonio" id="testimonioAleatorio"></div>
@@ -135,6 +155,7 @@
     🎵 TikTok: <a href="https://www.tiktok.com/@mozildur" target="_blank">@mozildur</a> <br>
     🎧 Spotify: <a href="https://open.spotify.com/intl-es/artist/4p4F27OWj29qjfBJXB2uJQ?si=ZB0S4Ry1TPq2ErobXKZc8w" target="_blank">MoZ en Spotify</a> <br>
     📺 YouTube: <a href="https://www.youtube.com/@MoZIldur" target="_blank">Explorando Un Curso de Milagros</a> <br>
+    💿 YouTube Music Playlist: <a href="https://www.youtube.com/playlist?list=PLMepX0V6b8PGvI7NrXaTty9g7UT-I0rtl" target="_blank">Canciones de la Estación</a><br>
     🙏 Donaciones: <a href="http://paypal.me/primerotupaz" target="_blank">paypal.me/primerotupaz</a>
   </div>
 
