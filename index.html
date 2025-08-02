@@ -7,6 +7,7 @@
   <style>
     body {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -17,10 +18,24 @@
     }
     h1 {
       font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    iframe {
+      max-width: 600px;
+      width: 100%;
+      border: none;
+    }
+    #sonic_history {
+      margin-top: 20px;
+      max-width: 600px;
+      width: 100%;
     }
   </style>
+  <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=306'></script>
 </head>
 <body>
   <h1>Frecuencia Milagro</h1>
+  <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" height="110" width="100%" scrolling="no"></iframe>
+  <div id='sonic_history'></div>
 </body>
 </html>
