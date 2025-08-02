@@ -13,7 +13,7 @@
       min-height: 100vh;
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f9f9ff, #f0f7ff);
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
       color: #3e006b;
       text-align: center;
       padding: 20px;
@@ -35,9 +35,19 @@
     #sonic_title {
       font-size: 1rem;
       font-weight: bold;
-      color: #6a1b9a;
+      color: #d500f9;
       margin-top: 20px;
       text-shadow: 1px 1px 3px #fff;
+    }
+    #sonic_title::before {
+      content: "🎧 Ahora estás escuchando: ";
+    }
+    iframe {
+      max-width: 100%;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
     #sonic_history {
       margin-top: 10px;
@@ -97,20 +107,6 @@
       max-width: 600px;
       box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     }
-    .floating-player {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background-color: #ffffff;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
-      z-index: 1000;
-    }
-    .floating-player iframe {
-      width: 100%;
-      height: 60px;
-      border: none;
-    }
   </style>
   <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=306'></script>
 </head>
@@ -120,6 +116,7 @@
 
   <div id="mensaje-bienvenida"></div>
 
+  <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" height="110" width="100%" scrolling="no"></iframe>
   <div id='sonic_title'></div>
   <p class="subtitle">🎵 Las últimas 5 canciones:</p>
   <div id='sonic_history'></div>
@@ -145,10 +142,6 @@
   </div>
 
   <div class="credits">Creado por MoZ con ayuda celestial (y un poco de HTML) © 2025</div>
-
-  <div class="floating-player">
-    <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012"></iframe>
-  </div>
 
   <script>
     const frases = [
