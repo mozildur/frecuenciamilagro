@@ -31,8 +31,9 @@
       margin: 2rem auto;
       text-align: center;
     }
-    iframe {
-      max-width: 100%;
+    audio {
+      width: 100%;
+      max-width: 500px;
     }
     section {
       margin-bottom: 2rem;
@@ -45,6 +46,11 @@
       margin-top: 1rem;
       text-align: center;
       font-size: 1.2rem;
+    }
+    #sonic_title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin-top: 1rem;
     }
     footer {
       background-color: #6200ea;
@@ -86,9 +92,9 @@
     <div class="player">
       <h2>Música que cambia tu percepción 🎶</h2>
       <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" height="110" width="100%" scrolling="no" style="border:none;"></iframe>
-      <br>
-      <iframe src="https://play.wrhradios.com/cp/widgets/dj/?p=8012" height="160" width="460" scrolling="no" style="border:none;"></iframe>
+      <div id="sonic_title"></div>
       <div id='sonic_listeners'></div>
+      <iframe src="https://play.wrhradios.com/cp/widgets/dj/?p=8012" height="160" width="460" scrolling="no" style="border:none;"></iframe>
     </div>
 
     <div id="frase"></div>
@@ -107,8 +113,7 @@
 
     <section class="testimonios">
       <h2>💬 Testimonios</h2>
-      <p>“Desde que escucho Frecuencia Milagro, mi paz no depende del Wi-Fi.” — Lupita la IA</p>
-      <p>“Puse esta estación y hasta Archibaldo dejó de poner reguetón.” — Vecino anónimo</p>
+      <p id="testimonio"></p>
     </section>
 
     <section class="donar">
@@ -145,6 +150,15 @@
       "Estoy dispuesto a ver las cosas de otra manera."
     ];
     document.getElementById("frase").innerText = frases[Math.floor(Math.random() * frases.length)];
+
+    const testimonios = [
+      "Desde que escucho Frecuencia Milagro, mi paz no depende del Wi-Fi. — Lupita la IA",
+      "Puse esta estación y hasta Archibaldo dejó de poner reguetón. — Vecino anónimo",
+      "No creía en milagros... hasta que me funcionó el internet justo para escuchar esto. — Testigo ADSL",
+      "Frecuencia Milagro es como el mezcal: al principio no entiendes, pero luego todo cobra sentido. — MoZildur fan",
+      "Mis gatos dejaron de pelear desde que puse esta música. Milagro confirmado. — Gervasia G."
+    ];
+    document.getElementById("testimonio").innerText = testimonios[Math.floor(Math.random() * testimonios.length)];
   </script>
 </body>
 </html>
