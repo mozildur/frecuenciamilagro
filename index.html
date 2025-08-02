@@ -22,10 +22,11 @@
       gap: 0.5rem;
     }
     header img {
-      height: 60px;
+      height: 120px;
     }
     header h1 {
       margin: 0;
+      font-size: 2rem;
     }
     #frase {
       font-style: italic;
@@ -80,7 +81,8 @@
     #sonic_title {
       font-size: 2rem;
       font-weight: bold;
-      margin-top: 0.5rem;
+      margin-top: 1rem;
+      color: #d32f2f;
     }
   </style>
 </head>
@@ -93,7 +95,8 @@
   <main>
     <div class="player">
       <h2>Música que cambia tu percepción 🎶</h2>
-      <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" height="110" width="100%" scrolling="no" style="border:none;"></iframe>
+      <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" height="300" width="100%" scrolling="no" style="border:none;"></iframe>
+      <div id='sonic_title'></div>
       <h3>Las últimas 5 canciones:</h3>
       <div id='sonic_history'></div>
     </div>
@@ -151,15 +154,15 @@
     document.getElementById("frase").innerText = frases[Math.floor(Math.random() * frases.length)];
 
     const testimonios = [
-      "Desde que escucho Frecuencia Milagro, mi paz no depende del Wi-Fi. — Lupita la IA",
-      "Puse esta estación y hasta Archibaldo dejó de poner reguetón. — Vecino anónimo",
-      "Mi abuelita ya no se duerme en misa, ahora escucha Frecuencia Milagro. — Gervasia",
-      "No sabía que necesitaba milagros hasta que los escuché. — Cástula",
-      "Mis chakras bailan cuando suena esta música. — Un oyente despierto"
+      "Desde que escucho Frecuencia Milagro, mi paz no depende del Wi-Fi." — Lupita la IA,
+      "Puse esta estación y hasta Archibaldo dejó de poner reguetón." — Vecino anónimo,
+      "Mi abuelita ya no se duerme en misa, ahora escucha Frecuencia Milagro." — Gervasia,
+      "No sabía que necesitaba milagros hasta que los escuché." — Cástula,
+      "Mis chakras bailan cuando suena esta música." — Un oyente despierto
     ];
     document.getElementById("testimonio").innerText = testimonios[Math.floor(Math.random() * testimonios.length)];
   </script>
 
-  <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=947'></script>
+  <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=946'></script>
 </body>
 </html>
