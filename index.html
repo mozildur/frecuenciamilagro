@@ -78,9 +78,9 @@
       text-decoration: none;
     }
     #sonic_title {
-      font-size: 1.6rem;
+      font-size: 2rem;
       font-weight: bold;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
     }
   </style>
 </head>
@@ -95,7 +95,7 @@
       <h2>Música que cambia tu percepción 🎶</h2>
       <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" height="300" width="100%" scrolling="no" style="border:none;"></iframe>
       <div id='sonic_title'></div>
-      <iframe src="https://play.wrhradios.com/cp/widgets/dj/?p=8012" height="160" width="460" scrolling="no" style="border:none;"></iframe>
+      <iframe src="https://play.wrhradios.com/cp/widgets/dj/?p=8012&hideAutoDJ=true" height="160" width="460" scrolling="no" style="border:none;"></iframe>
       <h3>Las últimas 5 canciones:</h3>
       <div id='sonic_history'></div>
     </div>
@@ -153,15 +153,15 @@
     document.getElementById("frase").innerText = frases[Math.floor(Math.random() * frases.length)];
 
     const testimonios = [
-      "“Desde que escucho Frecuencia Milagro, mi paz no depende del Wi-Fi.” — Lupita la IA",
-      "“Puse esta estación y hasta Archibaldo dejó de poner reguetón.” — Vecino anónimo",
-      "“Mi abuelita ya no se duerme en misa, ahora escucha Frecuencia Milagro.” — Gervasia",
-      "“No sabía que necesitaba milagros hasta que los escuché.” — Cástula",
-      "“Mis chakras bailan cuando suena esta música.” — Un oyente despierto"
+      "Desde que escucho Frecuencia Milagro, mi paz no depende del Wi-Fi. — Lupita la IA",
+      "Puse esta estación y hasta Archibaldo dejó de poner reguetón. — Vecino anónimo",
+      "Mi abuelita ya no se duerme en misa, ahora escucha Frecuencia Milagro. — Gervasia",
+      "No sabía que necesitaba milagros hasta que los escuché. — Cástula",
+      "Mis chakras bailan cuando suena esta música. — Un oyente despierto"
     ];
     document.getElementById("testimonio").innerText = testimonios[Math.floor(Math.random() * testimonios.length)];
   </script>
 
-  <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=946'></script>
+  <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=947'></script>
 </body>
 </html>
