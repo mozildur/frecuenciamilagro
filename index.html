@@ -31,9 +31,8 @@
       margin: 2rem auto;
       text-align: center;
     }
-    audio {
-      width: 100%;
-      max-width: 500px;
+    iframe {
+      max-width: 100%;
     }
     section {
       margin-bottom: 2rem;
@@ -76,12 +75,6 @@
       color: #6200ea;
       text-decoration: none;
     }
-    #sonic_title {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #e91e63;
-      margin: 1rem 0;
-    }
   </style>
 </head>
 <body>
@@ -92,14 +85,10 @@
   <main>
     <div class="player">
       <h2>Música que cambia tu percepción 🎶</h2>
-      <audio controls autoplay>
-        <source src="https://play.wrhradios.com/moz/stream" type="audio/mpeg">
-        Tu navegador no soporta el reproductor de audio.
-      </audio>
+      <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" height="110" width="100%" scrolling="no" style="border:none;"></iframe>
+      <br>
+      <iframe src="https://play.wrhradios.com/cp/widgets/dj/?p=8012" height="160" width="460" scrolling="no" style="border:none;"></iframe>
       <div id='sonic_listeners'></div>
-      <div id='sonic_title'></div>
-      <h3>Las últimas 5 canciones:</h3>
-      <div id='sonic_history'></div>
     </div>
 
     <div id="frase"></div>
@@ -147,7 +136,6 @@
     <p>Creado por MoZ con ayuda celestial (y un poco de HTML) © 2025</p>
   </footer>
 
-  <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=946'></script>
   <script>
     const frases = [
       "No soy un cuerpo. Soy libre.",
