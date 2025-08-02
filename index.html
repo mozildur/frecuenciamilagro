@@ -10,32 +10,96 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      color: #6200ea;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
+      color: #3e006b;
+      text-align: center;
+      padding: 20px;
     }
     h1 {
       font-size: 3rem;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #6200ea;
+      text-shadow: 1px 1px 2px #ccc;
+    }
+    #logo {
+      width: 200px;
       margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      border-radius: 12px;
+    }
+    #sonic_title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #d500f9;
+      margin-top: 20px;
+      text-shadow: 1px 1px 3px #fff;
     }
     iframe {
       max-width: 600px;
       width: 100%;
       border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
     #sonic_history {
-      margin-top: 20px;
+      margin-top: 10px;
       max-width: 600px;
       width: 100%;
+      font-size: 1rem;
+      background-color: #ffffffcc;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    p.subtitle {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #4a148c;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+    .credits {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #444;
+      font-style: italic;
+    }
+    .social-links {
+      margin-top: 30px;
+      font-size: 1rem;
+    }
+    .social-links a {
+      margin: 0 10px;
+      color: #3e006b;
+      text-decoration: none;
+    }
+    .social-links a:hover {
+      text-decoration: underline;
     }
   </style>
   <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=306'></script>
 </head>
 <body>
+  <img id="logo" src="LOGO.png" alt="Logo Frecuencia Milagro">
   <h1>Frecuencia Milagro</h1>
   <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" height="110" width="100%" scrolling="no"></iframe>
+  <div id='sonic_title'></div>
+  <p class="subtitle">Las últimas 5 canciones:</p>
   <div id='sonic_history'></div>
+
+  <div class="social-links">
+    📧 Contacto: <a href="mailto:moz@primerotupaz.com">moz@primerotupaz.com</a> <br>
+    📱 WhatsApp: <a href="https://wa.me/525522721399" target="_blank">+52 552 272 1399</a> <br>
+    📸 Instagram: <a href="https://www.instagram.com/primeratencion" target="_blank">@primeratencion</a> <br>
+    🎵 TikTok: <a href="https://www.tiktok.com/@mozildur" target="_blank">@mozildur</a> <br>
+    🎧 Spotify: <a href="https://open.spotify.com/intl-es/artist/4p4F27OWj29qjfBJXB2uJQ?si=ZB0S4Ry1TPq2ErobXKZc8w" target="_blank">MoZ en Spotify</a> <br>
+    📺 YouTube: <a href="https://www.youtube.com/@MoZIldur" target="_blank">Explorando Un Curso de Milagros</a>
+  </div>
+
+  <div class="credits">Creado por MoZ con ayuda celestial (y un poco de HTML) © 2025</div>
 </body>
 </html>
