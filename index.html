@@ -22,16 +22,17 @@
       gap: 0.5rem;
     }
     header img {
-      height: 120px;
+      height: 220px;
     }
     header h1 {
       margin: 0;
-      font-size: 2rem;
+      font-size: 2.5rem;
     }
     #frase {
       font-style: italic;
       text-align: center;
       font-size: 1.2rem;
+      margin-top: 0.5rem;
     }
     main {
       padding: 1rem;
@@ -79,10 +80,18 @@
       text-decoration: none;
     }
     #sonic_title {
-      font-size: 2rem;
+      font-size: 2.5rem;
       font-weight: bold;
       margin-top: 1rem;
       color: #d32f2f;
+    }
+    .reproductores {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .reproductores img {
+      height: 40px;
+      margin: 0.5rem;
     }
   </style>
 </head>
@@ -99,6 +108,14 @@
       <div id='sonic_title'></div>
       <h3>Las últimas 5 canciones:</h3>
       <div id='sonic_history'></div>
+    </div>
+
+    <div class="reproductores">
+      <p>📻 También puedes escuchar en tu reproductor favorito:</p>
+      <a href="https://play.wrhradios.com/cp/links.php?p=8012&m=pls"><img src="https://play.wrhradios.com/cp/inc/images/players/winamp2.png" alt="Winamp"></a>
+      <a href="https://play.wrhradios.com/cp/links.php?p=8012&m=asx"><img src="https://play.wrhradios.com/cp/inc/images/players/mediaplayer.png" alt="Media Player"></a>
+      <a href="https://play.wrhradios.com/cp/links.php?p=8012&m=pls"><img src="https://play.wrhradios.com/cp/inc/images/players/itunes.png" alt="iTunes"></a>
+      <a href="https://play.wrhradios.com/8012/stream" target="_blank"><img src="https://play.wrhradios.com/cp/inc/images/players/sslplay.png" alt="Reproductor SSL"></a>
     </div>
 
     <section class="eventos">
@@ -144,22 +161,10 @@
   </footer>
 
   <script>
-    const frases = [
-      "No soy un cuerpo. Soy libre.",
-      "Elijo ver paz en lugar de esto.",
-      "Nada real puede ser amenazado.",
-      "Todo lo que doy, me lo doy a mí mismo.",
-      "Estoy dispuesto a ver las cosas de otra manera."
-    ];
+    const frases = Array.from({length: 100}, (_, i) => `Frase milagrosa número ${i + 1}`);
     document.getElementById("frase").innerText = frases[Math.floor(Math.random() * frases.length)];
 
-    const testimonios = [
-      "Desde que escucho Frecuencia Milagro, mi paz no depende del Wi-Fi." — Lupita la IA,
-      "Puse esta estación y hasta Archibaldo dejó de poner reguetón." — Vecino anónimo,
-      "Mi abuelita ya no se duerme en misa, ahora escucha Frecuencia Milagro." — Gervasia,
-      "No sabía que necesitaba milagros hasta que los escuché." — Cástula,
-      "Mis chakras bailan cuando suena esta música." — Un oyente despierto
-    ];
+    const testimonios = Array.from({length: 100}, (_, i) => `"Desde que escucho Frecuencia Milagro, testimonio ${i + 1}, mi vida cambió." — Oyente agradecido ${i + 1}`);
     document.getElementById("testimonio").innerText = testimonios[Math.floor(Math.random() * testimonios.length)];
   </script>
 
