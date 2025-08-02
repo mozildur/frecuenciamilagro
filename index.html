@@ -31,7 +31,7 @@
       background-color: #ff4081;
       color: white;
       border: none;
-      padding: 15px 30px;
+      padding: 20px 40px;
       font-size: 2.5rem;
       border-radius: 10px;
       cursor: pointer;
@@ -40,11 +40,17 @@
     #play-button:hover {
       background-color: #f50057;
     }
+    .now-playing-label {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #6a1b9a;
+      margin-top: 20px;
+    }
     #sonic_title {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: bold;
       color: #880e4f;
-      margin-top: 20px;
+      margin-top: 10px;
       white-space: pre-wrap;
     }
     .playlist-link {
@@ -100,7 +106,8 @@
 
   <button id="play-button">▶️ Escuchar Ahora</button>
 
-  <div id="sonic_title">🎵 Ahora estás escuchando:</div>
+  <div class="now-playing-label">🎧 Ahora suena:</div>
+  <div id="sonic_title"></div>
   <div class="playlist-link">
     Puedes escuchar todas las canciones en la <a href="https://www.youtube.com/playlist?list=PLMepX0V6b8PGvI7NrXaTty9g7UT-I0rtl" target="_blank">playlist de YouTube Music</a>.
   </div>
