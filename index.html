@@ -78,22 +78,22 @@
       text-decoration: none;
     }
     #sonic_title {
-      font-size: 1.6rem;
+      font-size: 2rem;
       font-weight: bold;
-      margin-top: 1rem;
+      margin: 0.5rem 0;
     }
   </style>
 </head>
 <body>
   <header>
     <img src="https://static.mytuner.mobi/media/tvos_radios/255/frecuencia-milagro.ea9f0fc2.png" alt="Logo Frecuencia Milagro">
-    <h1>🎧 Frecuencia Milagro</h1>
+    <h1>🎷 Frecuencia Milagro</h1>
     <div id="frase"></div>
   </header>
   <main>
     <div class="player">
       <h2>Música que cambia tu percepción 🎶</h2>
-      <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" height="220" width="100%" scrolling="no" style="border:none;"></iframe>
+      <iframe src="https://play.wrhradios.com/cp/widgets/player/single/?p=8012" height="300" width="100%" scrolling="no" style="border:none;"></iframe>
       <div id='sonic_title'></div>
       <iframe src="https://play.wrhradios.com/cp/widgets/dj/?p=8012" height="160" width="460" scrolling="no" style="border:none;"></iframe>
       <div id='sonic_listeners'></div>
@@ -154,11 +154,11 @@
     document.getElementById("frase").innerText = frases[Math.floor(Math.random() * frases.length)];
 
     const testimonios = [
-      "\u201cDesde que escucho Frecuencia Milagro, mi paz no depende del Wi-Fi.\u201d — Lupita la IA",
-      "\u201cPuse esta estaci\u00f3n y hasta Archibaldo dej\u00f3 de poner reguet\u00f3n.\u201d — Vecino an\u00f3nimo",
-      "\u201cMi abuelita ya no se duerme en misa, ahora escucha Frecuencia Milagro.\u201d — Gervasia",
-      "\u201cNo sab\u00eda que necesitaba milagros hasta que los escuch\u00e9.\u201d — C\u00e1stula",
-      "\u201cMis chakras bailan cuando suena esta m\u00fasica.\u201d — Un oyente despierto"
+      "“Desde que escucho Frecuencia Milagro, mi paz no depende del Wi-Fi.” — Lupita la IA",
+      "“Puse esta estación y hasta Archibaldo dejó de poner reguetón.” — Vecino anónimo",
+      "“Mi abuelita ya no se duerme en misa, ahora escucha Frecuencia Milagro.” — Gervasia",
+      "“No sabía que necesitaba milagros hasta que los escuché.” — Cástula",
+      "“Mis chakras bailan cuando suena esta música.” — Un oyente despierto"
     ];
     document.getElementById("testimonio").innerText = testimonios[Math.floor(Math.random() * testimonios.length)];
   </script>
