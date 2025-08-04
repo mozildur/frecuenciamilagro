@@ -1,185 +1,322 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#7b1fa2" />
   <title>Frecuencia Milagro</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Frecuencia Milagro – Explorando Un Curso de Milagros con MoZ" />
+  <meta property="og:description" content="Estación de radio espiritual: música, frases, testimonios y transmisiones en vivo para reconectar con tu paz interior." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://frecuenciamilagro.com" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/mozildur/frecuenciamilagro/main/logo.png" />
+  <meta property="og:image:alt" content="Logo Frecuencia Milagro" />
+  <meta property="og:site_name" content="Frecuencia Milagro" />
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Frecuencia Milagro – Explorando Un Curso de Milagros con MoZ" />
+  <meta name="twitter:description" content="Estación de radio espiritual: música, frases, testimonios y transmisiones en vivo para reconectar con tu paz interior." />
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/mozildur/frecuenciamilagro/main/logo.png" />
+  <meta name="twitter:site" content="@MoZIldur" />
+
+  <link rel="canonical" href="https://frecuenciamilagro.com" />
+
   <style>
+    :root {
+      --bg1: #fce3ff;
+      --bg2: #d6f0ff;
+      --primary: #7b1fa2;
+      --dark: #3e006b;
+      --card: #fff3e0;
+      --radius: 12px;
+      --transition: .35s ease;
+    }
+    * {box-sizing:border-box;}
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom right, #fce3ff, #d6f0ff);
-      color: #3e006b;
+      background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+      color: var(--dark);
       margin: 0;
       padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
+      gap: 10px;
     }
-    #logo {
-      max-width: 90%;
-      width: 300px;
-      margin: 30px auto 10px;
+    img#logo {
+      max-width: 220px;
+      width: 100%;
+      margin: 25px auto 5px;
       display: block;
     }
     h1 {
-      font-size: 3rem;
-      margin: 10px 0;
-      color: #7b1fa2;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      margin: 6px 0;
+      color: var(--primary);
+      line-height: 1.1;
     }
-    .separador {
-      height: 30px;
+    .section {
+      width: 100%;
+      max-width: 960px;
+      padding: 0 12px;
     }
     #play-button {
       background-color: #ff4081;
       color: white;
       border: none;
-      padding: 20px 40px;
-      font-size: 2.5rem;
-      border-radius: 10px;
+      padding: 18px 50px;
+      font-size: 2.2rem;
+      border-radius: 14px;
       cursor: pointer;
-      margin-bottom: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: 0 10px 30px -5px rgba(255,64,129,.4);
     }
-    #play-button:hover {
-      background-color: #f50057;
+    #play-button:hover { filter: brightness(1.05); }
+    #play-button:active { transform: scale(.97); }
+
+    /* Botón de donativos */
+    #donate-button {
+      background: #ffdd57;
+      color: #3e006b;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      transition: var(--transition);
+      box-shadow: 0 8px 25px -5px rgba(255,221,87,.6);
+      text-decoration: none;
     }
+    #donate-button:hover { filter: brightness(1.05); }
+
     .now-playing-label {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: bold;
       color: #6a1b9a;
-      margin-top: 20px;
+      margin: 12px 0 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+    }
+    .now-playing-flex {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    #sonic_art {
+      width: 100px;
+      height: 100px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255,255,255,.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px -3px rgba(0,0,0,.1);
+    }
+    #sonic_art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     #sonic_title {
-      font-size: 1.5rem;
-      font-weight: bold;
+      font-size: 1.9rem;
+      font-weight: 700;
       color: #880e4f;
-      margin-top: 10px;
-      white-space: pre-wrap;
-    }
-    .playlist-link {
-      margin-top: 10px;
-      font-size: 1.2rem;
-      color: #4a148c;
-    }
-    .playlist-link a {
-      color: #4a148c;
-      text-decoration: underline;
-    }
-    .subtitle {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #6a1b9a;
-      margin: 30px 0 10px;
-    }
-    #sonic_history {
-      font-size: 1.2rem;
-      background: #ffffffbb;
-      max-width: 90%;
-      margin: 0 auto;
-      padding: 20px;
+      max-width: 600px;
+      line-height: 1.1;
+      padding: 6px 10px;
+      background: rgba(255,255,255,.9);
       border-radius: 10px;
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .small-title { font-size: 1.4rem !important; }
+
+    .playlist-link, .external-players, .subtitle,
+    #sonic_history, .frase, .testimonio,
+    .horarios, .social-links, .credits {
+      margin: 12px auto;
+      max-width: 960px;
+      width: calc(100% - 24px);
+    }
+
+    .playlist-link { font-size: 1rem; color: #4a148c; }
+    .playlist-link a { text-decoration: underline; }
+
+    .external-players {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .external-players a img {
+      width: 48px; height: 48px;
+      border-radius: 6px;
+      background: #fff; padding: 4px;
+      box-shadow: 0 6px 18px -4px rgba(0,0,0,.15);
+      transition: transform .25s ease;
+    }
+    .external-players a img:hover { transform: scale(1.05); }
+
+    .subtitle { font-size: 1.6rem; font-weight: bold; color: #6a1b9a; }
+
+    #sonic_history {
+      background: #ffffffdd; padding: 16px;
+      border-radius: var(--radius);
+      min-height: 100px; line-height: 1.3;
+      font-size: 1rem;
     }
     .frase, .testimonio {
-      font-size: 1.3rem;
-      max-width: 90%;
-      margin: 20px auto;
-      background: #fce4ec;
-      padding: 20px;
-      border-radius: 12px;
+      background: #fce4ec; padding: 16px;
+      border-radius: 12px; min-height: 60px;
+      font-size: 1.1rem; transition: opacity .5s ease;
     }
+    .fade-out { opacity: 0; }
+
     .horarios, .social-links, .credits {
-      max-width: 90%;
-      margin: 20px auto;
-      font-size: 1.2rem;
-      background: #fff3e0;
-      padding: 20px;
-      border-radius: 12px;
+      background: rgba(255,255,255,.95);
+      padding: 16px; border-radius: var(--radius);
+      font-size: 1rem; text-align: left; line-height: 1.4;
     }
-    .social-links a {
-      display: block;
-      color: #3e006b;
-      margin: 5px 0;
+    .social-links a { font-weight: 600; text-decoration: none; }
+    .social-links a:hover { text-decoration: underline; }
+
+    @media (max-width: 850px) {
+      #play-button, #donate-button { padding: 14px 28px; font-size: 2rem; }
+      #sonic_title { font-size: 1.5rem; }
+      h1 { font-size: 2.2rem; }
+    }
+    @media (max-width: 500px) {
+      #play-button, #donate-button { width: 100%; }
+      #sonic_title { font-size: 1.2rem; }
     }
   </style>
-  <script id='sonic_js' data-port='8012' src='https://play.wrhradios.com/cp/widgets.js?r=306'></script>
+
+  <!-- widget externo -->
+  <script id="sonic_js" data-port="8012" src="https://play.wrhradios.com/cp/widgets.js?r=306" defer></script>
 </head>
 <body>
-  <img id="logo" src="https://raw.githubusercontent.com/mozildur/frecuenciamilagro/main/logo.png" alt="Logo Frecuencia Milagro">
-  <h1>📻✨ Frecuencia Milagro ✨🎶</h1>
 
-  <button id="play-button">▶️ Escuchar Ahora</button>
-
-  <div class="now-playing-label">🎧 Ahora suena:</div>
-  <div id="sonic_title"></div>
-  <div class="playlist-link">
-    Puedes escuchar todas las canciones en la <a href="https://www.youtube.com/playlist?list=PLMepX0V6b8PGvI7NrXaTty9g7UT-I0rtl" target="_blank">playlist de YouTube Music</a>.
+  <div class="section">
+    <img id="logo" src="https://raw.githubusercontent.com/mozildur/frecuenciamilagro/main/logo.png" alt="Logo Frecuencia Milagro">
+    <h1>📻✨ Frecuencia Milagro ✨🎶</h1>
   </div>
 
-  <div class="separador"></div>
+  <div class="section">
+    <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; align-items:center;">
+      <button id="play-button" aria-label="Reproducir o pausar estación">▶️ Escuchar Ahora</button>
+      <a id="donate-button" href="https://paypal.me/primerotupaz" target="_blank" rel="noopener" aria-label="Donar a Frecuencia Milagro">
+        💛 Donar
+      </a>
+    </div>
+    <div style="font-size:.9rem; color:#444; margin-top:4px;">
+      Apoya la frecuencia, tu donativo mantiene la paz sonando.
+    </div>
 
-  <div class="subtitle">🎶 Las últimas 5 canciones:</div>
-  <div id="sonic_history"></div>
+    <div class="now-playing-label">🎧 Ahora suena:</div>
+    <div class="now-playing-flex">
+      <div id="sonic_art"><span style="font-size:.6rem;color:#666;">Cover</span></div>
+      <div id="sonic_title" aria-live="polite">Cargando título... si no aparece en 3s, recarga.</div>
+    </div>
 
-  <div class="separador"></div>
+    <div class="playlist-link">
+      Puedes escuchar todas las canciones en la <a href="https://www.youtube.com/playlist?list=PLMepX0V6b8PGvI7NrXaTty9g7UT-I0rtl" target="_blank" rel="noopener">playlist de YouTube Music</a>.
+    </div>
 
-  <div class="frase" id="fraseAleatoria"></div>
-  <div class="testimonio" id="testimonioAleatorio"></div>
+    <div class="external-players" aria-label="Escuchar con otros reproductores">
+      <a href="https://play.wrhradios.com/cp/links.php?p=8012&m=pls" target="_blank" rel="noopener"><img src="https://play.wrhradios.com/cp/inc/images/players/winamp2.png" alt="Winamp"></a>
+      <a href="https://play.wrhradios.com/cp/links.php?p=8012&m=asx" target="_blank" rel="noopener"><img src="https://play.wrhradios.com/cp/inc/images/players/mediaplayer.png" alt="WMP"></a>
+      <a href="https://play.wrhradios.com/cp/links.php?p=8012&m=pls" target="_blank" rel="noopener"><img src="https://play.wrhradios.com/cp/inc/images/players/vlc.png" alt="VLC"></a>
+      <a href="https://play.wrhradios.com/cp/links.php?p=8012&m=pls" target="_blank" rel="noopener"><img src="https://play.wrhradios.com/cp/inc/images/players/itunes.png" alt="iTunes"></a>
+    </div>
+  </div>
 
-  <div class="separador"></div>
+  <div class="section">
+    <div class="subtitle">🎶 Las últimas 5 canciones:</div>
+    <div id="sonic_history">Cargando historial...</div>
+  </div>
 
-  <div class="horarios">
-    ⏰ <strong>Transmisiones en vivo:</strong><br>
+  <div class="section">
+    <div class="frase" id="fraseAleatoria" aria-live="polite"></div>
+    <div class="testimonio" id="testimonioAleatorio" aria-live="polite"></div>
+  </div>
+
+  <div class="section horarios">
+    <div class="badge">En vivo</div>⏰ <strong>Transmisiones:</strong><br>
     📅 Lunes, martes y jueves - 13:00 hrs MEX: <em>Explorando Un Curso de Milagros</em><br>
     📅 Viernes - 13:00 hrs MEX: <em>Viernes Íntimo</em><br>
     📅 Lunes - 19:30 hrs MEX: <em>Clase UCDM con MoZ</em>
   </div>
 
-  <div class="separador"></div>
-
-  <div class="social-links">
-    📧 Contacto: <a href="mailto:moz@primerotupaz.com">moz@primerotupaz.com</a>
-    📱 WhatsApp: <a href="https://wa.me/525522721399" target="_blank">+52 552 272 1399</a>
-    📸 Instagram: <a href="https://www.instagram.com/primeratencion" target="_blank">@primeratencion</a>
-    🎵 TikTok: <a href="https://www.tiktok.com/@mozildur" target="_blank">@mozildur</a>
-    🎧 Spotify: <a href="https://open.spotify.com/intl-es/artist/4p4F27OWj29qjfBJXB2uJQ" target="_blank">MoZ en Spotify</a>
-    📺 YouTube: <a href="https://www.youtube.com/@MoZIldur" target="_blank">Explorando Un Curso de Milagros</a>
-    🙏 Donaciones: <a href="http://paypal.me/primerotupaz" target="_blank">paypal.me/primerotupaz</a>
+  <div class="section social-links">
+    <strong>Contacto directo:</strong><br>
+    📧 <a href="mailto:moz@primerotupaz.com">moz@primerotupaz.com</a> &nbsp;
+    📱 <a href="https://wa.me/525522721399" target="_blank" rel="noopener">+52 552 272 1399</a>
   </div>
 
-  <div class="separador"></div>
-
-  <div class="credits">
+  <div class="section credits">
     Creado por MoZ con ayuda celestial (y un poco de HTML) © 2025
   </div>
 
   <script>
-    const frases = [
-      "No soy un cuerpo, soy libre.",
-      "El amor no tiene opuestos.",
-      "Nada real puede ser amenazado. Nada irreal existe. En esto radica la paz de Dios.",
-      "El perdón es la llave de la felicidad.",
-      "Todo lo que das te lo das a ti mismo.",
-      "El miedo no es real."
-    ];
-
-    const testimonios = [
-      "Desde que escucho Frecuencia Milagro, mis días comienzan con paz. – Laura",
-      "Me acompaña en cada jornada, es mi cable a tierra. – José",
-      "La música y los mensajes me recuerdan quién soy realmente. – Ana",
-      "Gracias por esta estación, me reconecta con el amor. – Carlos",
-      "Aquí encontré más que música, encontré propósito. – Sofía"
-    ];
-
-    function mostrarAleatorios() {
-      const frase = frases[Math.floor(Math.random() * frases.length)];
-      const testimonio = testimonios[Math.floor(Math.random() * testimonios.length)];
-      document.getElementById('fraseAleatoria').textContent = `🌟 Frase Milagrosa: "${frase}"`;
-      document.getElementById('testimonioAleatorio').textContent = `💬 Testimonio: ${testimonio}`;
-    }
-
-    mostrarAleatorios();
-
+    // play/pause
     const audio = new Audio("https://play.wrhradios.com/8012/stream");
-    document.getElementById("play-button").addEventListener("click", () => {
-      audio.play();
+    audio.preload = "auto"; let playing = false;
+    const btn = document.getElementById("play-button");
+    function updateBtn(){btn.textContent=playing?"⏸️ Pausar":"▶️ Escuchar Ahora";}
+    btn.addEventListener("click", async ()=>{
+      try{ playing?audio.pause():await audio.play(); playing=!playing; }
+      catch(e){console.warn(e);}
+      updateBtn();
     });
+    ["play","pause","ended"].forEach(ev=>audio.addEventListener(ev,()=>{playing= !audio.paused; updateBtn();}));
+
+    // frases/testimonios
+    const frases=["No soy un cuerpo, soy libre.","El amor no tiene opuestos.","Nada real puede ser amenazado. Nada irreal existe. En esto radica la paz de Dios.","El perdón es la llave de la felicidad.","Todo lo que das te lo das a ti mismo.","El miedo no es real."];
+    const tests=["Desde que escucho Frecuencia Milagro, mis días comienzan con paz. – Laura","Me acompaña en cada jornada, es mi cable a tierra. – José","La música y los mensajes me recuerdan quién soy realmente. – Ana","Gracias por esta estación, me reconecta con el amor. – Carlos","Aquí encontré más que música, encontré propósito. – Sofía"];
+    const fEl=document.getElementById("fraseAleatoria"), tEl=document.getElementById("testimonioAleatorio");
+    function rotar(){
+      fEl.classList.add("fade-out"); tEl.classList.add("fade-out");
+      setTimeout(()=>{
+        fEl.textContent=`🌟 Frase Milagrosa: "${frases[Math.floor(Math.random()*frases.length)]}"`;
+        tEl.textContent=`💬 Testimonio: ${tests[Math.floor(Math.random()*tests.length)]}`;
+        fEl.classList.remove("fade-out"); tEl.classList.remove("fade-out");
+      },400);
+    }
+    rotar(); setInterval(rotar,30000);
+
+    // fallback título
+    const st=document.getElementById("sonic_title");
+    setTimeout(()=>{
+      if(!st.textContent.trim().length||st.textContent.includes("Cargando")){
+        st.textContent="No hay info de la canción aún. Intenta recargar si sigue así.";
+      }
+    },3000);
+    // ajuste tamaño
+    new MutationObserver(()=>{
+      st.classList[st.textContent.length>45?"add":"remove"]("small-title");
+    }).observe(st,{childList:true,subtree:true});
   </script>
 </body>
 </html>
