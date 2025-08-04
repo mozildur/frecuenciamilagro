@@ -50,16 +50,25 @@
       --bg1: #fce3ff;
       --bg2: #d6f0ff;
       --primary: #7b1fa2;
-      --dark: #3e006b;
-      --card: #fff3e0;
+      --text: #3e006b;
+      --card-bg: #ffffffee;
       --radius: 12px;
+      --focus-outline: #ffdd57;
       --transition: .35s ease;
+    }
+    .dark {
+      --bg1: #1f1a2b;
+      --bg2: #2e2a45;
+      --primary: #d3a1ff;
+      --text: #eee;
+      --card-bg: rgba(40,35,60,.9);
+      --focus-outline: #ffd36b;
     }
     * { box-sizing:border-box; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
-      color: var(--dark);
+      color: var(--text);
       margin: 0;
       padding: 0;
       min-height: 100vh;
@@ -67,7 +76,9 @@
       flex-direction: column;
       align-items: center;
       gap: 10px;
+      transition: background var(--transition), color var(--transition);
     }
+    a { color: inherit; }
     img#logo {
       max-width: 220px;
       width: 100%;
@@ -87,12 +98,15 @@
       max-width: 960px;
       padding: 0 12px;
     }
+    #play-button, #donate-button {
+      min-height: 44px;
+    }
     #play-button {
       background-color: #ff4081;
       color: white;
       border: none;
-      padding: 18px 50px;
-      font-size: 2.2rem;
+      padding: 18px 40px;
+      font-size: 2rem;
       border-radius: 14px;
       cursor: pointer;
       display: inline-flex;
@@ -109,7 +123,7 @@
       background: #ffdd57;
       color: #3e006b;
       border: none;
-      padding: 14px 28px;
+      padding: 14px 24px;
       font-size: 1.1rem;
       border-radius: 12px;
       cursor: pointer;
@@ -139,7 +153,7 @@
       border-radius: 999px;
       background: rgba(255,255,255,.85);
       text-decoration: none;
-      color: var(--dark);
+      color: var(--text);
       font-weight: 600;
       box-shadow: 0 6px 16px -2px rgba(0,0,0,.1);
       transition: transform .2s ease;
@@ -149,7 +163,7 @@
     .now-playing-label {
       font-size: 1.6rem;
       font-weight: bold;
-      color: #6a1b9a;
+      color: #d8b4ff;
       margin: 12px 0 4px;
       display: flex;
       justify-content: center;
@@ -175,20 +189,22 @@
       justify-content: center;
       box-shadow: 0 8px 20px -3px rgba(0,0,0,.1);
       flex-shrink: 0;
+      position: relative;
     }
     #sonic_art img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
     #sonic_title {
       font-size: 1.9rem;
       font-weight: 700;
-      color: #880e4f;
+      color: var(--text);
       max-width: 600px;
       line-height: 1.1;
       padding: 6px 10px;
-      background: rgba(255,255,255,.9);
+      background: var(--card-bg);
       border-radius: 10px;
       min-height: 56px;
       display: flex;
@@ -196,46 +212,81 @@
       justify-content: center;
       word-break: break-word;
     }
-    .small-title { font-size: 1.4rem !important; }
 
     .playlist-link, .subtitle,
-    #sonic_history, .frase, .testimonio,
-    .horarios, .social-links, .credits {
+    #sonic_history, .horarios, .social-links, .credits {
       margin: 12px auto;
       max-width: 960px;
       width: calc(100% - 24px);
     }
-
-    .playlist-link { font-size: 1rem; color: #4a148c; }
+    .playlist-link { font-size: 1rem; color: #9c64b5; }
     .playlist-link a { text-decoration: underline; }
 
     h2.subtitle {
       font-size: 1.6rem;
       font-weight: bold;
-      color: #6a1b9a;
+      color: #b39ddb;
       margin: 25px 0 10px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
+    /* Historial estilo cápsulas */
+    .history-wrapper {
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-top: 6px;
+    }
+    .history-item {
+      background: var(--card-bg);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: .9rem;
+      white-space: nowrap;
+      box-shadow: 0 6px 18px -4px rgba(0,0,0,.08);
+      position: relative;
+      transition: transform .3s ease, background .3s ease;
+      margin-right: 6px;
+      display: inline-block;
+    }
+    .history-item.current {
+      background: #ffe3f7;
+      font-weight: 700;
+    }
     #sonic_history {
-      background: #ffffffdd;
+      background: var(--card-bg);
       padding: 16px;
       border-radius: var(--radius);
       min-height: 100px;
       line-height: 1.3;
       font-size: 1rem;
     }
-    .frase, .testimonio {
-      background: #fce4ec;
-      padding: 16px;
-      border-radius: 12px;
-      min-height: 60px;
-      font-size: 1.1rem;
-      transition: opacity .5s ease;
+
+    /* Inspiración */
+    .inspiration {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 8px;
     }
-    .fade-out { opacity: 0; }
+    .card-small {
+      background: var(--card-bg);
+      padding: 16px 18px;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px -8px rgba(0,0,0,.08);
+      position: relative;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+    .card-small .label {
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
 
     .horarios, .social-links, .credits {
       background: rgba(255,255,255,.95);
@@ -245,7 +296,10 @@
       text-align: left;
       line-height: 1.4;
     }
-    .social-links a { font-weight: 600; text-decoration: none; color: var(--dark); }
+    .dark .horarios, .dark .social-links, .dark .credits {
+      background: rgba(30,25,50,.9);
+    }
+    .social-links a { font-weight: 600; text-decoration: none; color: var(--text); }
     .social-links a:hover { text-decoration: underline; }
 
     #sonic_listeners {
@@ -263,8 +317,67 @@
       margin-right:6px;
     }
 
+    /* animaciones */
+    .fade-change {
+      animation: fadeChange .4s ease-out;
+    }
+    @keyframes fadeChange {
+      0% { opacity: 0; transform: scale(.97); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .cover-pulse {
+      animation: pulse .6s ease-out;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    /* foco accesible claro */
+    :focus-visible {
+      outline: 3px solid var(--focus-outline);
+      outline-offset: 3px;
+    }
+
+    /* skip link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 8px;
+      background: #fff;
+      color: #3e006b;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      z-index: 50;
+      transition: top .2s ease;
+      text-decoration: none;
+    }
+    .skip-link:focus {
+      top: 8px;
+    }
+
+    /* parche modo oscuro: contraste en compartir y oyentes */
+    .dark .share-buttons a {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+    }
+    .dark .share-buttons a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    .dark #listener-section > div {
+      background: rgba(255,255,255,0.08) !important;
+    }
+    .dark #listener-section div {
+      color: #fff;
+    }
+    .dark #sonic_listeners {
+      color: #fff;
+    }
+
     @media (max-width: 850px) {
-      #play-button, #donate-button { padding: 14px 28px; font-size: 2rem; }
+      #play-button, #donate-button { padding: 14px 28px; font-size: 1.8rem; }
       #sonic_title { font-size: 1.5rem; }
       h1 { font-size: 2.2rem; }
     }
@@ -272,14 +385,24 @@
       #play-button, #donate-button { width: 100%; }
       #sonic_title { font-size: 1.2rem; }
     }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
   </style>
 
   <script id="sonic_js" data-port="8012" src="https://play.wrhradios.com/cp/widgets.js?r=306" defer></script>
 </head>
 <body>
+  <a href="#main" class="skip-link">Saltar al contenido</a>
   <header class="section" aria-label="Encabezado principal">
-    <img id="logo" src="https://raw.githubusercontent.com/mozildur/frecuenciamilagro/main/logo.png" alt="Logo Frecuencia Milagro">
-    <h1>📻✨ Frecuencia Milagro ✨🎶</h1>
+    <img id="logo" src="https://raw.githubusercontent.com/mozildur/frecuenciamilagro/main/logo.png" alt="Logo Frecuencia Milagro" loading="lazy" fetchpriority="high">
+    <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; justify-content:center;">
+      <h1 style="margin:0;">📻✨ Frecuencia Milagro ✨🎶</h1>
+      <button id="theme-toggle" aria-label="Cambiar tema" aria-pressed="false" style="background:none;border:none;cursor:pointer;font-size:1.4rem;display:inline-flex;align-items:center;gap:6px;">
+        🌙
+      </button>
+    </div>
+
     <div class="share-buttons" aria-label="Compartir estación">
       <a href="https://wa.me/?text=Estoy%20escuchando%20Frecuencia%20Milagro%2C%20%C3%A9chale%20un%20o%C3%ADdo%3A%20https%3A%2F%2Ffrecuenciamilagro.com" target="_blank" rel="noopener" aria-label="Compartir en WhatsApp">
         🟢 WhatsApp
@@ -291,19 +414,16 @@
         📘 Facebook
       </a>
     </div>
+
+    <div id="listener-section" style="margin-top:8px; text-align:center;">
+      <div style="display:inline-flex; align-items:center; gap:8px; background: rgba(255,255,255,.95); padding:8px 14px; border-radius:10px; box-shadow:0 6px 16px -2px rgba(0,0,0,.1);">
+        <div style="font-weight:700; font-size:1.1rem;">👥 Oyentes en vivo ahora:</div>
+        <div id="sonic_listeners" aria-live="polite">—</div>
+      </div>
+    </div>
   </header>
 
-  <main class="section" aria-label="Contenido principal">
-    <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; align-items:center;">
-      <button id="play-button" aria-label="Reproducir o pausar estación">▶️ Escuchar Ahora</button>
-      <a id="donate-button" href="https://paypal.me/primerotupaz" target="_blank" rel="noopener" aria-label="Donar a Frecuencia Milagro">
-        💛 Donar
-      </a>
-    </div>
-    <div style="font-size:.9rem; color:#444; margin-top:4px; text-align:center;">
-      Apoya la frecuencia, tu donativo mantiene la paz sonando.
-    </div>
-
+  <main id="main" class="section" aria-label="Contenido principal">
     <div class="now-playing-label">🎧 Ahora suena:</div>
     <div class="now-playing-flex" aria-label="Información de la canción actual">
       <div id="sonic_art" aria-label="Cover de la canción actual">
@@ -314,11 +434,18 @@
       </div>
     </div>
 
-    <div id="listener-section" style="margin-top:6px; text-align:center;">
-      <div style="display:inline-flex; align-items:center; gap:8px; background: rgba(255,255,255,.95); padding:8px 14px; border-radius:10px; box-shadow:0 6px 16px -2px rgba(0,0,0,.1);">
-        <div style="font-weight:700; font-size:1.1rem;">👥 Oyentes en vivo ahora:</div>
-        <div id="sonic_listeners" aria-live="polite">—</div>
-      </div>
+    <!-- anuncio para lectores de pantalla -->
+    <div id="sr-announcer" aria-live="polite" aria-atomic="true" style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;"></div>
+
+    <!-- play + donar juntos -->
+    <div style="margin-top:12px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+      <button id="play-button" aria-label="Reproducir o pausar estación">▶️ Escuchar Ahora</button>
+      <a id="donate-button" href="https://paypal.me/primerotupaz" target="_blank" rel="noopener" aria-label="Donar a Frecuencia Milagro">
+        💛 Donar
+      </a>
+    </div>
+    <div style="font-size:.9rem; color:#444; margin-top:4px; text-align:center;">
+      Apoya la frecuencia, tu donativo mantiene la paz sonando.
     </div>
 
     <div class="playlist-link">
@@ -326,10 +453,21 @@
     </div>
 
     <h2 class="subtitle">🎶 Las últimas 5 canciones:</h2>
-    <div id="sonic_history">Cargando historial...</div>
+    <div id="sonic_history" class="history-wrapper" aria-label="Historial de canciones">
+      <div id="history_inner" style="display:flex; gap:8px;"></div>
+    </div>
 
-    <div class="frase" id="fraseAleatoria" aria-live="polite"></div>
-    <div class="testimonio" id="testimonioAleatorio" aria-live="polite"></div>
+    <h2 class="subtitle">✨ Inspiración del día</h2>
+    <div class="inspiration" aria-label="Frase milagrosa y testimonio">
+      <div class="card-small" id="fraseCard" aria-live="polite">
+        <div class="label">🌟 Frase Milagrosa</div>
+        <div id="fraseAleatoria">Cargando...</div>
+      </div>
+      <div class="card-small" id="testimonioCard" aria-live="polite">
+        <div class="label">💬 Testimonio</div>
+        <div id="testimonioAleatorio">Cargando...</div>
+      </div>
+    </div>
 
     <div class="horarios">
       <div class="badge">En vivo</div>⏰ <strong>Transmisiones:</strong><br>
@@ -350,6 +488,33 @@
   </footer>
 
   <script>
+    // tema: toggle + preferencia
+    const themeToggle = document.getElementById('theme-toggle');
+    const applyTheme = (theme) => {
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+      themeToggle.setAttribute('aria-pressed', theme === 'dark');
+      localStorage.setItem('theme', theme);
+    };
+    const initTheme = () => {
+      const stored = localStorage.getItem('theme');
+      if (stored === 'dark' || stored === 'light') {
+        applyTheme(stored);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        applyTheme('dark');
+      } else {
+        applyTheme('light');
+      }
+    };
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      applyTheme(isDark ? 'light' : 'dark');
+    });
+    initTheme();
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'dark' : 'light');
+    });
+
     // audio play/pause toggle
     const audio = new Audio("https://play.wrhradios.com/8012/stream");
     audio.preload = "auto";
@@ -364,13 +529,14 @@
         else await audio.play();
       } catch (e) {
         console.warn("Error al reproducir:", e);
+        alert("No se pudo reproducir. Abre el stream directo en otra pestaña.");
       }
     });
     audio.addEventListener("play", () => { playing = true; updateBtn(); });
     audio.addEventListener("pause", () => { playing = false; updateBtn(); });
     audio.addEventListener("ended", () => { playing = false; updateBtn(); });
 
-    // frases y testimonios
+    // inspiración (frase + testimonio)
     const frases = [
       "No soy un cuerpo, soy libre.",
       "El amor no tiene opuestos.",
@@ -388,46 +554,107 @@
     ];
     const fraseEl = document.getElementById("fraseAleatoria");
     const testimonioEl = document.getElementById("testimonioAleatorio");
-    function rotar() {
-      fraseEl.classList.add("fade-out");
-      testimonioEl.classList.add("fade-out");
+    function rotarInspiracion() {
+      const fraseCard = document.getElementById("fraseCard");
+      const testCard = document.getElementById("testimonioCard");
+      fraseCard.classList.add("fade-change");
+      testCard.classList.add("fade-change");
       setTimeout(() => {
         fraseEl.textContent = `🌟 Frase Milagrosa: "${frases[Math.floor(Math.random() * frases.length)]}"`;
         testimonioEl.textContent = `💬 Testimonio: ${testimonios[Math.floor(Math.random() * testimonios.length)]}`;
-        fraseEl.classList.remove("fade-out");
-        testimonioEl.classList.remove("fade-out");
+        fraseCard.classList.remove("fade-change");
+        testCard.classList.remove("fade-change");
       }, 400);
     }
-    rotar();
-    setInterval(rotar, 30000);
+    rotarInspiracion();
+    setInterval(rotarInspiracion, 30000);
 
-    // fallback título
-    const st = document.getElementById("sonic_title");
-    setTimeout(() => {
-      if (!st.textContent.trim().length || st.textContent.includes("Cargando")) {
-        st.textContent = "No hay info de la canción aún. Intenta recargar si sigue así.";
-      }
-    }, 3000);
-    new MutationObserver(() => {
-      st.classList[st.textContent.length > 45 ? "add" : "remove"]("small-title");
-    }).observe(st, { childList: true, subtree: true });
+    // estado previo para detectar cambios
+    let lastPlaying = null;
+    let lastArt = null;
+    let lastHistory = [];
 
-    // oyentes actuales
+    const titleEl = document.getElementById("sonic_title");
+    const artContainer = document.getElementById("sonic_art");
+    const historyInner = document.getElementById("history_inner");
     const listenersEl = document.getElementById("sonic_listeners");
-    async function actualizarOyentes() {
+    const announcer = document.getElementById("sr-announcer");
+
+    // fetch directo a SonicPlayer
+    async function actualizarSonic() {
       try {
-        const res = await fetch("https://play.wrhradios.com/cp/widgets.php?port=8012&json=true");
-        if (!res.ok) throw new Error("no ok");
-        const data = await res.json();
-        const count = data.current_listeners ?? data.listeners ?? 0;
-        listenersEl.textContent = count;
+        const res = await fetch("https://play.wrhradios.com/cp/get_info.php?p=8012");
+        if (!res.ok) throw new Error('no ok');
+        const d = await res.json();
+
+        // título
+        if (d.title && d.title !== lastPlaying) {
+          lastPlaying = d.title;
+          titleEl.textContent = d.title;
+          titleEl.classList.add("fade-change");
+          setTimeout(() => titleEl.classList.remove("fade-change"), 400);
+          announcer.textContent = `Nueva canción: ${d.title}`;
+        }
+
+        // cover
+        if (d.art && d.art !== lastArt) {
+          lastArt = d.art;
+          const newImg = document.createElement("img");
+          newImg.src = d.art;
+          newImg.alt = "Cover de la canción";
+          newImg.loading = "lazy";
+          newImg.style.opacity = '0';
+          newImg.style.position = 'absolute';
+          newImg.style.top = '0';
+          newImg.style.left = '0';
+          newImg.style.width = '100%';
+          newImg.style.height = '100%';
+          newImg.style.objectFit = 'cover';
+          newImg.classList.add('cover-pulse');
+          const existing = artContainer.querySelector('img');
+          artContainer.appendChild(newImg);
+          requestAnimationFrame(() => {
+            newImg.style.transition = 'opacity .4s ease';
+            newImg.style.opacity = '1';
+          });
+          if (existing) {
+            existing.style.transition = 'opacity .3s ease';
+            existing.style.opacity = '0';
+            setTimeout(() => {
+              if (existing.parentElement) existing.remove();
+            }, 400);
+          }
+          setTimeout(() => newImg.classList.remove('cover-pulse'), 600);
+        }
+
+        // historial
+        const historyArr = Array.isArray(d.history) ? d.history.slice(0,5) : [];
+        const changed = JSON.stringify(historyArr) !== JSON.stringify(lastHistory);
+        if (changed) {
+          lastHistory = historyArr;
+          historyInner.innerHTML = '';
+          historyArr.forEach((track, idx) => {
+            const span = document.createElement('div');
+            span.className = 'history-item';
+            if (idx === 0) span.classList.add('current');
+            span.textContent = track;
+            historyInner.appendChild(span);
+          });
+        }
+
+        // oyentes
+        if (typeof d.listeners !== 'undefined') {
+          listenersEl.textContent = d.listeners;
+        } else if (typeof d.current_listeners !== 'undefined') {
+          listenersEl.textContent = d.current_listeners;
+        }
       } catch (e) {
-        console.warn("No se pudo obtener oyentes:", e);
-        listenersEl.textContent = "—";
+        console.warn('No se pudo actualizar Sonic:', e);
       }
     }
-    actualizarOyentes();
-    setInterval(actualizarOyentes, 30000);
+
+    actualizarSonic();
+    setInterval(actualizarSonic, 15000);
   </script>
 </body>
 </html>
