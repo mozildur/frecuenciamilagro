@@ -662,5 +662,13 @@
     actualizarSonic();
     setInterval(actualizarSonic, 15000);
   </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(()=> console.log('PWA activada 👍'))
+      .catch(e=> console.warn('PWA falló:', e));
+  }
+</script>
+
 </body>
 </html>
