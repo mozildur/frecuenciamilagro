@@ -568,7 +568,7 @@
       testCard.classList.add("fade-change");
       setTimeout(() => {
         fraseEl.textContent = `"${frases[Math.floor(Math.random() * frases.length)]}"`;
-        testimonioEl.textContent = `💬 Testimonio: ${testimonios[Math.floor(Math.random() * testimonios.length)]}`;
+        testimonioEl.textContent = testimonios[Math.floor(Math.random() * testimonios.length)];
         fraseCard.classList.remove("fade-change");
         testCard.classList.remove("fade-change");
       }, 400);
