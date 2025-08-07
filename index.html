@@ -544,21 +544,37 @@
     audio.addEventListener("ended", () => { playing = false; updateBtn(); });
 
     // inspiración (frase + testimonio)
-    const frases = [
-      "No soy un cuerpo, soy libre.",
-      "El amor no tiene opuestos.",
-      "Nada real puede ser amenazado. Nada irreal existe. En esto radica la paz de Dios.",
-      "El perdón es la llave de la felicidad.",
-      "Todo lo que das te lo das a ti mismo.",
-      "El miedo no es real."
-    ];
-    const testimonios = [
-      "Desde que escucho Frecuencia Milagro, mis días comienzan con paz. – Laura",
-      "Me acompaña en cada jornada, es mi cable a tierra. – José",
-      "La música y los mensajes me recuerdan quién soy realmente. – Ana",
-      "Gracias por esta estación, me reconecta con el amor. – Carlos",
-      "Aquí encontré más que música, encontré propósito. – Sofía"
-    ];
+  const frases = [
+  "No soy un cuerpo, soy libre.",
+  "El amor no tiene opuestos.",
+  "Nada real puede ser amenazado. Nada irreal existe. En esto radica la paz de Dios.",
+  "El perdón es la llave de la felicidad.",
+  "Todo lo que das te lo das a ti mismo.",
+  "El miedo no es real.",
+  "La paz no se busca, se recuerda.",
+  "Tu silencio interior es más fuerte que cualquier tormenta.",
+  "Cada latido de tu corazón es un milagro en acción.",
+  "El perdón libera lo que el rencor aprisiona.",
+  "Sólo el amor sostiene lo que el miedo desmorona.",
+  "En tu respiración habita la chispa de lo divino.",
+  "Lo imposible es sólo lo que aún no has perdonado.",
+  "Cuando regalas gratitud, el universo te sonríe."
+];
+   const testimonios = [
+  "Desde que escucho Frecuencia Milagro, mis días comienzan con paz. – Laura (México)",
+  "Me acompaña en cada jornada, es mi cable a tierra. – José (México)",
+  "La música y los mensajes me recuerdan quién soy realmente. – Ana (México)",
+  "Gracias por esta estación, me reconecta con el amor. – Carlos (México)",
+  "Aquí encontré más que música, encontré propósito. – Sofía (México)",
+  "Frecuencia Milagro me acompaña en el tráfico diario y me recuerda respirar profundo. – Ana (Colombia)",
+  "Gracias a esta estación descubrí mi energía serena. – Pedro (España)",
+  "Ahora empiezo cada día con esperanza, incluso antes del café. – Mariana (Argentina)",
+  "En el caos de la ciudad, esta radio es mi remanso de calma. – Diego (México)",
+  "Sus mensajes me hicieron reconectar con mi propósito. – Valentina (Chile)",
+  "Nunca imaginé que una emisora online pudiera sanar tanto. – Jorge (Perú)",
+  "Aquí encontré palabras que hablan directo al alma. – Gabriela (Brasil)",
+  "Mis tardes ya no son iguales sin estos milagros sonoros. – Luis (Estados Unidos)"
+];
     const fraseEl = document.getElementById("fraseAleatoria");
     const testimonioEl = document.getElementById("testimonioAleatorio");
     function rotarInspiracion() {
