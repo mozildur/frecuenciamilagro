@@ -13,8 +13,8 @@
             --bg-deep: #0f0b1e;
             --primary-pink: #ff4d8d;
             --primary-yellow: #fce367;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.07);
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.15);
         }
 
         body {
@@ -50,19 +50,20 @@
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
-            border-radius: 2rem;
+            border-radius: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        /* --- ESTÉTICA DEL VINILO RESPONSIVA --- */
+        /* --- ESTÉTICA DEL VINILO --- */
         .vinyl-container {
             position: relative;
-            width: 250px;
-            height: 250px;
+            width: 280px;
+            height: 280px;
             margin: 0 auto;
         }
 
         @media (min-width: 768px) {
-            .vinyl-container { width: 340px; height: 340px; }
+            .vinyl-container { width: 360px; height: 360px; }
         }
 
         .vinyl-record {
@@ -81,7 +82,7 @@
                 #181818 2px,
                 #000 3px
             );
-            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9);
             z-index: 5;
         }
 
@@ -93,7 +94,7 @@
             border-radius: 50%;
             overflow: hidden;
             z-index: 10;
-            border: 3px solid #000;
+            border: 4px solid #000;
         }
 
         .vinyl-label img {
@@ -101,19 +102,7 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            image-rendering: -webkit-optimize-contrast;
-            filter: contrast(1.05) brightness(1.05);
-        }
-
-        .vinyl-hole {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: var(--bg-deep);
-            border-radius: 50%;
-            z-index: 20;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.9);
-            border: 1px solid rgba(255,255,255,0.1);
+            filter: contrast(1.1) brightness(1.1);
         }
 
         .vinyl-reflection {
@@ -121,7 +110,7 @@
             inset: 0;
             background: linear-gradient(135deg, 
                 transparent 42%, 
-                rgba(255,255,255,0.06) 50%, 
+                rgba(255,255,255,0.08) 50%, 
                 transparent 58%);
             z-index: 15;
             border-radius: 50%;
@@ -139,126 +128,107 @@
 
         .playing-glow {
             position: absolute;
-            inset: -15px;
+            inset: -20px;
             background: var(--primary-pink);
-            filter: blur(60px);
+            filter: blur(80px);
             opacity: 0;
             transition: opacity 1.5s ease;
             border-radius: 50%;
             z-index: 1;
         }
-        .playing .playing-glow { opacity: 0.3; }
+        .playing .playing-glow { opacity: 0.4; }
 
         .wave-bar {
-            width: 4px;
-            height: 4px;
+            width: 5px;
+            height: 5px;
             background: var(--primary-pink);
-            border-radius: 4px;
+            border-radius: 5px;
         }
         .playing .wave-bar { animation: wave-anim 1.2s infinite ease-in-out; }
         @keyframes wave-anim {
-            0%, 100% { height: 4px; opacity: 0.3; }
-            50% { height: 28px; opacity: 1; }
+            0%, 100% { height: 5px; opacity: 0.3; }
+            50% { height: 35px; opacity: 1; }
         }
 
         #lesson-badge {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             background: linear-gradient(135deg, #ff4d8d, #fce367);
             color: #0f0b1e;
+            box-shadow: 0 4px 15px rgba(255, 77, 141, 0.4);
         }
 
-        /* Centova Widgets Customization */
-        .cc_recenttracks_list { width: 100%; }
-        .cc_recenttracks_entry {
-            display: block !important;
-            padding: 1.25rem !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-        }
-        .cc_recenttracks_entry td { color: white !important; font-size: 0.85rem !important; }
-        .cc_recenttracks_title { font-weight: 700 !important; color: #fff !important; display: block; }
-        .cc_recenttracks_artist { color: #a1a1aa !important; font-size: 0.75rem !important; display: block; margin-top: 2px; }
+        /* TuneIn Links - Iconos más grandes */
+        #cc_tunein img { height: 50px; width: auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); }
 
-        /* Sintonía Externa */
-        #cc_tunein {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-        #cc_tunein a {
-            transition: transform 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        #cc_tunein a:hover { transform: translateY(-3px); }
-        #cc_tunein img { height: 35px; width: auto; }
+        /* Widgets Centova */
+        .cc_recenttracks_entry td { color: white !important; font-size: 1rem !important; }
+        .cc_recenttracks_title { font-weight: 800 !important; font-size: 1.1rem !important; }
 
-        .custom-scroll::-webkit-scrollbar { width: 4px; }
-        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
     </style>
 </head>
 <body class="antialiased">
 
     <div id="particles-container"></div>
 
-    <div class="max-w-4xl mx-auto pt-8 pb-16 px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">
+    <div class="max-w-5xl mx-auto pt-10 pb-20 px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
         
         <!-- HEADER -->
-        <header class="text-center space-y-6">
+        <header class="text-center space-y-8">
             <div class="flex justify-center">
-                <div class="relative w-28 h-28 md:w-40 md:h-40 bg-white rounded-3xl flex items-center justify-center overflow-hidden shadow-2xl p-4 border border-white/20 transform hover:scale-105 transition-transform">
+                <div class="relative w-32 h-32 md:w-48 md:h-48 bg-white rounded-[2.5rem] flex items-center justify-center overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] p-4 border-4 border-white/20 transform hover:scale-105 transition-transform">
                     <img src="https://static.mytuner.mobi/media/tvos_radios/255/frecuencia-milagro.ea9f0fc2.png" alt="Logo Frecuencia Milagro" class="w-full h-auto object-contain">
                 </div>
             </div>
-            <div class="space-y-2">
-                <h1 class="text-3xl md:text-6xl font-bold tracking-tighter italic text-white drop-shadow-lg">Frecuencia Milagro</h1>
-                <p class="text-pink-300 font-bold tracking-[0.3em] uppercase text-[9px] md:text-[11px] opacity-80">Música que cambia tu percepción</p>
+            <div class="space-y-4">
+                <h1 class="text-4xl md:text-7xl font-black tracking-tighter italic text-white drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]">Frecuencia Milagro</h1>
+                <p class="text-pink-300 font-black tracking-[0.4em] uppercase text-xs md:text-sm opacity-90">Música que cambia tu percepción</p>
             </div>
         </header>
 
-        <!-- REDES Y ESTADO -->
-        <section class="flex flex-col items-center gap-6">
-            <div class="flex flex-wrap justify-center gap-3 w-full">
-                <a href="https://wa.me/526867883335" target="_blank" class="glass-panel px-5 py-3 flex items-center gap-3 hover:bg-green-500/10 transition-all flex-1 sm:flex-none justify-center">
-                    <i class="fab fa-whatsapp text-green-400 text-lg"></i>
-                    <span class="text-[9px] font-black uppercase tracking-widest">WhatsApp</span>
+        <!-- REDES Y ESTADO - BOTONES MÁS GRANDES -->
+        <section class="flex flex-col items-center gap-8">
+            <div class="flex flex-wrap justify-center gap-4 w-full">
+                <a href="https://wa.me/526867883335" target="_blank" class="glass-panel px-10 py-5 flex items-center gap-4 hover:bg-green-500/20 transition-all flex-1 sm:flex-none justify-center border-white/20">
+                    <i class="fab fa-whatsapp text-green-400 text-2xl"></i>
+                    <span class="text-xs font-black uppercase tracking-widest text-white">WhatsApp</span>
                 </a>
-                <a href="https://instagram.com/primeratencion" target="_blank" class="glass-panel px-5 py-3 flex items-center gap-3 hover:bg-pink-600/10 transition-all flex-1 sm:flex-none justify-center">
-                    <i class="fab fa-instagram text-pink-400 text-lg"></i>
-                    <span class="text-[9px] font-black uppercase tracking-widest">Instagram</span>
+                <a href="https://instagram.com/primeratencion" target="_blank" class="glass-panel px-10 py-5 flex items-center gap-4 hover:bg-pink-600/20 transition-all flex-1 sm:flex-none justify-center border-white/20">
+                    <i class="fab fa-instagram text-pink-400 text-2xl"></i>
+                    <span class="text-xs font-black uppercase tracking-widest text-white">Instagram</span>
                 </a>
-                <button onclick="shareApp()" class="glass-panel px-5 py-3 flex items-center gap-3 hover:bg-white/10 transition-all flex-1 sm:flex-none justify-center">
-                    <i class="fas fa-share-nodes text-pink-400 text-lg"></i>
-                    <span class="text-[9px] font-black uppercase tracking-widest">Compartir</span>
+                <button onclick="shareApp()" class="glass-panel px-10 py-5 flex items-center gap-4 hover:bg-white/10 transition-all flex-1 sm:flex-none justify-center border-white/20">
+                    <i class="fas fa-share-nodes text-yellow-400 text-2xl"></i>
+                    <span class="text-xs font-black uppercase tracking-widest text-white">Compartir</span>
                 </button>
             </div>
 
-            <div class="bg-black/40 backdrop-blur-xl px-6 md:px-8 py-3 rounded-full border border-white/5 flex flex-wrap items-center justify-center gap-4 md:gap-6 shadow-xl text-center">
-                <div class="flex items-center gap-2.5">
-                    <div id="status-led" class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e] animate-pulse"></div>
-                    <span class="text-[9px] md:text-[10px] font-bold text-slate-200 cc_streaminfo uppercase tracking-tight" data-type="server" data-username="mario1">...</span>
+            <div class="bg-black/60 backdrop-blur-3xl px-10 py-4 rounded-full border-2 border-white/10 flex flex-wrap items-center justify-center gap-6 md:gap-10 shadow-2xl">
+                <div class="flex items-center gap-3">
+                    <div id="status-led" class="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_12px_#22c55e] animate-pulse"></div>
+                    <span class="text-xs font-black text-slate-100 cc_streaminfo uppercase tracking-widest" data-type="server" data-username="mario1">Sintonizando...</span>
                 </div>
-                <div class="w-px h-4 bg-white/10 hidden sm:block"></div>
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-signal text-[10px] text-pink-500 opacity-60"></i>
-                    <span class="text-[9px] md:text-[10px] font-bold text-slate-200 uppercase tracking-tighter">
-                        <span class="cc_streaminfo" data-type="bitrate" data-username="mario1">...</span> kbps
+                <div class="w-px h-6 bg-white/20 hidden sm:block"></div>
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-bolt text-pink-500 text-sm"></i>
+                    <span class="text-xs font-black text-slate-100 uppercase tracking-widest">
+                        <span class="cc_streaminfo" data-type="bitrate" data-username="mario1">...</span> KBPS
                     </span>
                 </div>
-                <div class="w-px h-4 bg-white/10 hidden sm:block"></div>
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-users text-[10px] text-pink-500 opacity-60"></i>
-                    <span class="text-[9px] md:text-[10px] font-bold text-slate-200"><span class="cc_streaminfo" data-type="listeners" data-username="mario1">0</span> Oyentes</span>
+                <div class="w-px h-6 bg-white/20 hidden sm:block"></div>
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-users text-pink-500 text-sm"></i>
+                    <span class="text-xs font-black text-slate-100 uppercase tracking-widest">
+                        <span class="cc_streaminfo" data-type="listeners" data-username="mario1">0</span> OYENTES
+                    </span>
                 </div>
             </div>
         </section>
 
         <!-- REPRODUCTOR CENTRAL -->
-        <main id="player-container" class="glass-panel p-6 md:p-12 space-y-10 relative overflow-hidden shadow-2xl">
-            <div class="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+        <main id="player-container" class="glass-panel p-8 md:p-16 space-y-12 relative overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.5)] border-white/10">
+            <div class="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20">
                 
                 <div class="vinyl-container">
                     <div class="playing-glow"></div>
@@ -273,225 +243,205 @@
                     </div>
                 </div>
 
-                <div class="text-center lg:text-left space-y-6 flex-1 min-w-0 w-full">
-                    <div class="space-y-4">
-                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
-                            <span id="lesson-badge" class="hidden px-3 py-1 text-[10px] font-black uppercase tracking-[0.1em] rounded-lg shadow-lg">LECCIÓN ---</span>
-                            <span class="px-2.5 py-1 bg-white/5 border border-white/10 text-white/50 text-[8px] font-black uppercase tracking-widest rounded-md italic">Sintonizando...</span>
-                            <button onclick="copyTrack()" class="text-white/30 hover:text-white transition-colors p-1" title="Copiar Título"><i class="fas fa-copy text-sm"></i></button>
+                <div class="text-center lg:text-left space-y-8 flex-1 min-w-0 w-full">
+                    <div class="space-y-6">
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4">
+                            <span id="lesson-badge" class="hidden px-5 py-2 text-xs font-black uppercase tracking-[0.2em] rounded-xl shadow-lg text-white">LECCIÓN ---</span>
+                            <span class="px-4 py-2 bg-white/10 border border-white/20 text-white font-black text-[10px] uppercase tracking-widest rounded-xl italic">Sintonizando Milagros</span>
+                            <button onclick="copyTrack()" class="text-white/40 hover:text-white transition-colors p-2" title="Copiar Título"><i class="fas fa-copy text-xl"></i></button>
                         </div>
                         
-                        <h2 id="song-title-container" class="text-xl sm:text-2xl md:text-4xl font-bold leading-tight text-white italic tracking-tight break-words">
+                        <h2 id="song-title-container" class="text-2xl sm:text-4xl md:text-5xl font-black leading-tight text-white italic tracking-tighter break-words drop-shadow-lg">
                             <span id="metadata-song" class="cc_streaminfo" data-type="song" data-username="mario1">Cargando Milagros...</span>
                         </h2>
                     </div>
                     
-                    <div class="flex gap-1.5 justify-center lg:justify-start h-8 items-end">
+                    <div class="flex gap-2 justify-center lg:justify-start h-10 items-end">
                         <div class="wave-bar" style="animation-delay: 0.1s"></div>
                         <div class="wave-bar" style="animation-delay: 0.3s"></div>
                         <div class="wave-bar" style="animation-delay: 0.2s"></div>
                         <div class="wave-bar" style="animation-delay: 0.4s"></div>
                         <div class="wave-bar" style="animation-delay: 0.6s"></div>
+                        <div class="wave-bar" style="animation-delay: 0.1s"></div>
+                        <div class="wave-bar" style="animation-delay: 0.5s"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="max-w-xl mx-auto space-y-8">
-                <div class="flex items-center justify-center gap-8 md:gap-12">
-                    <button id="play-btn" class="bg-gradient-to-br from-pink-500 to-pink-700 w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center text-3xl md:text-4xl shadow-2xl active:scale-95 transition-all hover:shadow-pink-500/20">
-                        <i id="play-icon" class="fas fa-play ml-1"></i>
+            <!-- CONTROLES CENTRALES MÁS GRANDES -->
+            <div class="max-w-2xl mx-auto space-y-12">
+                <div class="flex items-center justify-center gap-10 md:gap-16">
+                    <button id="play-btn" class="bg-gradient-to-br from-pink-500 to-pink-700 w-28 h-28 md:w-36 md:h-36 rounded-full flex items-center justify-center text-4xl md:text-6xl shadow-[0_15px_40px_rgba(255,77,141,0.5)] active:scale-90 transition-all hover:scale-105">
+                        <i id="play-icon" class="fas fa-play ml-2"></i>
                     </button>
-                    <a href="https://paypal.me/primerotupaz" target="_blank" class="bg-yellow-500 hover:bg-yellow-400 text-black px-8 md:px-12 py-4 rounded-2xl font-black text-[10px] md:text-xs uppercase shadow-xl transition-all hover:-translate-y-1">
-                        Donar
+                    <a href="https://paypal.me/primerotupaz" target="_blank" class="bg-yellow-400 hover:bg-yellow-300 text-black px-12 md:px-20 py-6 md:py-8 rounded-3xl font-black text-xs md:text-sm uppercase shadow-2xl transition-all hover:-translate-y-2 flex items-center gap-3">
+                        <i class="fas fa-heart text-pink-600"></i> Donar
                     </a>
                 </div>
 
-                <div class="flex items-center gap-4 px-6 py-4 bg-black/40 rounded-3xl border border-white/5 backdrop-blur-2xl">
-                    <i id="volume-icon" class="fas fa-volume-high text-slate-500 text-sm"></i>
-                    <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.8" class="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-pink-500">
-                    <span id="volume-val" class="text-[10px] font-black text-slate-400 w-8 text-right">80%</span>
+                <div class="flex items-center gap-6 px-10 py-6 bg-black/50 rounded-[2.5rem] border-2 border-white/10 backdrop-blur-3xl shadow-2xl">
+                    <i id="volume-icon" class="fas fa-volume-high text-slate-400 text-xl"></i>
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.8" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-pink-500">
+                    <span id="volume-val" class="text-xs font-black text-slate-200 w-12 text-right">80%</span>
                 </div>
             </div>
         </main>
 
         <!-- SECCIÓN DE UCDM: LECCIÓN DEL DÍA -->
-        <section id="ucdm-lesson-section" class="glass-panel p-8 md:p-10 border-t-4 border-pink-500/30 flex flex-col md:flex-row items-center gap-8 shadow-2xl">
-            <div class="flex flex-col items-center md:items-start space-y-4 flex-1">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-pink-500/10 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-book-open text-pink-500 text-lg"></i>
+        <section id="ucdm-lesson-section" class="glass-panel p-10 md:p-14 border-t-8 border-pink-500/50 flex flex-col md:flex-row items-center gap-10 shadow-2xl transform hover:scale-[1.01] transition-transform">
+            <div class="flex flex-col items-center md:items-start space-y-6 flex-1">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 bg-pink-500/20 rounded-2xl flex items-center justify-center shadow-lg">
+                        <i class="fas fa-book-open text-pink-400 text-2xl"></i>
                     </div>
-                    <h4 class="text-[11px] font-black text-pink-400 uppercase tracking-[0.2em]">Lección del Día</h4>
+                    <h4 class="text-xs font-black text-pink-300 uppercase tracking-[0.3em]">Lección del Día</h4>
                 </div>
-                <div class="text-center md:text-left">
-                    <h5 id="ucdm-lesson-number" class="text-3xl md:text-5xl font-bold text-white mb-2 tracking-tighter italic">Lección ---</h5>
-                    <p id="ucdm-lesson-title" class="text-base md:text-xl text-slate-200 font-medium italic leading-tight">Cargando lección de hoy...</p>
+                <div class="text-center md:text-left space-y-3">
+                    <h5 id="ucdm-lesson-number" class="text-4xl md:text-7xl font-black text-white tracking-tighter italic">Lección ---</h5>
+                    <p id="ucdm-lesson-title" class="text-xl md:text-2xl text-slate-200 font-bold italic leading-tight">Sintonizando la Verdad...</p>
                 </div>
             </div>
-            <a href="https://whatsapp.com/channel/0029VaZLyl6CXC3DMsGiaO3l" target="_blank" class="w-full md:w-auto flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest border border-white/5 transition-all shadow-lg group">
-                Leer en WhatsApp <i class="fab fa-whatsapp text-green-400 text-lg group-hover:scale-125 transition-transform"></i>
+            <a href="https://whatsapp.com/channel/0029VaZLyl6CXC3DMsGiaO3l" target="_blank" class="w-full md:w-auto flex items-center justify-center gap-4 bg-green-500/10 hover:bg-green-500/20 px-12 py-7 rounded-3xl text-xs font-black uppercase tracking-widest border-2 border-green-500/20 transition-all shadow-xl group">
+                Leer en WhatsApp <i class="fab fa-whatsapp text-green-400 text-3xl group-hover:scale-125 transition-transform"></i>
             </a>
         </section>
 
-        <!-- SINTONÍA EXTERNA -->
-        <section class="glass-panel p-6 md:p-10 space-y-8 text-center shadow-xl">
-            <div class="flex items-center justify-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-yellow-500/10 flex items-center justify-center">
-                    <i class="fas fa-headphones text-yellow-500 text-sm"></i>
+        <!-- OTRAS PLATAFORMAS -->
+        <section class="glass-panel p-10 md:p-14 space-y-12 text-center shadow-2xl">
+            <div class="flex items-center justify-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 flex items-center justify-center">
+                    <i class="fas fa-headphones text-yellow-500 text-xl"></i>
                 </div>
-                <h4 class="text-[11px] font-black uppercase tracking-widest text-white/70">Escuchar en otras plataformas</h4>
+                <h4 class="text-sm font-black uppercase tracking-widest text-white/80">Otras plataformas de sintonía</h4>
             </div>
             
-            <div id="cc_tunein">
-                <a href="https://centova.servidoraweb.net:2199/tunein/mario1.pls" target="_blank">
-                    <img src="https://centova.servidoraweb.net:2199/system/images/tunein-pls.png" alt="Winamp, iTunes" title="Winamp, iTunes" />
-                    <span class="text-[8px] font-black opacity-40 uppercase tracking-tighter">Winamp/iTunes</span>
+            <div id="cc_tunein" class="grid grid-cols-2 md:grid-cols-4 gap-10">
+                <a href="https://centova.servidoraweb.net:2199/tunein/mario1.pls" target="_blank" class="hover:scale-110 transition-transform">
+                    <img src="https://centova.servidoraweb.net:2199/system/images/tunein-pls.png" alt="Winamp, iTunes" />
+                    <span class="text-[10px] font-black uppercase tracking-widest text-white/50">Winamp/iTunes</span>
                 </a>
-                <a href="https://centova.servidoraweb.net:2199/tunein/mario1.asx" target="_blank">
-                    <img src="https://centova.servidoraweb.net:2199/system/images/tunein-asx.png" alt="Windows Media Player" title="Windows Media Player" />
-                    <span class="text-[8px] font-black opacity-40 uppercase tracking-tighter">W. Media</span>
+                <a href="https://centova.servidoraweb.net:2199/tunein/mario1.asx" target="_blank" class="hover:scale-110 transition-transform">
+                    <img src="https://centova.servidoraweb.net:2199/system/images/tunein-asx.png" alt="Windows Media Player" />
+                    <span class="text-[10px] font-black uppercase tracking-widest text-white/50">Windows Media</span>
                 </a>
-                <a href="https://centova.servidoraweb.net:2199/tunein/mario1.ram" target="_blank">
-                    <img src="https://centova.servidoraweb.net:2199/system/images/tunein-ram.png" alt="Real Player" title="Real Player" />
-                    <span class="text-[8px] font-black opacity-40 uppercase tracking-tighter">Real Player</span>
+                <a href="https://centova.servidoraweb.net:2199/tunein/mario1.ram" target="_blank" class="hover:scale-110 transition-transform">
+                    <img src="https://centova.servidoraweb.net:2199/system/images/tunein-ram.png" alt="Real Player" />
+                    <span class="text-[10px] font-black uppercase tracking-widest text-white/50">Real Player</span>
                 </a>
-                <a href="https://centova.servidoraweb.net:2199/tunein/mario1.qtl" target="_blank">
-                    <img src="https://centova.servidoraweb.net:2199/system/images/tunein-qtl.png" alt="QuickTime" title="QuickTime" />
-                    <span class="text-[8px] font-black opacity-40 uppercase tracking-tighter">QuickTime</span>
+                <a href="https://centova.servidoraweb.net:2199/tunein/mario1.qtl" target="_blank" class="hover:scale-110 transition-transform">
+                    <img src="https://centova.servidoraweb.net:2199/system/images/tunein-qtl.png" alt="QuickTime" />
+                    <span class="text-[10px] font-black uppercase tracking-widest text-white/50">QuickTime</span>
                 </a>
             </div>
         </section>
 
         <!-- HISTORIAL Y PROGRAMACIÓN -->
-        <section class="grid lg:grid-cols-2 gap-8">
-            <!-- Historial -->
-            <div class="glass-panel p-6 md:p-8 flex flex-col space-y-6 overflow-hidden">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-pink-500/10 flex items-center justify-center">
-                            <i class="fas fa-history text-pink-500 text-sm"></i>
-                        </div>
-                        <h4 class="text-[10px] font-black uppercase tracking-widest text-white/70">Historial de Luz</h4>
+        <section class="grid lg:grid-cols-2 gap-10">
+            <div class="glass-panel p-8 md:p-10 flex flex-col space-y-8 overflow-hidden">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-pink-500/20 flex items-center justify-center shadow-lg">
+                        <i class="fas fa-history text-pink-400"></i>
                     </div>
-                    <a href="https://www.youtube.com/playlist?list=PLMepX0V6b8PGvI7NrXaTty9g7UT-I0rtl" target="_blank" class="bg-red-600 px-4 py-2 rounded-xl text-[8px] font-black uppercase flex items-center gap-2 hover:bg-red-500 transition-colors shadow-lg">
-                        <i class="fab fa-youtube"></i> Playlist
-                    </a>
+                    <h4 class="text-xs font-black uppercase tracking-widest text-white">Historial de Luz</h4>
                 </div>
-                
-                <div class="custom-scroll overflow-y-auto max-h-[300px] md:max-h-[350px] pr-2">
+                <div class="custom-scroll overflow-y-auto max-h-[350px] pr-4">
                     <div id="tracks-target" class="cc_recenttracks_list" data-username="mario1">
-                        <div class="p-10 text-center text-white/20 italic text-xs uppercase tracking-widest">Sincronizando pasado...</div>
+                        <div class="p-10 text-center text-white/30 italic text-xs uppercase tracking-widest">Sintonizando historial de bendiciones...</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Programación -->
-            <div class="glass-panel p-6 md:p-8 flex flex-col space-y-8">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg bg-yellow-500/10 flex items-center justify-center">
-                        <i class="fas fa-calendar-alt text-yellow-500 text-sm"></i>
+            <div class="glass-panel p-8 md:p-10 flex flex-col space-y-10">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-yellow-500/20 flex items-center justify-center shadow-lg">
+                        <i class="fas fa-calendar-alt text-yellow-400"></i>
                     </div>
-                    <h4 class="text-[10px] font-black uppercase tracking-widest text-white/70">Programación</h4>
+                    <h4 class="text-xs font-black uppercase tracking-widest text-white">Programación</h4>
                 </div>
-
-                <div class="space-y-5">
-                    <div class="flex justify-between items-center border-b border-white/5 pb-4 group">
-                        <div class="space-y-0.5">
-                            <p class="text-[8px] font-black text-pink-500 uppercase tracking-tighter">Diario - 07:00 MEX</p>
-                            <p class="text-sm font-bold italic group-hover:text-pink-300 transition-colors">Meditando con MoZ</p>
+                <div class="space-y-6">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-6 group">
+                        <div class="space-y-1">
+                            <p class="text-[10px] font-black text-pink-400 uppercase tracking-tighter">Diario - 07:00 MEX</p>
+                            <p class="text-lg font-bold italic group-hover:text-pink-300 transition-colors">Meditando con MoZ</p>
                         </div>
-                        <div class="w-1.5 h-1.5 rounded-full bg-pink-500/30"></div>
+                        <div class="w-2 h-2 rounded-full bg-pink-500/40"></div>
                     </div>
-                    <div class="flex justify-between items-center border-b border-white/5 pb-4 group">
-                        <div class="space-y-0.5">
-                            <p class="text-[8px] font-black text-pink-500 uppercase tracking-tighter">L-M-J - 13:00 MEX</p>
-                            <p class="text-sm font-bold italic group-hover:text-pink-300 transition-colors">Explorando UCDM</p>
+                    <div class="flex justify-between items-center border-b border-white/10 pb-6 group">
+                        <div class="space-y-1">
+                            <p class="text-[10px] font-black text-pink-400 uppercase tracking-tighter">L-M-J - 13:00 MEX</p>
+                            <p class="text-lg font-bold italic group-hover:text-pink-300 transition-colors text-white">Explorando UCDM</p>
                         </div>
-                        <div class="w-1.5 h-1.5 rounded-full bg-pink-500/30"></div>
-                    </div>
-                    <div class="flex justify-between items-center border-b border-white/5 pb-4 group">
-                        <div class="space-y-0.5">
-                            <p class="text-[8px] font-black text-pink-500 uppercase tracking-tighter">VIE - 13:00 MEX</p>
-                            <p class="text-sm font-bold italic group-hover:text-pink-300 transition-colors">Viernes Íntimo</p>
-                        </div>
-                        <div class="w-1.5 h-1.5 rounded-full bg-pink-500/30"></div>
-                    </div>
-                    <div class="flex justify-between items-center group">
-                        <div class="space-y-0.5">
-                            <p class="text-[8px] font-black text-pink-500 uppercase tracking-tighter">LUN - 19:30 MEX</p>
-                            <p class="text-sm font-bold italic group-hover:text-pink-300 transition-colors">Clase con MoZ</p>
-                        </div>
-                        <div class="w-1.5 h-1.5 rounded-full bg-pink-500/30"></div>
+                        <div class="w-2 h-2 rounded-full bg-pink-500/40"></div>
                     </div>
                 </div>
-
-                <!-- Relojes Globales con Banderas Reales -->
-                <div class="mt-auto pt-8 border-t border-white/5 grid grid-cols-2 gap-3 md:gap-4">
-                    <div class="text-center bg-white/5 p-3 md:p-4 rounded-2xl border border-white/5">
-                        <p class="text-[7px] md:text-[8px] font-black text-slate-500 mb-2 uppercase tracking-widest flex items-center justify-center gap-2">
-                            España <img src="https://flagcdn.com/w40/es.png" class="w-4 rounded-sm shadow-sm" alt="España">
+                
+                <!-- BANDERAS Y RELOJES MÁS GRANDES -->
+                <div class="mt-auto pt-10 border-t border-white/10 grid grid-cols-2 gap-4">
+                    <div class="text-center bg-white/5 p-5 rounded-[2rem] border border-white/10 shadow-lg">
+                        <p class="text-[10px] font-black text-slate-400 mb-2 uppercase tracking-widest flex items-center justify-center gap-2">
+                            España <img src="https://flagcdn.com/w40/es.png" class="w-5 rounded shadow-sm" alt="ES">
                         </p>
-                        <p id="time-esp" class="text-base md:text-xl font-bold text-white tracking-widest">--:--</p>
+                        <p id="time-esp" class="text-2xl font-black text-white tracking-widest">--:--</p>
                     </div>
-                    <div class="text-center bg-white/5 p-3 md:p-4 rounded-2xl border border-white/5">
-                        <p class="text-[7px] md:text-[8px] font-black text-slate-500 mb-2 uppercase tracking-widest flex items-center justify-center gap-2">
-                            México <img src="https://flagcdn.com/w40/mx.png" class="w-4 rounded-sm shadow-sm" alt="México">
+                    <div class="text-center bg-white/5 p-5 rounded-[2rem] border border-white/10 shadow-lg">
+                        <p class="text-[10px] font-black text-slate-400 mb-2 uppercase tracking-widest flex items-center justify-center gap-2">
+                            México <img src="https://flagcdn.com/w40/mx.png" class="w-5 rounded shadow-sm" alt="MX">
                         </p>
-                        <p id="time-mex" class="text-base md:text-xl font-bold text-white tracking-widest">--:--</p>
+                        <p id="time-mex" class="text-2xl font-black text-white tracking-widest">--:--</p>
                     </div>
-                    <div class="text-center bg-white/5 p-3 md:p-4 rounded-2xl border border-white/5">
-                        <p class="text-[7px] md:text-[8px] font-black text-slate-500 mb-2 uppercase tracking-widest flex items-center justify-center gap-2">
-                            Argentina <img src="https://flagcdn.com/w40/ar.png" class="w-4 rounded-sm shadow-sm" alt="Argentina">
+                    <div class="text-center bg-white/5 p-5 rounded-[2rem] border border-white/10 shadow-lg">
+                        <p class="text-[10px] font-black text-slate-400 mb-2 uppercase tracking-widest flex items-center justify-center gap-2">
+                            Argentina <img src="https://flagcdn.com/w40/ar.png" class="w-5 rounded shadow-sm" alt="AR">
                         </p>
-                        <p id="time-arg" class="text-base md:text-xl font-bold text-white tracking-widest">--:--</p>
+                        <p id="time-arg" class="text-2xl font-black text-white tracking-widest">--:--</p>
                     </div>
-                    <div class="text-center bg-white/5 p-3 md:p-4 rounded-2xl border border-white/5">
-                        <p class="text-[7px] md:text-[8px] font-black text-slate-500 mb-2 uppercase tracking-widest flex items-center justify-center gap-2">
-                            Colombia <img src="https://flagcdn.com/w40/co.png" class="w-4 rounded-sm shadow-sm" alt="Colombia">
+                    <div class="text-center bg-white/5 p-5 rounded-[2rem] border border-white/10 shadow-lg">
+                        <p class="text-[10px] font-black text-slate-400 mb-2 uppercase tracking-widest flex items-center justify-center gap-2">
+                            Colombia <img src="https://flagcdn.com/w40/co.png" class="w-5 rounded shadow-sm" alt="CO">
                         </p>
-                        <p id="time-col" class="text-base md:text-xl font-bold text-white tracking-widest">--:--</p>
+                        <p id="time-col" class="text-2xl font-black text-white tracking-widest">--:--</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- CONTACTOS -->
-        <footer class="glass-panel p-8 md:p-12 space-y-10 relative overflow-hidden">
-            <div class="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
-                <i class="fas fa-heart text-9xl"></i>
+        <footer class="glass-panel p-10 md:p-16 space-y-12 relative overflow-hidden shadow-2xl">
+            <div class="absolute top-0 right-0 p-10 opacity-5 pointer-events-none">
+                <i class="fas fa-heart text-[15rem]"></i>
             </div>
             
-            <div class="flex flex-col md:flex-row justify-between items-center gap-12 relative z-10">
-                <div class="flex flex-col items-center md:items-start space-y-6 w-full md:w-auto">
-                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-pink-500 bg-pink-500/10 px-4 py-1.5 rounded-full">¿Tienes dudas o comentarios?</p>
-                    <div class="flex flex-col space-y-5 w-full">
-                        <a href="mailto:moz@primerotupaz.com" class="flex items-center gap-4 group bg-white/5 p-3 rounded-2xl border border-white/5 hover:bg-white/10 transition-all">
-                            <div class="w-10 h-10 rounded-xl bg-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <i class="fas fa-envelope text-pink-400"></i>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-16 relative z-10">
+                <div class="flex flex-col items-center md:items-start space-y-8 w-full md:w-auto">
+                    <p class="text-xs font-black uppercase tracking-[0.3em] text-pink-500 bg-pink-500/10 px-6 py-2 rounded-full">Contacto Directo</p>
+                    <div class="flex flex-col space-y-6 w-full">
+                        <a href="mailto:moz@primerotupaz.com" class="flex items-center gap-6 group bg-white/5 p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all">
+                            <div class="w-14 h-14 rounded-2xl bg-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                                <i class="fas fa-envelope text-pink-400 text-xl"></i>
                             </div>
-                            <span class="text-sm font-bold text-slate-300 tracking-tight">moz@primerotupaz.com</span>
+                            <span class="text-lg font-bold text-slate-200 tracking-tight">moz@primerotupaz.com</span>
                         </a>
-                        <a href="tel:+526867883335" class="flex items-center gap-4 group bg-white/5 p-3 rounded-2xl border border-white/5 hover:bg-white/10 transition-all">
-                            <div class="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <i class="fas fa-phone text-green-400"></i>
+                        <a href="tel:+526867883335" class="flex items-center gap-6 group bg-white/5 p-5 rounded-3xl border border-white/10 hover:bg-white/10 transition-all">
+                            <div class="w-14 h-14 rounded-2xl bg-green-500/20 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                                <i class="fas fa-phone text-green-400 text-xl"></i>
                             </div>
-                            <span class="text-sm font-bold text-slate-300 tracking-tight">+52 686 788 3335</span>
+                            <span class="text-lg font-bold text-slate-200 tracking-tight">+52 686 788 3335</span>
                         </a>
                     </div>
                 </div>
 
-                <div class="text-center md:text-right space-y-5">
-                    <img src="https://static.mytuner.mobi/media/tvos_radios/255/frecuencia-milagro.ea9f0fc2.png" class="h-10 md:h-14 ml-auto opacity-20 grayscale hover:opacity-40 transition-opacity" alt="">
-                    <div class="space-y-1">
-                        <p class="text-[9px] text-slate-500 font-bold uppercase tracking-[0.4em]">Frecuencia Milagro © 2026</p>
-                        <p class="text-[8px] text-slate-600 font-bold uppercase tracking-[0.2em]">Sintonizando la Verdad Interior</p>
+                <div class="text-center md:text-right space-y-8">
+                    <img src="https://static.mytuner.mobi/media/tvos_radios/255/frecuencia-milagro.ea9f0fc2.png" class="h-16 md:h-20 ml-auto opacity-30 grayscale hover:opacity-100 transition-all duration-700" alt="">
+                    <div class="space-y-2">
+                        <p class="text-xs text-slate-500 font-black uppercase tracking-[0.4em]">Frecuencia Milagro © 2026</p>
+                        <p class="text-[10px] text-pink-600 font-bold uppercase tracking-[0.2em]">Paz Interior • Verdad • Milagros</p>
                     </div>
                 </div>
             </div>
         </footer>
     </div>
 
-    <!-- AUDIO & SCRIPTS -->
+    <!-- AUDIO ELEMENT -->
     <audio id="main-audio" crossorigin="anonymous"></audio>
     <script src="https://centova.servidoraweb.net/system/recenttracks.js"></script>
     <script src="https://centova.servidoraweb.net/system/streaminfo.js"></script>
@@ -504,20 +454,20 @@
         const STREAM_URL = "https://centova.servidoraweb.net:2199/proxy/mario1/stream";
         let isPlaying = false;
 
-        // --- TÍTULOS UCDM ---
         const ucdmTitles = {
             1: "Nada de lo que veo significa nada.",
-            90: "Mi mente es parte de la de Dios. Soy muy santo.",
-            99: "La salvación es mi única función aquí.",
-            100: "Mi parte es esencial en el plan de Dios para la salvación."
+            100: "Mi parte es esencial en el plan de Dios para la salvación.",
+            150: "Repaso de las Lecciones 139 y 140."
         };
 
-        // --- PROCESADOR DE METADATOS (BADGE) ---
+        // Procesador de metadatos seguro para badge
         function processMetadata() {
             const songElement = document.getElementById('metadata-song');
             if (!songElement) return;
             
             const text = songElement.innerText;
+            if (text === "Cargando Milagros...") return;
+
             const lessonRegex = /Lecci[oó]nes?\s*(\d+)/i;
             const match = text.match(lessonRegex);
             const badge = document.getElementById('lesson-badge');
@@ -538,109 +488,97 @@
             const observer = new MutationObserver(processMetadata);
             observer.observe(targetNode, config);
         }
-        setInterval(processMetadata, 1500);
+        setInterval(processMetadata, 2000);
 
-        // --- CÁLCULO LECCIÓN UCDM ---
         function updateUCDM() {
             const now = new Date();
             const start = new Date(now.getFullYear(), 0, 0);
             const diff = now - start;
-            const oneDay = 1000 * 60 * 60 * 24;
-            const dayOfYear = Math.floor(diff / oneDay);
-            const lesson = dayOfYear > 365 ? 365 : dayOfYear;
-            
-            const numEl = document.getElementById('ucdm-lesson-number');
-            const titleEl = document.getElementById('ucdm-lesson-title');
-            if(numEl) numEl.innerText = `Lección ${lesson}`;
-            if(titleEl) titleEl.innerText = ucdmTitles[lesson] || "La salvación es mi única función aquí.";
+            const lesson = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('ucdm-lesson-number').innerText = `Lección ${lesson}`;
+            document.getElementById('ucdm-lesson-title').innerText = ucdmTitles[lesson] || "La salvación es mi única función aquí.";
         }
 
-        // --- CONTROL DE AUDIO ---
         function togglePlay(forceState) {
             if (isPlaying && forceState !== true) {
-                audio.pause(); 
-                audio.src = ""; 
-                playIcon.className = 'fas fa-play ml-1';
+                audio.pause(); audio.src = ""; 
+                playIcon.className = 'fas fa-play ml-2';
                 playerContainer.classList.remove('playing');
                 isPlaying = false;
             } else {
-                playIcon.className = 'fas fa-spinner animate-spin';
+                playIcon.className = 'fas fa-spinner animate-spin ml-0';
                 audio.src = STREAM_URL + "?t=" + Date.now();
                 audio.play().then(() => {
-                    playIcon.className = 'fas fa-pause';
+                    playIcon.className = 'fas fa-pause ml-0';
                     playerContainer.classList.add('playing');
                     isPlaying = true;
-                }).catch(() => { 
-                    playIcon.className = 'fas fa-play ml-1';
-                    const activateAudio = () => { if(!isPlaying) togglePlay(true); document.removeEventListener('click', activateAudio); };
-                    document.addEventListener('click', activateAudio);
+                }).catch(() => {
+                    playIcon.className = 'fas fa-play ml-2';
+                    // Activar con cualquier click en el documento si el autoplay falla
+                    const interaction = () => { if(!isPlaying) togglePlay(true); document.removeEventListener('click', interaction); };
+                    document.addEventListener('click', interaction);
                 });
             }
         }
-
-        window.addEventListener('load', () => {
-            updateClocks();
-            updateUCDM();
-            setTimeout(() => togglePlay(true), 1500);
-        });
 
         function updateClocks() {
             const tzs = {'time-mex':'America/Mexico_City','time-esp':'Europe/Madrid','time-arg':'America/Buenos_Aires','time-col':'America/Bogota'};
             const opt = {hour:'2-digit',minute:'2-digit',hour12:false};
             for(const [id,tz] of Object.entries(tzs)){
                 const el = document.getElementById(id);
-                if(el) {
-                    try { el.innerText = new Intl.DateTimeFormat('es-MX',{...opt,timeZone:tz}).format(new Date()); } catch(e) {}
-                }
+                if(el) { try { el.innerText = new Intl.DateTimeFormat('es-MX',{...opt,timeZone:tz}).format(new Date()); } catch(e) {} }
             }
         }
-        setInterval(updateClocks, 1000);
 
-        playBtn.addEventListener('click', () => togglePlay());
+        // --- INICIALIZACIÓN ---
+        window.addEventListener('load', () => {
+            updateClocks();
+            updateUCDM();
+            setInterval(updateClocks, 1000);
+            
+            // Intento de reproducción automática al cargar
+            setTimeout(() => togglePlay(true), 1500);
+            
+            // Forzar activación con el primer toque en CUALQUIER lugar de la pantalla
+            document.body.addEventListener('click', () => {
+                if(!isPlaying) togglePlay(true);
+            }, { once: true });
+        });
+
+        playBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita que el evento del body se dispare doble
+            togglePlay();
+        });
 
         document.getElementById('volume-slider').addEventListener('input', (e) => {
             audio.volume = e.target.value;
-            const volVal = document.getElementById('volume-val');
-            if(volVal) volVal.innerText = Math.round(e.target.value * 100) + "%";
+            document.getElementById('volume-val').innerText = Math.round(e.target.value * 100) + "%";
         });
 
         function copyTrack() {
-            const sEl = document.getElementById('metadata-song');
-            if(sEl && sEl.innerText !== "Cargando Milagros...") {
-                const t = document.createElement('textarea'); 
-                t.value = sEl.innerText; 
-                document.body.appendChild(t); 
-                t.select(); 
-                document.execCommand('copy'); 
-                document.body.removeChild(t);
-            }
+            const t = document.getElementById('metadata-song').innerText;
+            const aux = document.createElement("input");
+            aux.setAttribute("value", t);
+            document.body.appendChild(aux);
+            aux.select();
+            document.execCommand("copy");
+            document.body.removeChild(aux);
         }
 
-        function shareApp() { 
-            if(navigator.share) {
-                navigator.share({title:'Frecuencia Milagro', url:window.location.href});
-            } else {
-                const dummy = document.createElement('input');
-                document.body.appendChild(dummy);
-                dummy.value = window.location.href;
-                dummy.select();
-                document.execCommand('copy');
-                document.body.removeChild(dummy);
-            }
+        function shareApp() {
+            if(navigator.share) navigator.share({title:'Frecuencia Milagro', url:window.location.href});
         }
 
         const pc = document.getElementById('particles-container');
-        if (pc) {
-            for(let i = 0; i < 20; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                p.style.width = p.style.height = (Math.random() * 2 + 1) + 'px';
-                p.style.left = Math.random() * 100 + 'vw';
-                p.style.bottom = '-10px';
-                p.style.animationDuration = (Math.random() * 15 + 10) + 's';
-                p.style.animationDelay = (Math.random() * 10) + 's';
-                pc.appendChild(p);
-            }
+        for(let i = 0; i < 25; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.bottom = '-10px';
+            p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+            p.style.animationDelay = (Math.random() * 10) + 's';
+            pc.appendChild(p);
         }
 
         setInterval(() => {
