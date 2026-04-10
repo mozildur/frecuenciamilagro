@@ -24,232 +24,249 @@
             color: white;
             min-height: 100vh;
             overflow-x: hidden;
+            user-select: none;
         }
 
+        /* Fondo Animado */
         .particle {
             position: fixed;
             background: white;
             border-radius: 50%;
-            opacity: 0.2;
+            opacity: 0.15;
             pointer-events: none;
             animation: float 25s infinite linear;
         }
 
         @keyframes float {
             0% { transform: translateY(0) translateX(0); opacity: 0; }
-            50% { opacity: 0.4; }
+            50% { opacity: 0.3; }
             100% { transform: translateY(-100vh) translateX(30px); opacity: 0; }
         }
 
         .glass-panel {
             background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
             border-radius: 2.5rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .vinyl-glow {
-            box-shadow: 0 0 50px -10px rgba(255, 77, 141, 0);
-            transition: box-shadow 1s ease;
-        }
-        .playing .vinyl-glow {
-            box-shadow: 0 0 60px -10px rgba(255, 77, 141, 0.4);
-        }
-
-        .playing-disc {
-            animation: spin-slow 20s linear infinite;
+        /* --- ESTÉTICA DEL VINILO --- */
+        .vinyl-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 0 auto;
         }
 
-        @keyframes spin-slow {
+        @media (min-width: 768px) {
+            .vinyl-container { width: 340px; height: 340px; }
+        }
+
+        .vinyl-record {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #080808;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: repeating-radial-gradient(
+                circle at center,
+                #000 0,
+                #000 1px,
+                #181818 2px,
+                #000 3px
+            );
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            z-index: 5;
+        }
+
+        .vinyl-label {
+            position: relative;
+            width: 44%;
+            height: 44%;
+            background: #222;
+            border-radius: 50%;
+            overflow: hidden;
+            z-index: 10;
+            border: 4px solid #000;
+        }
+
+        .vinyl-label img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            image-rendering: -webkit-optimize-contrast;
+            filter: contrast(1.05) brightness(1.05);
+        }
+
+        .vinyl-hole {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: var(--bg-deep);
+            border-radius: 50%;
+            z-index: 20;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.9);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .vinyl-reflection {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, 
+                transparent 42%, 
+                rgba(255,255,255,0.08) 50%, 
+                transparent 58%);
+            z-index: 15;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .playing .vinyl-record {
+            animation: spin-vinyl 15s linear infinite;
+        }
+
+        @keyframes spin-vinyl {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        .wave-container {
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            gap: 3px;
-            height: 30px;
+        .playing-glow {
+            position: absolute;
+            inset: -20px;
+            background: var(--primary-pink);
+            filter: blur(80px);
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            border-radius: 50%;
+            z-index: 1;
         }
+        .playing .playing-glow { opacity: 0.25; }
+
         .wave-bar {
-            width: 3px;
+            width: 4px;
             height: 4px;
             background: var(--primary-pink);
-            border-radius: 3px;
-            transition: all 0.2s;
+            border-radius: 4px;
         }
-        .playing .wave-bar {
-            animation: wave-anim 1.2s infinite ease-in-out;
-        }
+        .playing .wave-bar { animation: wave-anim 1.2s infinite ease-in-out; }
         @keyframes wave-anim {
             0%, 100% { height: 4px; opacity: 0.3; }
-            50% { height: 25px; opacity: 1; }
+            50% { height: 28px; opacity: 1; }
         }
 
-        .btn-pink {
-            background: linear-gradient(135deg, #ff4d8d, #ff1a6b);
-            box-shadow: 0 10px 20px -5px rgba(255, 77, 141, 0.4);
+        #lesson-badge {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, #ff4d8d, #fce367);
+            color: #0f0b1e;
         }
 
-        .history-scroll {
-            max-height: 320px;
-            overflow-y: auto;
-            scrollbar-width: thin;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 1.5rem;
-            padding: 10px;
+        /* Estilos para el Widget de Centova */
+        .cc_recenttracks_list {
+            width: 100%;
         }
-
-        .cc_recenttracks_list .cc_recenttracks_buy,
-        .cc_recenttracks_list a[href*="buy"],
-        .cc_recenttracks_list a[href*="comprar"],
-        .cc_recenttracks_list a[href*="amazon"],
-        .cc_recenttracks_list a[href*="itunes"] {
-            display: none !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-        }
-
-        .cc_recenttracks_list table {
-            width: 100% !important;
-            border-collapse: collapse !important;
-        }
-
-        .cc_recenttracks_list tr, .cc_recenttracks_entry {
+        .cc_recenttracks_entry {
             display: block !important;
-            padding: 12px 15px !important;
+            padding: 1.5rem !important;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-            color: #ffffff !important;
+            transition: background 0.3s ease;
+        }
+        .cc_recenttracks_entry:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .cc_recenttracks_entry td {
+            color: white !important;
             font-size: 0.9rem !important;
-            font-weight: 500 !important;
-            text-align: left !important;
         }
+        .cc_recenttracks_title { font-weight: 700 !important; color: #fff !important; }
+        .cc_recenttracks_artist { color: #a1a1aa !important; font-size: 0.8rem !important; }
 
-        .cc_recenttracks_list td {
-            display: inline-block !important;
-            color: #ffffff !important;
-            background: transparent !important;
-        }
-
-        .cc_recenttracks_entry::before, .cc_recenttracks_list tr td:first-child::before {
-            content: "\f001";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            margin-right: 12px;
-            color: var(--primary-pink);
-            font-size: 0.75rem;
-        }
-
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-
-        .tooltip { visibility: hidden; opacity: 0; transition: 0.3s; }
-        .group:hover .tooltip { visibility: visible; opacity: 1; }
+        /* Scrollbar personalizada */
+        .custom-scroll::-webkit-scrollbar { width: 5px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
     </style>
 </head>
-<body class="pb-10 px-4">
+<body>
 
     <div id="particles-container"></div>
 
-    <div class="max-w-4xl mx-auto pt-12 space-y-10 relative z-10">
+    <div class="max-w-4xl mx-auto pt-10 pb-20 px-4 space-y-12 relative z-10">
         
-        <header class="text-center space-y-6">
+        <header class="text-center space-y-4">
             <div class="flex justify-center">
-                <div class="relative group">
-                    <div class="absolute -inset-4 bg-gradient-to-r from-pink-500 to-yellow-500 rounded-[3rem] blur-xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-                    <div class="relative w-40 h-40 md:w-48 md:h-48 bg-white rounded-[2.5rem] flex items-center justify-center overflow-hidden shadow-2xl p-4 border border-white/20 transition-transform duration-700 group-hover:rotate-3">
-                        <img src="https://static.mytuner.mobi/media/tvos_radios/255/frecuencia-milagro.ea9f0fc2.png" 
-                             alt="Logo Frecuencia Milagro" 
-                             class="w-full h-auto object-contain">
-                    </div>
+                <div class="relative w-32 h-32 md:w-40 md:h-40 bg-white rounded-[2.5rem] flex items-center justify-center overflow-hidden shadow-2xl p-4 border border-white/20">
+                    <img src="https://static.mytuner.mobi/media/tvos_radios/255/frecuencia-milagro.ea9f0fc2.png" alt="Logo Frecuencia Milagro" class="w-full h-auto object-contain">
                 </div>
             </div>
-            
-            <div class="space-y-3">
-                <h1 class="text-5xl md:text-7xl font-bold tracking-tighter">Frecuencia Milagro</h1>
-                <p class="text-pink-300 font-bold tracking-[0.5em] uppercase text-[10px] md:text-xs">Música que cambia tu percepción</p>
-                <div id="location-greeting" class="flex items-center justify-center gap-2 text-white/30 text-[10px] font-bold uppercase tracking-widest opacity-0 transition-opacity duration-1000">
-                    <i class="fas fa-location-dot text-[8px]"></i>
-                    <span id="loc-text">Cargando ubicación...</span>
-                </div>
+            <div class="space-y-2">
+                <h1 class="text-4xl md:text-6xl font-bold tracking-tighter italic text-white">Frecuencia Milagro</h1>
+                <p class="text-pink-300 font-bold tracking-[0.4em] uppercase text-[10px]">Música que cambia tu percepción</p>
             </div>
         </header>
 
+        <!-- Redes y Controles -->
         <section class="flex flex-col items-center gap-6">
             <div class="flex flex-wrap justify-center gap-3">
-                <a href="https://wa.me/526867883335" target="_blank" class="glass-panel px-5 py-3 flex items-center gap-2.5 hover:bg-green-500/10 group">
+                <a href="https://wa.me/526867883335" target="_blank" class="glass-panel px-6 py-3 flex items-center gap-3 hover:bg-green-500/10 transition-colors">
                     <i class="fab fa-whatsapp text-green-400 text-lg"></i>
-                    <span class="text-[9px] font-black uppercase">WhatsApp</span>
+                    <span class="text-[9px] font-black uppercase tracking-widest">WhatsApp</span>
                 </a>
-                <a href="https://instagram.com/primeratencion" target="_blank" class="glass-panel px-5 py-3 flex items-center gap-2.5 hover:bg-pink-600/10 group">
+                <a href="https://instagram.com/primeratencion" target="_blank" class="glass-panel px-6 py-3 flex items-center gap-3 hover:bg-pink-600/10 transition-colors">
                     <i class="fab fa-instagram text-pink-400 text-lg"></i>
-                    <span class="text-[9px] font-black uppercase">Instagram</span>
+                    <span class="text-[9px] font-black uppercase tracking-widest">Instagram</span>
                 </a>
-                <button onclick="shareApp()" class="glass-panel px-5 py-3 flex items-center gap-2.5 hover:bg-white/10 group">
+                <button onclick="shareApp()" class="glass-panel px-6 py-3 flex items-center gap-3 hover:bg-white/10 transition-colors">
                     <i class="fas fa-share-nodes text-pink-400 text-lg"></i>
-                    <span class="text-[9px] font-black uppercase">Compartir</span>
+                    <span class="text-[9px] font-black uppercase tracking-widest">Compartir</span>
                 </button>
             </div>
 
-            <div class="bg-black/50 backdrop-blur-xl px-10 py-4 rounded-full border border-white/5 flex items-center gap-8 shadow-2xl">
-                <div class="flex items-center gap-3">
-                    <div id="status-led" class="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_15px_#22c55e] animate-pulse"></div>
-                    <div class="flex flex-col">
-                        <span class="text-[9px] font-black uppercase text-white/50 mb-1">Servidor</span>
-                        <span class="text-[10px] font-bold text-slate-200 cc_streaminfo uppercase" data-type="server" data-username="mario1">...</span>
-                    </div>
+            <div class="bg-black/50 backdrop-blur-xl px-10 py-3 rounded-full border border-white/5 flex items-center gap-8 shadow-xl">
+                <div class="flex items-center gap-2.5">
+                    <div id="status-led" class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e] animate-pulse"></div>
+                    <span class="text-[10px] font-bold text-slate-200 cc_streaminfo uppercase tracking-tight" data-type="server" data-username="mario1">...</span>
                 </div>
-                <div class="w-px h-6 bg-white/10"></div>
-                <div class="flex flex-col">
-                    <span class="text-[9px] font-black uppercase text-white/50 mb-1">Oyentes</span>
-                    <span class="text-[10px] font-bold text-slate-200"><span class="cc_streaminfo" data-type="listeners" data-username="mario1">0</span> en línea</span>
-                </div>
+                <div class="w-px h-5 bg-white/10"></div>
+                <span class="text-[10px] font-bold text-slate-200"><span class="cc_streaminfo" data-type="listeners" data-username="mario1">0</span> Oyentes</span>
             </div>
         </section>
 
-        <main id="player-container" class="glass-panel p-10 md:p-16 space-y-12 relative overflow-hidden group/card shadow-2xl border-white/10">
-            <div class="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20">
-                <div class="relative">
-                    <div id="disc-shadow" class="absolute inset-0 bg-pink-500/20 blur-3xl rounded-full opacity-0 transition-opacity duration-1000"></div>
-                    <div id="disc-wrapper" class="w-56 h-56 md:w-72 md:h-72 bg-slate-900 rounded-full border-[12px] border-white/5 shadow-2xl relative overflow-hidden ring-1 ring-white/10 vinyl-glow transition-transform duration-700">
-                        <img class="cc_streaminfo absolute inset-0 z-10 w-full h-full object-cover" data-type="trackimageurl" data-username="mario1" alt="Portada" />
-                        <div class="absolute inset-0 flex items-center justify-center z-0 bg-gradient-to-br from-slate-800 to-slate-950">
-                            <i class="fas fa-compact-disc text-[120px] text-white/5"></i>
+        <!-- Reproductor Central -->
+        <main id="player-container" class="glass-panel p-8 md:p-14 space-y-10 relative overflow-hidden shadow-2xl">
+            <div class="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-16">
+                
+                <div class="vinyl-container">
+                    <div class="playing-glow"></div>
+                    <div class="vinyl-record">
+                        <div class="vinyl-reflection"></div>
+                        <div class="vinyl-label">
+                            <img src="https://scontent.fmex2-2.fna.fbcdn.net/v/t39.30808-6/670038883_26655489084085221_7271399558907037169_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=13d280&_nc_ohc=xoR7vcpx1JwQ7kNvwH41Ghl&_nc_oc=AdrsG_DsBAMeCL8DvnqY30S4UmG8Oy-GpSiBQRtjOeSPUMsXjwOhKxNd5V6x-ZawaAAiesodJHzD57NMfHeN3xWg&_nc_zt=23&_nc_ht=scontent.fmex2-2.fna&_nc_gid=G86iCpEF8LYu7z_eqoteVQ&_nc_ss=7a3a8&oh=00_Af2Kp9PV-TAA0e2odO9D3D5OBtLOzimzrPi7TNsyZaNL3g&oe=69DE358E" 
+                                 alt="Portada Álbum" 
+                                 id="album-cover" />
                         </div>
-                        <div class="absolute inset-0 m-auto w-8 h-8 bg-slate-900 rounded-full border-4 border-white/10 z-20"></div>
+                        <div class="vinyl-hole"></div>
                     </div>
                 </div>
 
-                <div class="text-center lg:text-left space-y-6 flex-1 min-w-0">
-                    <div class="space-y-2">
+                <div class="text-center lg:text-left space-y-5 flex-1 min-w-0">
+                    <div class="space-y-3">
                         <div class="flex items-center justify-center lg:justify-start gap-3">
-                            <span class="px-3 py-1 bg-pink-500/10 border border-pink-500/20 text-pink-400 text-[9px] font-black uppercase tracking-[0.3em] rounded-md">En directo</span>
-                            <button onclick="copyTrack()" class="text-white/20 hover:text-white transition-colors relative" title="Copiar">
-                                <i class="fas fa-copy text-xs"></i>
-                                <span class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 bg-black text-white text-[8px] px-2 py-1 rounded mb-2">Copiar</span>
-                            </button>
+                            <span id="lesson-badge" class="hidden px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.15em] rounded-md shadow-lg">LECCIÓN ---</span>
+                            <span class="px-2 py-1 bg-white/5 border border-white/10 text-white/40 text-[8px] font-black uppercase tracking-widest rounded">Sintonizando</span>
+                            <button onclick="copyTrack()" class="text-white/20 hover:text-white transition-colors"><i class="fas fa-copy text-xs"></i></button>
                         </div>
-                        <h2 id="song-title" class="text-xl sm:text-2xl md:text-3xl font-bold leading-tight text-white italic">
-                            <span class="cc_streaminfo" data-type="song" data-username="mario1">Sintonizando...</span>
+                        
+                        <h2 id="song-title-container" class="text-xl sm:text-2xl md:text-3xl font-bold leading-tight text-white italic tracking-tight">
+                            <span id="metadata-song" class="cc_streaminfo" data-type="song" data-username="mario1">Iniciando Milagros...</span>
                         </h2>
                     </div>
                     
-                    <div class="flex flex-wrap justify-center lg:justify-start gap-4">
-                        <div class="flex items-center gap-3 text-[10px] font-black uppercase bg-white/5 px-5 py-2 rounded-2xl border border-white/5">
-                            <i class="fas fa-signal text-blue-400"></i>
-                            <span class="cc_streaminfo" data-type="bitrate" data-username="mario1">---</span> KBPS
-                        </div>
-                        <div class="flex items-center gap-3 text-[10px] font-black uppercase bg-white/5 px-5 py-2 rounded-2xl border border-white/5">
-                            <i class="fas fa-clock text-yellow-400"></i>
-                            <span class="cc_streaminfo" data-type="time" data-username="mario1">00:00</span>
-                        </div>
-                    </div>
-
-                    <div class="wave-container">
+                    <div class="flex gap-1.5 justify-center lg:justify-start h-8 items-end">
                         <div class="wave-bar" style="animation-delay: 0.1s"></div>
                         <div class="wave-bar" style="animation-delay: 0.3s"></div>
                         <div class="wave-bar" style="animation-delay: 0.2s"></div>
@@ -259,180 +276,203 @@
                 </div>
             </div>
 
-            <div class="max-w-xl mx-auto space-y-12">
-                <div class="flex items-center justify-center gap-12">
-                    <button id="play-btn" class="btn-pink w-28 h-28 rounded-full flex items-center justify-center text-4xl shadow-2xl active:scale-95 transition-all duration-300">
-                        <i id="play-icon" class="fas fa-play ml-2"></i>
+            <div class="max-w-xl mx-auto space-y-10">
+                <div class="flex items-center justify-center gap-10">
+                    <button id="play-btn" class="bg-gradient-to-br from-pink-500 to-pink-700 w-20 h-20 rounded-full flex items-center justify-center text-3xl shadow-2xl active:scale-90 transition-all">
+                        <i id="play-icon" class="fas fa-play ml-1"></i>
                     </button>
-                    <a href="https://paypal.me/primerotupaz" target="_blank" class="bg-yellow-500 hover:bg-yellow-400 text-black px-12 py-5 rounded-[1.5rem] font-black text-xs uppercase shadow-xl transition-all">
-                        <i class="fas fa-heart text-xl mr-2"></i> Donar
+                    <a href="https://paypal.me/primerotupaz" target="_blank" class="bg-yellow-500 hover:bg-yellow-400 text-black px-10 py-4 rounded-2xl font-black text-[10px] uppercase shadow-xl transition-all">
+                        Donar
                     </a>
                 </div>
 
-                <div class="flex items-center gap-6 px-8 py-5 bg-black/40 rounded-[2rem] border border-white/5 backdrop-blur-2xl">
-                    <button id="mute-btn" class="text-slate-500 hover:text-white"><i id="volume-icon" class="fas fa-volume-high text-xl"></i></button>
+                <div class="flex items-center gap-5 px-6 py-4 bg-black/40 rounded-3xl border border-white/5 backdrop-blur-2xl">
+                    <i id="volume-icon" class="fas fa-volume-high text-slate-500"></i>
                     <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.8" class="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer">
-                    <span id="volume-val" class="text-[11px] font-black text-slate-500 w-10">80%</span>
+                    <span id="volume-val" class="text-[10px] font-black text-slate-500 w-8 text-right">80%</span>
                 </div>
             </div>
         </main>
 
-        <!-- SECCIÓN DE UCDM: LECCIÓN DEL DÍA MEJORADA -->
-        <section class="grid md:grid-cols-2 gap-8">
-            <div id="ucdm-section" class="glass-panel p-10 border-t-4 border-pink-500/30 flex flex-col justify-between">
-                <div class="space-y-4">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-pink-500/10 rounded-2xl flex items-center justify-center">
-                            <i class="fas fa-book-open text-pink-500 text-xl"></i>
+        <!-- HISTORIAL Y PROGRAMACIÓN -->
+        <section class="grid lg:grid-cols-2 gap-8">
+            <!-- Historial -->
+            <div class="glass-panel p-8 flex flex-col space-y-6 overflow-hidden">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-history text-pink-500"></i>
+                        <h4 class="text-[11px] font-black uppercase tracking-widest text-white">Historial de Luz</h4>
+                    </div>
+                    <a href="https://www.youtube.com/playlist?list=PLMepX0V6b8PGvI7NrXaTty9g7UT-I0rtl" target="_blank" class="bg-red-600 px-4 py-2 rounded-xl text-[8px] font-black uppercase flex items-center gap-2 hover:bg-red-500 transition-colors">
+                        <i class="fab fa-youtube"></i> Playlist
+                    </a>
+                </div>
+                
+                <div class="custom-scroll overflow-y-auto max-h-[350px]">
+                    <div id="tracks-target" class="cc_recenttracks_list" data-username="mario1">
+                        <div class="p-10 text-center text-white/20 italic text-xs">Cargando canciones recientes...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Programación -->
+            <div class="glass-panel p-8 flex flex-col space-y-8">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-calendar-alt text-yellow-500"></i>
+                    <h4 class="text-[11px] font-black uppercase tracking-widest text-white">Programación</h4>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="flex justify-between items-center border-b border-white/5 pb-4">
+                        <div class="space-y-1">
+                            <p class="text-[9px] font-black text-pink-500 uppercase">Diario - 07:00 MEX</p>
+                            <p class="text-sm font-bold italic">Meditando con MoZ</p>
                         </div>
-                        <h4 class="text-xs font-black text-pink-400 uppercase tracking-widest">Lección del Día</h4>
+                        <div class="w-2 h-2 rounded-full bg-pink-500/20"></div>
                     </div>
-                    <div class="py-4">
-                        <p class="text-slate-400 text-[10px] font-black uppercase mb-1">Un Curso de Milagros</p>
-                        <h5 id="ucdm-lesson-number" class="text-3xl font-bold text-white mb-2 tracking-tighter">Lección ---</h5>
-                        <p id="ucdm-lesson-title" class="text-base text-white font-medium leading-tight italic mb-3">Cargando sabiduría...</p>
-                        <p class="text-[10px] text-slate-400 leading-relaxed uppercase tracking-widest">
-                            "Nada real puede ser amenazado. Nada irreal existe."
-                        </p>
+                    <div class="flex justify-between items-center border-b border-white/5 pb-4">
+                        <div class="space-y-1">
+                            <p class="text-[9px] font-black text-pink-500 uppercase">L-M-J - 13:00 MEX</p>
+                            <p class="text-sm font-bold italic">Explorando UCDM</p>
+                        </div>
+                        <div class="w-2 h-2 rounded-full bg-pink-500/20"></div>
                     </div>
-                </div>
-                <!-- Link actualizado al canal de WhatsApp -->
-                <a id="ucdm-link" href="https://whatsapp.com/channel/0029VaZLyl6CXC3DMsGiaO3l" target="_blank" class="mt-6 inline-flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all group">
-                    Ver lección en WhatsApp <i class="fab fa-whatsapp text-green-400 text-sm group-hover:scale-110 transition-transform"></i>
-                </a>
-            </div>
-
-            <!-- Inspiración -->
-            <div class="glass-panel p-10 border-t-4 border-yellow-500/30">
-                <i class="fas fa-sparkles text-yellow-500 text-xl mb-4"></i>
-                <h4 class="text-xs font-black text-yellow-500 uppercase mb-2">Inspiración</h4>
-                <p class="text-xl font-medium italic text-slate-200 leading-relaxed">"Tu percepción del mundo es un eco de tu estado mental. Elige la paz y el mundo se transformará contigo."</p>
-            </div>
-        </section>
-
-        <!-- Historial -->
-        <section class="space-y-6">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-6">
-                <div class="text-left space-y-1">
-                    <h3 class="text-[10px] font-black uppercase text-pink-500 tracking-widest">Recientemente</h3>
-                    <p class="text-3xl font-bold">Historial de Luz</p>
-                </div>
-                <a href="https://www.youtube.com/playlist?list=PLMepX0V6b8PGvI7NrXaTty9g7UT-I0rtl" target="_blank" class="bg-[#FF0000] text-white px-8 py-4 rounded-2xl text-[10px] font-black uppercase flex items-center gap-4 shadow-xl hover:scale-105 transition-all">
-                    <i class="fab fa-youtube text-xl"></i> Playlist
-                </a>
-            </div>
-            
-            <div id="history-box" class="glass-panel border-white/5 history-scroll">
-                <div id="tracks-target" class="cc_recenttracks_list" data-username="mario1">
-                    <div class="p-10 text-center text-slate-500 italic text-sm">
-                        <i class="fas fa-circle-notch animate-spin mb-4 text-2xl block mx-auto text-pink-500/50"></i>
-                        Recuperando últimas canciones...
+                    <div class="flex justify-between items-center border-b border-white/5 pb-4">
+                        <div class="space-y-1">
+                            <p class="text-[9px] font-black text-pink-500 uppercase">VIE - 13:00 MEX</p>
+                            <p class="text-sm font-bold italic">Viernes Íntimo</p>
+                        </div>
+                        <div class="w-2 h-2 rounded-full bg-pink-500/20"></div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="space-y-1">
+                            <p class="text-[9px] font-black text-pink-500 uppercase">LUN - 19:30 MEX</p>
+                            <p class="text-sm font-bold italic">Clase con MoZ</p>
+                        </div>
+                        <div class="w-2 h-2 rounded-full bg-pink-500/20"></div>
                     </div>
                 </div>
+
+                <!-- Relojes Globales integrados en programación -->
+                <div class="mt-auto pt-8 border-t border-white/5 grid grid-cols-2 gap-4">
+                    <div class="text-center bg-white/5 p-4 rounded-2xl">
+                        <p class="text-[8px] font-black text-slate-500 mb-1 uppercase">España</p>
+                        <p id="time-esp" class="text-lg font-bold text-white tracking-widest">--:--</p>
+                    </div>
+                    <div class="text-center bg-white/5 p-4 rounded-2xl">
+                        <p class="text-[8px] font-black text-slate-500 mb-1 uppercase">México</p>
+                        <p id="time-mex" class="text-lg font-bold text-white tracking-widest">--:--</p>
+                    </div>
+                    <div class="text-center bg-white/5 p-4 rounded-2xl">
+                        <p class="text-[8px] font-black text-slate-500 mb-1 uppercase">Argentina</p>
+                        <p id="time-arg" class="text-lg font-bold text-white tracking-widest">--:--</p>
+                    </div>
+                    <div class="text-center bg-white/5 p-4 rounded-2xl">
+                        <p class="text-[8px] font-black text-slate-500 mb-1 uppercase">Colombia</p>
+                        <p id="time-col" class="text-lg font-bold text-white tracking-widest">--:--</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Horarios Mundiales -->
-        <section class="glass-panel p-8 space-y-6">
-            <div class="flex items-center justify-center gap-3"><i class="fas fa-globe text-pink-500"></i><h4 class="text-xs font-black uppercase tracking-widest text-slate-400">Sincronía Global</h4></div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="text-center"><p class="text-[10px] font-black text-slate-500 mb-2 uppercase">México</p><p id="time-mex" class="text-2xl font-bold text-white tracking-widest">--:--:--</p></div>
-                <div class="text-center"><p class="text-[10px] font-black text-slate-500 mb-2 uppercase">España</p><p id="time-esp" class="text-2xl font-bold text-white tracking-widest">--:--:--</p></div>
-                <div class="text-center"><p class="text-[10px] font-black text-slate-500 mb-2 uppercase">Argentina</p><p id="time-arg" class="text-2xl font-bold text-white tracking-widest">--:--:--</p></div>
-                <div class="text-center"><p class="text-[10px] font-black text-slate-500 mb-2 uppercase">Colombia</p><p id="time-col" class="text-2xl font-bold text-white tracking-widest">--:--:--</p></div>
-            </div>
-        </section>
+        <!-- CONTACTOS -->
+        <footer class="glass-panel p-8 md:p-12 space-y-10">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex flex-col items-center md:items-start space-y-3">
+                    <p class="text-[10px] font-black uppercase tracking-widest text-pink-500">¿Tienes dudas o comentarios?</p>
+                    <div class="flex flex-col space-y-4">
+                        <a href="mailto:moz@primerotupaz.com" class="flex items-center gap-4 group">
+                            <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-pink-500/20 transition-colors">
+                                <i class="fas fa-envelope text-pink-400"></i>
+                            </div>
+                            <span class="text-sm font-bold text-slate-300">moz@primerotupaz.com</span>
+                        </a>
+                        <a href="tel:+526867883335" class="flex items-center gap-4 group">
+                            <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-green-500/20 transition-colors">
+                                <i class="fas fa-phone text-green-400"></i>
+                            </div>
+                            <span class="text-sm font-bold text-slate-300">+52 686 788 3335</span>
+                        </a>
+                    </div>
+                </div>
 
-        <!-- Programación -->
-        <section class="glass-panel p-10 border-t-4 border-blue-500/30">
-            <i class="fas fa-clock text-blue-500 text-xl mb-4"></i>
-            <h4 class="text-xs font-black text-blue-400 uppercase mb-4">Programación</h4>
-            <div class="space-y-4 text-white">
-                <div class="flex justify-between items-center"><span class="text-slate-400 text-[10px] font-black uppercase">Diario - 07:00 MEX</span><p class="text-[11px] font-bold">Meditando con MoZ</p></div>
-                <div class="flex justify-between items-center"><span class="text-slate-400 text-[10px] font-black uppercase">L-M-J - 13:00 MEX</span><p class="text-[11px] font-bold">Explorando UCDM</p></div>
-                <div class="flex justify-between items-center"><span class="text-slate-400 text-[10px] font-black uppercase">Vie - 13:00 MEX</span><p class="text-[11px] font-bold">Viernes Íntimo</p></div>
-                <div class="flex justify-between items-center"><span class="text-slate-400 text-[10px] font-black uppercase">Lun - 19:30 MEX</span><p class="text-[11px] font-bold">Clase con MoZ</p></div>
+                <div class="text-center md:text-right space-y-4">
+                    <img src="https://static.mytuner.mobi/media/tvos_radios/255/frecuencia-milagro.ea9f0fc2.png" class="h-12 ml-auto opacity-30 grayscale" alt="">
+                    <p class="text-[9px] text-slate-500 font-bold uppercase tracking-[0.4em]">Frecuencia Milagro © 2026 | Powered by Nuthost</p>
+                </div>
             </div>
-        </section>
-
-        <footer class="pt-10 space-y-8">
-            <div class="glass-panel p-8 flex flex-col md:flex-row justify-between items-center gap-8 px-12">
-                <div class="flex items-center gap-4 text-[11px] font-black uppercase text-slate-400"><i class="fas fa-envelope text-pink-500 text-xl"></i><span>moz@primerotupaz.com</span></div>
-                <div class="flex items-center gap-4 text-[11px] font-black uppercase text-slate-400"><i class="fas fa-phone text-pink-500 text-xl"></i><span>+52 686 788 3335</span></div>
-            </div>
-            <p class="text-[9px] text-slate-500 font-bold uppercase tracking-[0.4em] text-center">Frecuencia Milagro © 2025 | Powered by Nuthost</p>
         </footer>
     </div>
 
     <!-- AUDIO & SCRIPTS -->
     <audio id="main-audio" crossorigin="anonymous"></audio>
-    <script language="javascript" src="https://centova.servidoraweb.net/system/recenttracks.js"></script>
-    <script language="javascript" src="https://centova.servidoraweb.net/system/streaminfo.js"></script>
+    <script src="https://centova.servidoraweb.net/system/recenttracks.js"></script>
+    <script src="https://centova.servidoraweb.net/system/streaminfo.js"></script>
 
     <script>
-        // --- BASE DE DATOS DE LECCIONES UCDM (EJEMPLO REPRESENTATIVO) ---
-        // Se incluyen las lecciones cercanas al día actual (Abril) y ejemplos
-        const ucdmTitles = {
-            1: "Nada de lo que veo significa nada",
-            2: "Le he dado a todo lo que veo todo el significado que tiene para mí",
-            90: "Para el repaso de hoy: Mi mente es parte de la de Dios. Soy muy santo. Mi santidad envuelve todo lo que veo.",
-            91: "Los milagros se ven en la luz.",
-            92: "Los milagros se ven en la luz, y la luz y la fortaleza son una sola.",
-            93: "La luz, la dicha y la paz moran en mí.",
-            94: "Soy tal como Dios me creó.",
-            95: "Soy un solo Ser, unido a mi Creador.",
-            96: "La salvación y el perdón son lo mismo.",
-            97: "Soy espíritu.",
-            98: "Aceptaré mi papel en el plan de Dios para la salvación.",
-            99: "La salvación es mi única función aquí.",
-            100: "Mi parte es esencial en el plan de Dios para la salvación."
-        };
-
         const audio = document.getElementById('main-audio');
         const playBtn = document.getElementById('play-btn');
         const playIcon = document.getElementById('play-icon');
         const playerContainer = document.getElementById('player-container');
-        const discWrapper = document.getElementById('disc-wrapper');
         const STREAM_URL = "https://centova.servidoraweb.net:2199/proxy/mario1/stream";
         let isPlaying = false;
 
-        // Lógica de Un Curso de Milagros (UCDM)
-        function updateUCDM() {
-            const now = new Date();
-            const startOfYear = new Date(now.getFullYear(), 0, 1);
-            const diffInMs = now - startOfYear;
-            const dayOfYear = Math.floor(diffInMs / (1000 * 60 * 60 * 24)) + 1;
-            const lessonNumber = dayOfYear > 365 ? 365 : dayOfYear;
+        // --- PROCESADOR DE METADATOS ---
+        function processMetadata() {
+            const songElement = document.getElementById('metadata-song');
+            if (!songElement) return;
             
-            const numEl = document.getElementById('ucdm-lesson-number');
-            const titleEl = document.getElementById('ucdm-lesson-title');
+            const text = songElement.innerText;
+            const lessonRegex = /Lecci[oó]nes?\s*(\d+)/i;
+            const match = text.match(lessonRegex);
+            const badge = document.getElementById('lesson-badge');
             
-            if (numEl) numEl.innerText = `Lección ${lessonNumber}`;
-            
-            // Si el título no está en la base de datos simplificada, mostramos un mensaje genérico
-            if (titleEl) {
-                titleEl.innerText = ucdmTitles[lessonNumber] || "Aceptaré mi papel en el plan de Dios.";
+            if (match && match[0]) {
+                badge.innerText = match[0].toUpperCase();
+                badge.classList.remove('hidden');
+                badge.classList.add('flex');
+            } else {
+                badge.classList.add('hidden');
+                badge.classList.remove('flex');
             }
         }
-        updateUCDM();
 
-        // Limpieza Activa del Historial
-        function cleanHistory() {
-            const container = document.getElementById('tracks-target');
-            if (!container) return;
-            const links = container.querySelectorAll('a');
-            links.forEach(link => {
-                const text = link.innerText.toLowerCase();
-                if (text.includes('buy') || text.includes('comprar') || link.className.includes('buy')) {
-                    link.remove();
-                }
-            });
-            const tds = container.querySelectorAll('td');
-            tds.forEach(td => td.style.color = '#ffffff');
+        const targetNode = document.getElementById('metadata-song');
+        if (targetNode) {
+            const config = { characterData: true, childList: true, subtree: true };
+            const observer = new MutationObserver(processMetadata);
+            observer.observe(targetNode, config);
         }
-        setInterval(cleanHistory, 2000);
+        setInterval(processMetadata, 1500);
 
-        // Relojes Mundiales
+        // --- CONTROL DE AUDIO ---
+        function togglePlay(forceState) {
+            if (isPlaying && forceState !== true) {
+                audio.pause(); audio.src = ""; 
+                playIcon.className = 'fas fa-play ml-1';
+                playerContainer.classList.remove('playing');
+                isPlaying = false;
+            } else {
+                playIcon.className = 'fas fa-spinner animate-spin';
+                audio.src = STREAM_URL + "?t=" + Date.now();
+                audio.play().then(() => {
+                    playIcon.className = 'fas fa-pause';
+                    playerContainer.classList.add('playing');
+                    isPlaying = true;
+                }).catch(() => { 
+                    playIcon.className = 'fas fa-play ml-1';
+                    const activateAudio = () => { if(!isPlaying) togglePlay(true); document.removeEventListener('click', activateAudio); };
+                    document.addEventListener('click', activateAudio);
+                });
+            }
+        }
+
+        window.addEventListener('load', () => {
+            updateClocks();
+            setTimeout(() => togglePlay(true), 1500);
+        });
+
+        // Relojes Globales
         function updateClocks() {
             const tzs = {'time-mex':'America/Mexico_City','time-esp':'Europe/Madrid','time-arg':'America/Buenos_Aires','time-col':'America/Bogota'};
             const opt = {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false};
@@ -444,96 +484,41 @@
             }
         }
         setInterval(updateClocks, 1000);
-        updateClocks();
 
-        // Detección de Ubicación
-        async function getLoc() {
-            try {
-                const r = await fetch('https://ipapi.co/json/');
-                if(r.ok){
-                    const d = await r.json();
-                    const f = d.country_code.toLowerCase().split('').map(c => String.fromCodePoint(c.charCodeAt(0)+127397)).join('');
-                    const locEl = document.getElementById('loc-text');
-                    const greetEl = document.getElementById('location-greeting');
-                    if(locEl) locEl.innerText = `Desde ${d.country_name} ${f}`;
-                    if(greetEl) greetEl.style.opacity = '1';
-                }
-            } catch(e) {}
-        }
-        getLoc();
-
-        // Player Logic
-        playBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                audio.pause(); audio.src = ""; 
-                playIcon.className = 'fas fa-play ml-2';
-                playerContainer.classList.remove('playing');
-                discWrapper.classList.remove('playing-disc');
-                isPlaying = false;
-            } else {
-                playIcon.className = 'fas fa-spinner animate-spin';
-                audio.src = STREAM_URL + "?t=" + new Date().getTime();
-                audio.play().then(() => {
-                    playIcon.className = 'fas fa-pause';
-                    playerContainer.classList.add('playing');
-                    discWrapper.classList.add('playing-disc');
-                    isPlaying = true;
-                }).catch(() => {
-                    playIcon.className = 'fas fa-play ml-2';
-                });
-            }
-        });
+        playBtn.addEventListener('click', () => togglePlay());
 
         document.getElementById('volume-slider').addEventListener('input', (e) => {
             audio.volume = e.target.value;
             document.getElementById('volume-val').innerText = Math.round(e.target.value * 100) + "%";
         });
 
-        function copyTrack() {
-            const songEl = document.querySelector('[data-type="song"]');
-            if(songEl && songEl.innerText !== "Sintonizando...") {
-                const temp = document.createElement('textarea');
-                temp.value = songEl.innerText;
-                document.body.appendChild(temp);
-                temp.select();
-                document.execCommand('copy');
-                document.body.removeChild(temp);
-                const t = document.querySelector('.tooltip');
-                if(t) {
-                    t.innerText = "¡Copiado!";
-                    setTimeout(() => t.innerText = "Copiar", 2000);
-                }
-            }
-        }
-
         function shareApp() { 
             if(navigator.share) navigator.share({title:'Frecuencia Milagro', url:window.location.href});
-            else {
-                const temp = document.createElement('textarea');
-                temp.value = window.location.href;
-                document.body.appendChild(temp);
-                temp.select();
-                document.execCommand('copy');
-                document.body.removeChild(temp);
-                alert("Enlace copiado ✨");
-            }
+            else alert("Enlace copiado ✨");
         }
 
-        // Partículas de fondo
         const pc = document.getElementById('particles-container');
-        if(pc) {
-            for(let i = 0; i < 45; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                const size = Math.random() * 2 + 1;
-                p.style.width = p.style.height = size + 'px';
-                p.style.left = Math.random() * 100 + 'vw';
-                p.style.bottom = '-10px';
-                p.style.animationDuration = (Math.random() * 15 + 10) + 's';
-                p.style.animationDelay = (Math.random() * 15) + 's';
-                pc.appendChild(p);
-            }
+        for(let i = 0; i < 35; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.width = p.style.height = (Math.random() * 2 + 1) + 'px';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.bottom = '-10px';
+            p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+            p.style.animationDelay = (Math.random() * 10) + 's';
+            pc.appendChild(p);
         }
+
+        // Limpieza de historial Centova
+        setInterval(() => {
+            const container = document.getElementById('tracks-target');
+            if (container) {
+                container.querySelectorAll('a').forEach(link => {
+                    if (link.innerText.toLowerCase().includes('buy') || link.innerText.toLowerCase().includes('comprar')) link.remove();
+                });
+                container.querySelectorAll('td').forEach(td => td.style.color = '#ffffff');
+            }
+        }, 3000);
     </script>
 </body>
 </html>
