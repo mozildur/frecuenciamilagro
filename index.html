@@ -186,6 +186,28 @@
         .custom-scroll::-webkit-scrollbar-track { background: transparent; }
         .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
 
+        /* Estilos para el área de Gemini ✨ */
+        .gemini-container {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            padding-top: 2rem;
+        }
+        
+        .ai-glow {
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+        }
+
+        .loading-shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -278,6 +300,17 @@
                         <div class="bar" style="animation-delay: 0.5s"></div>
                         <div class="bar" style="animation-delay: 0.7s"></div>
                     </div>
+
+                    <!-- Gemini AI Song Reflection ✨ -->
+                    <div class="flex flex-col gap-4 mt-8">
+                        <button onclick="getSongReflection()" class="inline-flex items-center justify-center gap-3 glass px-8 py-4 text-xs font-black uppercase tracking-widest hover:bg-cyan-500/20 transition-all group ai-glow">
+                            <i class="fas fa-sparkles text-cyan-400 group-hover:rotate-12 transition-transform"></i>
+                            ✨ Reflexión del Momento
+                        </button>
+                        <div id="song-reflection-display" class="hidden glass-card p-6 text-sm italic text-cyan-100/80 leading-relaxed border-cyan-500/20">
+                            <p id="reflection-text"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -314,6 +347,18 @@
                     <h5 id="ucdm-lesson-number" class="text-5xl md:text-8xl font-black text-white italic tracking-tighter">Lección ---</h5>
                     <p id="ucdm-lesson-title" class="text-2xl md:text-4xl text-slate-300 font-medium italic leading-snug">Sincronizando con la fuente...</p>
                 </div>
+                
+                <!-- Gemini AI Lesson Insight ✨ -->
+                <div class="pt-6 space-y-4">
+                    <button onclick="getLessonInsight()" class="inline-flex items-center gap-4 bg-white/5 hover:bg-cyan-500/10 px-8 py-4 rounded-2xl border border-white/10 transition-all group ai-glow">
+                        <i class="fas fa-magic text-cyan-400"></i>
+                        <span class="text-[10px] font-black uppercase tracking-widest">✨ Profundizar Lección</span>
+                    </button>
+                    <div id="lesson-insight-display" class="hidden glass-card p-6 text-sm text-slate-300 leading-relaxed border-cyan-500/20">
+                        <p id="insight-text"></p>
+                    </div>
+                </div>
+
                 <div class="pt-8">
                     <a href="https://whatsapp.com/channel/0029VaZLyl6CXC3DMsGiaO3l" target="_blank" class="inline-flex items-center gap-6 bg-green-500/10 hover:bg-green-500/20 px-10 py-6 rounded-3xl border-2 border-green-500/30 transition-all text-white group">
                         <span class="font-black uppercase tracking-widest text-sm">Escuchar en WhatsApp</span>
@@ -428,11 +473,92 @@
         const CURRENT_SONG_URL = "http://144.217.30.219:8061/currentsong?sid=1";
         let isPlaying = false;
 
+        // Gemini API Configuration ✨
+        const apiKey = "";
+        const geminiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent";
+
         const ucdmTitles = {
             1: "Nada de lo que veo significa nada.",
             100: "Mi parte es esencial en el plan de Dios para la salvación.",
             150: "Repaso de las Lecciones 139 y 140."
         };
+
+        // Función para llamar a Gemini con Reintentos y Backoff ✨
+        async function callGemini(prompt, systemPrompt) {
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            let retries = 5;
+            let delay = 1000;
+
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(`${geminiUrl}?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text;
+                } catch (error) {
+                    if (i === retries - 1) throw error;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        // ✨ Función para obtener reflexión de la canción actual
+        async function getSongReflection() {
+            const songTitle = document.getElementById('live-song-title').innerText;
+            const display = document.getElementById('song-reflection-display');
+            const textEl = document.getElementById('reflection-text');
+
+            if (songTitle === "Cargando...") return;
+
+            display.classList.remove('hidden');
+            display.classList.add('loading-shimmer');
+            textEl.innerText = "✨ Escuchando el milagro en esta canción...";
+
+            try {
+                const systemPrompt = "Eres un guía espiritual inspirado en Un Curso de Milagros. Tu objetivo es dar una reflexión poética y corta (máximo 3 líneas) basada en el título de la canción proporcionado. No uses introducciones, ve directo a la reflexión.";
+                const reflection = await callGemini(`Título de la canción: "${songTitle}"`, systemPrompt);
+                
+                display.classList.remove('loading-shimmer');
+                textEl.innerText = reflection;
+            } catch (error) {
+                display.classList.remove('loading-shimmer');
+                textEl.innerText = "Lo siento, la conexión con la paz se ha interrumpido brevemente. Inténtalo de nuevo.";
+            }
+        }
+
+        // ✨ Función para profundizar en la lección
+        async function getLessonInsight() {
+            const lessonNum = document.getElementById('ucdm-lesson-number').innerText;
+            const lessonTitle = document.getElementById('ucdm-lesson-title').innerText;
+            const display = document.getElementById('lesson-insight-display');
+            const textEl = document.getElementById('insight-text');
+
+            display.classList.remove('hidden');
+            display.classList.add('loading-shimmer');
+            textEl.innerText = "✨ Profundizando en la verdad de hoy...";
+
+            try {
+                const systemPrompt = "Eres un instructor experto en Un Curso de Milagros. Explica de forma práctica y sencilla (máximo 4 líneas) cómo aplicar la lección mencionada en la vida cotidiana hoy. Enfócate en el perdón y la paz interior.";
+                const insight = await callGemini(`Lección: ${lessonNum} - ${lessonTitle}`, systemPrompt);
+                
+                display.classList.remove('loading-shimmer');
+                textEl.innerText = insight;
+            } catch (error) {
+                display.classList.remove('loading-shimmer');
+                textEl.innerText = "La sabiduría está en ti, pero mi conexión externa falló. Respira profundo e inténtalo de nuevo.";
+            }
+        }
 
         async function fetchTitle() {
             try {
@@ -508,7 +634,6 @@
             
             document.addEventListener('click', () => { if(!isPlaying) togglePlay(true); }, {once: true});
             
-            // Limpiar tabla de historial (quitar enlaces de compra de Centova)
             setInterval(() => {
                 const target = document.getElementById('tracks-target');
                 if (target) {
