@@ -94,7 +94,6 @@
             box-shadow: 0 10px 20px -5px rgba(255, 77, 141, 0.4);
         }
 
-        /* --- ESTILOS RECONSTRUIDOS DEL HISTORIAL --- */
         .history-scroll {
             max-height: 320px;
             overflow-y: auto;
@@ -104,7 +103,6 @@
             padding: 10px;
         }
 
-        /* Ocultar específicamente el botón de compra y cualquier link externo */
         .cc_recenttracks_list .cc_recenttracks_buy,
         .cc_recenttracks_list a[href*="buy"],
         .cc_recenttracks_list a[href*="comprar"],
@@ -115,7 +113,6 @@
             pointer-events: none !important;
         }
 
-        /* Estilo para las filas del historial (Centova suele usar tablas o listas) */
         .cc_recenttracks_list table {
             width: 100% !important;
             border-collapse: collapse !important;
@@ -137,7 +134,6 @@
             background: transparent !important;
         }
 
-        /* Añadir icono musical antes de cada canción */
         .cc_recenttracks_entry::before, .cc_recenttracks_list tr td:first-child::before {
             content: "\f001";
             font-family: "Font Awesome 6 Free";
@@ -281,7 +277,40 @@
             </div>
         </main>
 
-        <!-- SECCIÓN DE HISTORIAL RECONSTRUIDA -->
+        <!-- SECCIÓN DE UCDM: LECCIÓN DEL DÍA MEJORADA -->
+        <section class="grid md:grid-cols-2 gap-8">
+            <div id="ucdm-section" class="glass-panel p-10 border-t-4 border-pink-500/30 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-pink-500/10 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-book-open text-pink-500 text-xl"></i>
+                        </div>
+                        <h4 class="text-xs font-black text-pink-400 uppercase tracking-widest">Lección del Día</h4>
+                    </div>
+                    <div class="py-4">
+                        <p class="text-slate-400 text-[10px] font-black uppercase mb-1">Un Curso de Milagros</p>
+                        <h5 id="ucdm-lesson-number" class="text-3xl font-bold text-white mb-2 tracking-tighter">Lección ---</h5>
+                        <p id="ucdm-lesson-title" class="text-base text-white font-medium leading-tight italic mb-3">Cargando sabiduría...</p>
+                        <p class="text-[10px] text-slate-400 leading-relaxed uppercase tracking-widest">
+                            "Nada real puede ser amenazado. Nada irreal existe."
+                        </p>
+                    </div>
+                </div>
+                <!-- Link actualizado al canal de WhatsApp -->
+                <a id="ucdm-link" href="https://whatsapp.com/channel/0029VaZLyl6CXC3DMsGiaO3l" target="_blank" class="mt-6 inline-flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all group">
+                    Ver lección en WhatsApp <i class="fab fa-whatsapp text-green-400 text-sm group-hover:scale-110 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Inspiración -->
+            <div class="glass-panel p-10 border-t-4 border-yellow-500/30">
+                <i class="fas fa-sparkles text-yellow-500 text-xl mb-4"></i>
+                <h4 class="text-xs font-black text-yellow-500 uppercase mb-2">Inspiración</h4>
+                <p class="text-xl font-medium italic text-slate-200 leading-relaxed">"Tu percepción del mundo es un eco de tu estado mental. Elige la paz y el mundo se transformará contigo."</p>
+            </div>
+        </section>
+
+        <!-- Historial -->
         <section class="space-y-6">
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 px-6">
                 <div class="text-left space-y-1">
@@ -303,7 +332,7 @@
             </div>
         </section>
 
-        <!-- Horarios -->
+        <!-- Horarios Mundiales -->
         <section class="glass-panel p-8 space-y-6">
             <div class="flex items-center justify-center gap-3"><i class="fas fa-globe text-pink-500"></i><h4 class="text-xs font-black uppercase tracking-widest text-slate-400">Sincronía Global</h4></div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -314,22 +343,15 @@
             </div>
         </section>
 
-        <section class="grid md:grid-cols-2 gap-8 text-left">
-            <div class="glass-panel p-10 border-t-4 border-yellow-500/30">
-                <i class="fas fa-sparkles text-yellow-500 text-xl mb-4"></i>
-                <h4 class="text-xs font-black text-yellow-500 uppercase mb-2">Inspiración</h4>
-                <p class="text-xl font-medium italic text-slate-200 leading-relaxed">"Tu percepción del mundo es un eco de tu estado mental. Elige la paz y el mundo se transformará contigo."</p>
-            </div>
-            
-            <div class="glass-panel p-10 border-t-4 border-blue-500/30">
-                <i class="fas fa-clock text-blue-500 text-xl mb-4"></i>
-                <h4 class="text-xs font-black text-blue-400 uppercase mb-4">Programación</h4>
-                <div class="space-y-4 text-white">
-                    <div class="flex justify-between items-center"><span class="text-slate-400 text-[10px] font-black uppercase">Diario - 07:00 MEX</span><p class="text-[11px] font-bold">Meditando con MoZ</p></div>
-                    <div class="flex justify-between items-center"><span class="text-slate-400 text-[10px] font-black uppercase">L-M-J - 13:00 MEX</span><p class="text-[11px] font-bold">Explorando UCDM</p></div>
-                    <div class="flex justify-between items-center"><span class="text-slate-400 text-[10px] font-black uppercase">Vie - 13:00 MEX</span><p class="text-[11px] font-bold">Viernes Íntimo</p></div>
-                    <div class="flex justify-between items-center"><span class="text-slate-400 text-[10px] font-black uppercase">Lun - 19:30 MEX</span><p class="text-[11px] font-bold">Clase con MoZ</p></div>
-                </div>
+        <!-- Programación -->
+        <section class="glass-panel p-10 border-t-4 border-blue-500/30">
+            <i class="fas fa-clock text-blue-500 text-xl mb-4"></i>
+            <h4 class="text-xs font-black text-blue-400 uppercase mb-4">Programación</h4>
+            <div class="space-y-4 text-white">
+                <div class="flex justify-between items-center"><span class="text-slate-400 text-[10px] font-black uppercase">Diario - 07:00 MEX</span><p class="text-[11px] font-bold">Meditando con MoZ</p></div>
+                <div class="flex justify-between items-center"><span class="text-slate-400 text-[10px] font-black uppercase">L-M-J - 13:00 MEX</span><p class="text-[11px] font-bold">Explorando UCDM</p></div>
+                <div class="flex justify-between items-center"><span class="text-slate-400 text-[10px] font-black uppercase">Vie - 13:00 MEX</span><p class="text-[11px] font-bold">Viernes Íntimo</p></div>
+                <div class="flex justify-between items-center"><span class="text-slate-400 text-[10px] font-black uppercase">Lun - 19:30 MEX</span><p class="text-[11px] font-bold">Clase con MoZ</p></div>
             </div>
         </section>
 
@@ -342,11 +364,30 @@
         </footer>
     </div>
 
+    <!-- AUDIO & SCRIPTS -->
     <audio id="main-audio" crossorigin="anonymous"></audio>
     <script language="javascript" src="https://centova.servidoraweb.net/system/recenttracks.js"></script>
     <script language="javascript" src="https://centova.servidoraweb.net/system/streaminfo.js"></script>
 
     <script>
+        // --- BASE DE DATOS DE LECCIONES UCDM (EJEMPLO REPRESENTATIVO) ---
+        // Se incluyen las lecciones cercanas al día actual (Abril) y ejemplos
+        const ucdmTitles = {
+            1: "Nada de lo que veo significa nada",
+            2: "Le he dado a todo lo que veo todo el significado que tiene para mí",
+            90: "Para el repaso de hoy: Mi mente es parte de la de Dios. Soy muy santo. Mi santidad envuelve todo lo que veo.",
+            91: "Los milagros se ven en la luz.",
+            92: "Los milagros se ven en la luz, y la luz y la fortaleza son una sola.",
+            93: "La luz, la dicha y la paz moran en mí.",
+            94: "Soy tal como Dios me creó.",
+            95: "Soy un solo Ser, unido a mi Creador.",
+            96: "La salvación y el perdón son lo mismo.",
+            97: "Soy espíritu.",
+            98: "Aceptaré mi papel en el plan de Dios para la salvación.",
+            99: "La salvación es mi única función aquí.",
+            100: "Mi parte es esencial en el plan de Dios para la salvación."
+        };
+
         const audio = document.getElementById('main-audio');
         const playBtn = document.getElementById('play-btn');
         const playIcon = document.getElementById('play-icon');
@@ -355,55 +396,73 @@
         const STREAM_URL = "https://centova.servidoraweb.net:2199/proxy/mario1/stream";
         let isPlaying = false;
 
+        // Lógica de Un Curso de Milagros (UCDM)
+        function updateUCDM() {
+            const now = new Date();
+            const startOfYear = new Date(now.getFullYear(), 0, 1);
+            const diffInMs = now - startOfYear;
+            const dayOfYear = Math.floor(diffInMs / (1000 * 60 * 60 * 24)) + 1;
+            const lessonNumber = dayOfYear > 365 ? 365 : dayOfYear;
+            
+            const numEl = document.getElementById('ucdm-lesson-number');
+            const titleEl = document.getElementById('ucdm-lesson-title');
+            
+            if (numEl) numEl.innerText = `Lección ${lessonNumber}`;
+            
+            // Si el título no está en la base de datos simplificada, mostramos un mensaje genérico
+            if (titleEl) {
+                titleEl.innerText = ucdmTitles[lessonNumber] || "Aceptaré mi papel en el plan de Dios.";
+            }
+        }
+        updateUCDM();
+
         // Limpieza Activa del Historial
         function cleanHistory() {
             const container = document.getElementById('tracks-target');
             if (!container) return;
-            
-            // Eliminar cualquier enlace que no sea de la canción (como botones de compra)
             const links = container.querySelectorAll('a');
             links.forEach(link => {
-                if (link.innerText.toLowerCase().includes('buy') || 
-                    link.innerText.toLowerCase().includes('comprar') || 
-                    link.className.includes('buy')) {
+                const text = link.innerText.toLowerCase();
+                if (text.includes('buy') || text.includes('comprar') || link.className.includes('buy')) {
                     link.remove();
                 }
             });
-
-            // Asegurar que el texto sea blanco
             const tds = container.querySelectorAll('td');
             tds.forEach(td => td.style.color = '#ffffff');
         }
-
-        // Ejecutar limpieza periódica
         setInterval(cleanHistory, 2000);
 
-        // Relojes
+        // Relojes Mundiales
         function updateClocks() {
             const tzs = {'time-mex':'America/Mexico_City','time-esp':'Europe/Madrid','time-arg':'America/Buenos_Aires','time-col':'America/Bogota'};
             const opt = {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false};
             for(const [id,tz] of Object.entries(tzs)){
                 const el = document.getElementById(id);
-                if(el) el.innerText = new Intl.DateTimeFormat('es-MX',{...opt,timeZone:tz}).format(new Date());
+                if(el) {
+                    try { el.innerText = new Intl.DateTimeFormat('es-MX',{...opt,timeZone:tz}).format(new Date()); } catch(e) {}
+                }
             }
         }
         setInterval(updateClocks, 1000);
+        updateClocks();
 
-        // Ubicación
+        // Detección de Ubicación
         async function getLoc() {
             try {
                 const r = await fetch('https://ipapi.co/json/');
                 if(r.ok){
                     const d = await r.json();
                     const f = d.country_code.toLowerCase().split('').map(c => String.fromCodePoint(c.charCodeAt(0)+127397)).join('');
-                    document.getElementById('loc-text').innerText = `Desde ${d.country_name} ${f}`;
-                    document.getElementById('location-greeting').style.opacity = '1';
+                    const locEl = document.getElementById('loc-text');
+                    const greetEl = document.getElementById('location-greeting');
+                    if(locEl) locEl.innerText = `Desde ${d.country_name} ${f}`;
+                    if(greetEl) greetEl.style.opacity = '1';
                 }
             } catch(e) {}
         }
         getLoc();
 
-        // Player
+        // Player Logic
         playBtn.addEventListener('click', () => {
             if (isPlaying) {
                 audio.pause(); audio.src = ""; 
@@ -430,9 +489,50 @@
             document.getElementById('volume-val').innerText = Math.round(e.target.value * 100) + "%";
         });
 
+        function copyTrack() {
+            const songEl = document.querySelector('[data-type="song"]');
+            if(songEl && songEl.innerText !== "Sintonizando...") {
+                const temp = document.createElement('textarea');
+                temp.value = songEl.innerText;
+                document.body.appendChild(temp);
+                temp.select();
+                document.execCommand('copy');
+                document.body.removeChild(temp);
+                const t = document.querySelector('.tooltip');
+                if(t) {
+                    t.innerText = "¡Copiado!";
+                    setTimeout(() => t.innerText = "Copiar", 2000);
+                }
+            }
+        }
+
         function shareApp() { 
             if(navigator.share) navigator.share({title:'Frecuencia Milagro', url:window.location.href});
-            else alert("Enlace copiado ✨");
+            else {
+                const temp = document.createElement('textarea');
+                temp.value = window.location.href;
+                document.body.appendChild(temp);
+                temp.select();
+                document.execCommand('copy');
+                document.body.removeChild(temp);
+                alert("Enlace copiado ✨");
+            }
+        }
+
+        // Partículas de fondo
+        const pc = document.getElementById('particles-container');
+        if(pc) {
+            for(let i = 0; i < 45; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                const size = Math.random() * 2 + 1;
+                p.style.width = p.style.height = size + 'px';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.bottom = '-10px';
+                p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                p.style.animationDelay = (Math.random() * 15) + 's';
+                pc.appendChild(p);
+            }
         }
     </script>
 </body>
