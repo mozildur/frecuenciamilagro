@@ -46,6 +46,26 @@
             border-radius: 1.5rem;
         }
 
+        /* --- MARQUEE EFFECT (DESLIZAMIENTO MEJORADO) --- */
+        .marquee-container {
+            display: flex;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .marquee-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 45s linear infinite; /* Tiempo ajustado para más texto */
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
         /* --- ESTILO SPOTIFY PLAYER --- */
         .player-hero {
             display: flex;
@@ -125,17 +145,18 @@
         }
 
         .btn-play {
-            width: 90px;
-            height: 90px;
+            width: 100px;
+            height: 100px;
             background: #ffffff;
             color: #000000;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 3rem;
             transition: all 0.2s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            margin: 0 auto;
         }
 
         .btn-play:hover {
@@ -186,20 +207,28 @@
         .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased text-white">
 
     <div class="mesh-bg"></div>
 
     <!-- NAVEGACIÓN SUPERIOR -->
     <nav class="flex items-center justify-between px-6 py-4 sticky top-0 z-50 bg-gradient-to-b from-black/60 to-transparent backdrop-blur-md">
-        <div class="flex items-center gap-3">
-            <img src="https://static.mytuner.mobi/media/tvos_radios/255/frecuencia-milagro.ea9f0fc2.png" class="w-10 h-10 rounded-lg bg-white p-1" alt="Logo">
-            <span class="font-bold tracking-tighter text-xl text-white">Frecuencia Milagro</span>
+        <div class="flex items-center gap-3 overflow-hidden flex-1 mr-4">
+            <img src="https://static.mytuner.mobi/media/tvos_radios/255/frecuencia-milagro.ea9f0fc2.png" class="w-10 h-10 rounded-lg bg-white p-1 flex-shrink-0" alt="Logo">
+            <div class="flex flex-col md:flex-row md:items-center md:gap-2 overflow-hidden w-full">
+                <span class="font-bold tracking-tighter text-lg md:text-xl whitespace-nowrap">Frecuencia Milagro</span>
+                <div class="marquee-container">
+                    <span id="nav-song-title" class="marquee-content font-bold tracking-tighter text-lg md:text-xl text-white/40 italic">
+                        — Conectando con la Sabiduría Universal...
+                    </span>
+                </div>
+            </div>
         </div>
-        <div class="flex items-center gap-5">
-            <a href="https://facebook.com/primeratencion" target="_blank" class="text-white/70 hover:text-blue-500 transition-colors"><i class="fab fa-facebook text-2xl"></i></a>
-            <a href="https://instagram.com/primeratencion" target="_blank" class="text-white/70 hover:text-pink-400 transition-colors"><i class="fab fa-instagram text-2xl"></i></a>
-            <a href="https://wa.me/526867883335" target="_blank" class="text-white/70 hover:text-green-400 transition-colors"><i class="fab fa-whatsapp text-2xl"></i></a>
+        <div class="flex items-center gap-4 flex-shrink-0">
+            <a href="mailto:moz@primerotupaz.com" class="text-white/70 hover:text-red-400 transition-colors" title="Email"><i class="fas fa-envelope text-2xl"></i></a>
+            <a href="https://facebook.com/primeratencion" target="_blank" class="text-white/70 hover:text-blue-500 transition-colors" title="Facebook"><i class="fab fa-facebook text-2xl"></i></a>
+            <a href="https://instagram.com/primeratencion" target="_blank" class="text-white/70 hover:text-pink-400 transition-colors" title="Instagram"><i class="fab fa-instagram text-2xl"></i></a>
+            <a href="https://wa.me/526867883335" target="_blank" class="text-white/70 hover:text-green-400 transition-colors" title="WhatsApp"><i class="fab fa-whatsapp text-2xl"></i></a>
         </div>
     </nav>
 
@@ -216,14 +245,14 @@
             <div class="w-full text-center space-y-6">
                 <div class="space-y-3">
                     <span id="lesson-badge" class="hidden text-pink-500 font-bold text-xs tracking-widest uppercase">Lección en Curso</span>
-                    <h2 id="live-song-title" class="text-4xl md:text-6xl font-black tracking-tighter text-white">Cargando...</h2>
-                    <p class="text-white/50 font-medium">Sintonizando la Verdad Interior • 24/7</p>
+                    <h2 id="live-song-title" class="text-4xl md:text-6xl font-black tracking-tighter">Cargando...</h2>
+                    <p class="text-white/50 font-medium italic">Sintonizando la Verdad Interior</p>
                 </div>
 
                 <div class="flex items-center justify-center pt-2">
                     <button onclick="getSongReflection()" class="btn-action ai-glow">
                         <i class="fas fa-sparkles text-cyan-400"></i>
-                        <span class="text-white">Reflexión sobre la canción ✨</span>
+                        <span>Reflexión sobre la canción ✨</span>
                     </button>
                 </div>
 
@@ -243,8 +272,8 @@
                     <p id="reflection-text"></p>
                 </div>
 
-                <!-- CONTROL PLAY CENTRADO -->
-                <div class="flex flex-col items-center gap-8 pt-6">
+                <!-- CONTROL PLAY TOTALMENTE CENTRADO -->
+                <div class="flex flex-col items-center gap-8 pt-8">
                     <button id="play-btn" class="btn-play">
                         <i id="play-icon" class="fas fa-play"></i>
                     </button>
@@ -260,33 +289,33 @@
 
         <!-- SECCIÓN 2: ACCIONES RÁPIDAS -->
         <section class="grid grid-cols-2 md:grid-cols-4 gap-5 mt-12">
-            <a href="https://paypal.me/primerotupaz" target="_blank" class="glass-panel p-6 flex flex-col items-center gap-3 hover:bg-yellow-400/10 transition-colors group text-white">
+            <a href="https://paypal.me/primerotupaz" target="_blank" class="glass-panel p-6 flex flex-col items-center gap-3 hover:bg-yellow-400/10 transition-colors group">
                 <i class="fas fa-heart text-2xl text-yellow-400 group-hover:scale-110 transition-transform"></i>
                 <span class="text-[10px] font-black uppercase tracking-widest">Donar Amor</span>
             </a>
             <div class="glass-panel p-6 flex flex-col items-center gap-3">
                 <span class="cc_streaminfo text-xl font-bold text-pink-500" data-type="listeners" data-username="mario1">0</span>
-                <span class="text-[10px] font-black uppercase tracking-widest opacity-30 text-white">Oyentes</span>
+                <span class="text-[10px] font-black uppercase tracking-widest opacity-30">Oyentes</span>
             </div>
             <div class="glass-panel p-6 flex flex-col items-center gap-3">
                 <span class="text-xl font-bold text-cyan-400">64</span>
-                <span class="text-[10px] font-black uppercase tracking-widest opacity-30 text-white">KBPS</span>
+                <span class="text-[10px] font-black uppercase tracking-widest opacity-30">KBPS</span>
             </div>
             <div class="glass-panel p-6 flex flex-col items-center gap-3">
                 <i class="fas fa-broadcast-tower text-2xl text-white/40"></i>
-                <span class="text-[10px] font-black uppercase tracking-widest opacity-30 text-white">Señal HD</span>
+                <span class="text-[10px] font-black uppercase tracking-widest opacity-30">Señal HD</span>
             </div>
         </section>
 
         <!-- SECCIÓN 3: LECCIÓN DEL DÍA -->
         <section class="mt-16 space-y-8">
             <div class="flex items-center justify-between">
-                <h3 class="text-2xl font-bold tracking-tight text-white">Lección del Día</h3>
+                <h3 class="text-2xl font-bold tracking-tight">Lección del Día</h3>
                 <button onclick="getLessonInsight()" class="text-xs font-bold text-cyan-400 hover:text-cyan-300 transition-colors">✨ Reflexión lección del día</button>
             </div>
             <div class="glass-panel p-8 space-y-5 border-l-4 border-pink-500 shadow-2xl relative overflow-hidden">
                 <h4 id="ucdm-lesson-number" class="text-pink-500 font-black text-xs uppercase tracking-[0.3em]">Cargando...</h4>
-                <p id="ucdm-lesson-title" class="text-2xl md:text-3xl font-bold italic leading-tight text-white/95">Conectando con la sabiduría del instante...</p>
+                <p id="ucdm-lesson-title" class="text-2xl md:text-3xl font-bold italic leading-tight text-white/95">Sincronizando con la sabiduría...</p>
                 
                 <div id="lesson-insight-display" class="hidden mt-6 p-6 glass-panel bg-white/5 border-white/5 text-sm text-white/80 italic leading-relaxed">
                     <p id="insight-text"></p>
@@ -294,11 +323,11 @@
 
                 <!-- Botones para profundizar -->
                 <div class="pt-6 flex flex-wrap gap-4">
-                    <a href="https://whatsapp.com/channel/0029VaZLyl6CXC3DMsGiaO3l" target="_blank" class="inline-flex items-center gap-4 bg-green-500/10 hover:bg-green-500/20 px-6 py-4 rounded-2xl border border-green-500/30 transition-all group text-white">
+                    <a href="https://whatsapp.com/channel/0029VaZLyl6CXC3DMsGiaO3l" target="_blank" class="inline-flex items-center gap-4 bg-green-500/10 hover:bg-green-500/20 px-6 py-4 rounded-2xl border border-green-500/30 transition-all group">
                         <i class="fab fa-whatsapp text-green-400 text-xl group-hover:scale-110 transition-transform"></i>
                         <span class="text-[11px] font-black uppercase tracking-widest">WhatsApp ✨</span>
                     </a>
-                    <a href="https://www.youtube.com/channel/UCWMdQmpS04i2j0ehwMmuMEw" target="_blank" class="inline-flex items-center gap-4 bg-red-500/10 hover:bg-red-500/20 px-6 py-4 rounded-2xl border border-red-500/30 transition-all group text-white">
+                    <a href="https://www.youtube.com/channel/UCWMdQmpS04i2j0ehwMmuMEw" target="_blank" class="inline-flex items-center gap-4 bg-red-500/10 hover:bg-red-500/20 px-6 py-4 rounded-2xl border border-red-500/30 transition-all group">
                         <i class="fab fa-youtube text-red-500 text-xl group-hover:scale-110 transition-transform"></i>
                         <span class="text-[11px] font-black uppercase tracking-widest">YouTube ✨</span>
                     </a>
@@ -308,19 +337,19 @@
 
         <!-- SECCIÓN 4: PROGRAMACIÓN -->
         <section class="mt-16 space-y-8">
-            <h3 class="text-2xl font-bold tracking-tight text-white">Programación de Milagros</h3>
+            <h3 class="text-2xl font-bold tracking-tight">Programación de Milagros</h3>
             <div class="grid md:grid-cols-2 gap-4">
-                <div class="glass-panel p-6 flex items-center justify-between border-b border-white/5 text-white">
+                <div class="glass-panel p-6 flex items-center justify-between border-b border-white/5">
                     <div class="space-y-1">
                         <p class="text-[10px] font-black text-pink-500 uppercase">Diario - 07:00 MEX</p>
-                        <p class="font-bold italic text-white">Meditando con MoZ</p>
+                        <p class="font-bold italic">Meditando con MoZ</p>
                     </div>
                     <i class="fas fa-sun text-yellow-500/40 text-xl"></i>
                 </div>
-                <div class="glass-panel p-6 flex items-center justify-between border-b border-white/5 text-white">
+                <div class="glass-panel p-6 flex items-center justify-between border-b border-white/5">
                     <div class="space-y-1">
                         <p class="text-[10px] font-black text-pink-500 uppercase">L-M-J - 13:00 MEX</p>
-                        <p class="font-bold italic text-white">Explorando UCDM</p>
+                        <p class="font-bold italic">Explorando UCDM</p>
                     </div>
                     <i class="fas fa-book-open text-cyan-500/40 text-xl"></i>
                 </div>
@@ -330,8 +359,8 @@
         <!-- SECCIÓN 5: HISTORIAL -->
         <section class="mt-16 space-y-8">
             <div class="flex items-center justify-between">
-                <h3 class="text-2xl font-bold tracking-tight text-white">Historial de Luz</h3>
-                <a href="https://www.youtube.com/playlist?list=PLMepX0V6b8PGvI7NrXaTty9g7UT-I0rtl" target="_blank" class="bg-red-600/20 hover:bg-red-600/40 px-5 py-2.5 rounded-xl border border-red-600/30 transition-all flex items-center gap-3 group text-white">
+                <h3 class="text-2xl font-bold tracking-tight">Historial de Luz</h3>
+                <a href="https://www.youtube.com/playlist?list=PLMepX0V6b8PGvI7NrXaTty9g7UT-I0rtl" target="_blank" class="bg-red-600/20 hover:bg-red-600/40 px-5 py-2.5 rounded-xl border border-red-600/30 transition-all flex items-center gap-3 group">
                     <i class="fab fa-youtube text-red-500 text-lg group-hover:scale-110"></i>
                     <span class="text-[9px] font-black uppercase tracking-widest">Playlist Milagrosa</span>
                 </a>
@@ -345,59 +374,39 @@
 
         <!-- SECCIÓN 6: HORARIOS MUNDIALES -->
         <section class="mt-20 space-y-8">
-            <h4 class="text-xs font-black uppercase tracking-[0.4em] opacity-40 text-center text-white">Horarios Mundiales</h4>
+            <h4 class="text-xs font-black uppercase tracking-[0.4em] opacity-40 text-center">Relojes del Despertar</h4>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="glass-panel p-6 text-center text-white">
+                <div class="glass-panel p-6 text-center">
                     <img src="https://flagcdn.com/w80/mx.png" class="w-8 mx-auto mb-3 opacity-60 rounded-sm" alt="MX">
                     <p class="text-[9px] font-black uppercase mb-1 opacity-40">México</p>
-                    <p id="time-mex" class="text-xl font-bold tracking-widest text-white">--:--</p>
+                    <p id="time-mex" class="text-xl font-bold tracking-widest">--:--</p>
                 </div>
-                <div class="glass-panel p-6 text-center text-white">
+                <div class="glass-panel p-6 text-center">
                     <img src="https://flagcdn.com/w80/es.png" class="w-8 mx-auto mb-3 opacity-60 rounded-sm" alt="ES">
                     <p class="text-[9px] font-black uppercase mb-1 opacity-40">España</p>
-                    <p id="time-esp" class="text-xl font-bold tracking-widest text-white">--:--</p>
+                    <p id="time-esp" class="text-xl font-bold tracking-widest">--:--</p>
                 </div>
-                <div class="glass-panel p-6 text-center text-white">
+                <div class="glass-panel p-6 text-center">
                     <img src="https://flagcdn.com/w80/ar.png" class="w-8 mx-auto mb-3 opacity-60 rounded-sm" alt="AR">
                     <p class="text-[9px] font-black uppercase mb-1 opacity-40">Argentina</p>
-                    <p id="time-arg" class="text-xl font-bold tracking-widest text-white">--:--</p>
+                    <p id="time-arg" class="text-xl font-bold tracking-widest">--:--</p>
                 </div>
-                <div class="glass-panel p-6 text-center text-white">
+                <div class="glass-panel p-6 text-center">
                     <img src="https://flagcdn.com/w80/co.png" class="w-8 mx-auto mb-3 opacity-60 rounded-sm" alt="CO">
                     <p class="text-[9px] font-black uppercase mb-1 opacity-40">Colombia</p>
-                    <p id="time-col" class="text-xl font-bold tracking-widest text-white">--:--</p>
+                    <p id="time-col" class="text-xl font-bold tracking-widest">--:--</p>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN 7: CONTACTO -->
-        <section class="mt-16 space-y-8">
-             <h4 class="text-xs font-black uppercase tracking-widest opacity-40 text-center text-white">Ponte en contacto</h4>
-             <div class="grid md:grid-cols-2 gap-4">
-                <a href="mailto:moz@primerotupaz.com" class="glass-panel p-6 flex items-center justify-between hover:bg-white/5 transition-colors group text-white">
-                    <div class="flex items-center gap-4">
-                        <i class="fas fa-envelope text-pink-500"></i>
-                        <span class="text-sm font-bold text-white">moz@primerotupaz.com</span>
-                    </div>
-                    <i class="fas fa-chevron-right text-xs opacity-30 group-hover:opacity-100 transition-all text-white"></i>
-                </a>
-                <a href="tel:+526867883335" class="glass-panel p-6 flex items-center justify-between hover:bg-white/5 transition-colors group text-white">
-                    <div class="flex items-center gap-4">
-                        <i class="fas fa-phone text-green-500"></i>
-                        <span class="text-sm font-bold text-white">+52 686 788 3335</span>
-                    </div>
-                    <i class="fas fa-chevron-right text-xs opacity-30 group-hover:opacity-100 transition-all text-white"></i>
-                </a>
-             </div>
-        </section>
-
         <footer class="mt-32 text-center pb-10">
-            <p class="text-[10px] font-black uppercase tracking-[0.5em] opacity-20 italic text-white">Frecuencia Milagro © 2026 • Música que cambia tu percepción</p>
+            <p class="text-[10px] font-black uppercase tracking-[0.5em] opacity-20 italic">Frecuencia Milagro © 2026 • Música que cambia tu percepción</p>
         </footer>
     </div>
 
     <!-- AUDIO CORE -->
     <audio id="main-audio" crossorigin="anonymous"></audio>
+    <!-- Elemento oculto que Centova Cast actualiza automáticamente -->
     <div style="display:none"><span id="metadata-song" class="cc_streaminfo" data-type="song" data-username="mario1">...</span></div>
     
     <!-- Scripts de Centova -->
@@ -413,9 +422,12 @@
         const timeCurrent = document.getElementById('time-current');
         
         const STREAM_URL = "https://centova.servidoraweb.net:2199/proxy/mario1/stream";
-        const CURRENT_SONG_URL = "http://144.217.30.219:8061/currentsong?sid=1";
+        const STATS_URL = "http://144.217.30.219:8061/statistics";
+        const ADMIN_STATS_URL = "http://144.217.30.219:8061/admin.cgi?sid=1&mode=viewxml&page=6";
+        
         let isPlaying = false;
         let startTime = Date.now();
+        let currentLessonNumber = 0;
 
         // Gemini API Configuration ✨
         const apiKey = "";
@@ -488,20 +500,108 @@
             } catch (e) { textEl.innerText = "La verdad te hará libre. Confía en tu guía interior."; }
         }
 
-        // --- CORE RADIO ---
-        async function fetchTitle() {
+        // --- CORE RADIO (OBTENCIÓN DE DATOS EXTENDIDOS) ---
+        function formatListenTime(seconds) {
+            if (!seconds) return "";
+            const s = parseInt(seconds);
+            if (isNaN(s)) return "";
+            const h = Math.floor(s / 3600);
+            const m = Math.floor((s % 3600) / 60);
+            if (h > 0) return `${h}h ${m}m`;
+            return `${m} min`;
+        }
+
+        function formatUptime(seconds) {
+            if (!seconds) return "0h";
+            const s = parseInt(seconds);
+            const d = Math.floor(s / 86400);
+            const h = Math.floor((s % 86400) / 3600);
+            return d > 0 ? `${d}d ${h}h` : `${h}h`;
+        }
+
+        async function fetchFullStats() {
             try {
-                const res = await fetch(CURRENT_SONG_URL);
-                const title = await res.text();
-                if (title && title.length > 2) {
-                    document.getElementById('live-song-title').innerText = title;
-                    processBadge(title);
-                }
+                const response = await fetch(ADMIN_STATS_URL);
+                const text = await response.text();
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(text, "text/xml");
+                
+                const getVal = (tag) => xmlDoc.getElementsByTagName(tag)[0]?.textContent || "";
+
+                return {
+                    title: getVal("SONGTITLE"),
+                    listeners: getVal("CURRENTLISTENERS"),
+                    unique: getVal("UNIQUELISTENERS"),
+                    peak: getVal("PEAKLISTENERS"),
+                    max: getVal("MAXLISTENERS"),
+                    avgTime: getVal("AVERAGETIME"),
+                    uptime: getVal("STREAMUPTIME"),
+                    bitrate: getVal("BITRATE"),
+                    genre: getVal("GENRE"),
+                    serverName: getVal("SERVERTITLE")
+                };
             } catch (e) {
-                const centova = document.getElementById('metadata-song').innerText;
-                if(centova && centova !== "...") {
-                    document.getElementById('live-song-title').innerText = centova;
-                    processBadge(centova);
+                // Fallback básico
+                try {
+                    const response = await fetch(STATS_URL);
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(text, "text/xml");
+                    const getVal = (tag) => xmlDoc.getElementsByTagName(tag)[0]?.textContent || "";
+                    return {
+                        title: getVal("SONGTITLE"),
+                        listeners: getVal("CURRENTLISTENERS"),
+                        unique: "", peak: "", max: "100", avgTime: "", uptime: "",
+                        bitrate: getVal("BITRATE"),
+                        genre: "",
+                        serverName: getVal("SERVERTITLE")
+                    };
+                } catch (e2) {
+                    const centova = document.getElementById('metadata-song').innerText;
+                    return { title: centova, listeners: null, bitrate: "64", serverName: "Frecuencia Milagro" };
+                }
+            }
+        }
+
+        async function updateMarquee() {
+            const stats = await fetchFullStats();
+            
+            if(stats.title && stats.title !== "..." && stats.title !== "") {
+                const displayEl = document.getElementById('live-song-title');
+                const navEl = document.getElementById('nav-song-title');
+                
+                // Actualizar título central
+                if (displayEl.innerText !== stats.title) {
+                    displayEl.innerText = stats.title;
+                    processBadge(stats.title);
+                }
+
+                // Generar frases de "Frecuencia"
+                const spiritualAffirmations = [
+                    "Dios es amor y, por lo tanto, eso es lo que soy yo.",
+                    "La paz de Dios brilla en mí ahora.",
+                    "No soy un cuerpo, soy libre.",
+                    "Elijo el milagro en lugar del miedo."
+                ];
+                const randomAff = spiritualAffirmations[Math.floor(Math.random() * spiritualAffirmations.length)];
+
+                // Construir cadena de marquesina de alto valor
+                let marqueeText = `— Sintonía Actual: ${stats.title}`;
+                marqueeText += ` • Lección Activa: ${currentLessonNumber}`;
+                if (stats.listeners) marqueeText += ` • Oyentes: ${stats.listeners}/${stats.max || '100'}`;
+                if (stats.unique) marqueeText += ` • Únicos: ${stats.unique}`;
+                if (stats.peak) marqueeText += ` • Récord Histórico: ${stats.peak}`;
+                if (stats.uptime) marqueeText += ` • Señal Estable: ${formatUptime(stats.uptime)}`;
+                if (stats.avgTime) marqueeText += ` • Promedio de Escucha: ${formatListenTime(stats.avgTime)}`;
+                if (stats.bitrate) marqueeText += ` • Audio HD: ${stats.bitrate}kbps`;
+                marqueeText += ` • Afirmación: ${randomAff}`;
+                marqueeText += ` • Un Milagro te espera en cada instante ✨ — `;
+
+                // Solo actualizar si el contenido base cambió significativamente
+                if (navEl.dataset.currentSong !== stats.title) {
+                    navEl.innerText = marqueeText;
+                    navEl.dataset.currentSong = stats.title;
+                    navEl.classList.remove('hidden');
                 }
             }
         }
@@ -559,6 +659,7 @@
             const start = new Date(now.getFullYear(), 0, 1);
             const diff = now - start;
             const lesson = Math.floor(diff / (1000 * 60 * 60 * 24)) + 1;
+            currentLessonNumber = lesson;
             document.getElementById('ucdm-lesson-number').innerText = `Lección ${lesson}`;
             document.getElementById('ucdm-lesson-title').innerText = ucdmTitles[lesson] || "La salvación es mi única función aquí.";
         }
@@ -566,7 +667,11 @@
         window.addEventListener('load', () => {
             updateClocks(); updateUCDM();
             setInterval(updateClocks, 1000);
-            setInterval(fetchTitle, 5000);
+            
+            // Polling para la marquesina con datos enriquecidos
+            setInterval(updateMarquee, 10000);
+            updateMarquee(); // Ejecución inicial inmediata
+            
             setInterval(updateProgress, 1000);
             setTimeout(() => togglePlay(true), 1200);
             
