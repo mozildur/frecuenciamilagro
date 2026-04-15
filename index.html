@@ -231,6 +231,12 @@
 
         .custom-scroll::-webkit-scrollbar { width: 5px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        
+        /* Centova List Overrides */
+        .cc_recenttracks_list { width: 100% !important; }
+        .cc_recenttracks_entry { border-bottom: 1px solid rgba(255,255,255,0.05) !important; padding: 15px 0 !important; }
+        .cc_recenttracks_title { color: #fff !important; font-weight: 600 !important; display: block; font-size: 0.95rem !important; }
+        .cc_recenttracks_artist { color: #888 !important; font-size: 0.8rem !important; }
     </style>
 </head>
 <body class="antialiased text-center">
@@ -330,7 +336,7 @@
             </div>
         </section>
 
-        <!-- ACCIONES RÁPIDAS -->
+        <!-- SECCIÓN 2: ACCIONES RÁPIDAS -->
         <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
             <a href="https://paypal.me/primerotupaz" target="_blank" class="glass-panel p-6 flex flex-col items-center gap-3 group">
                 <i class="fas fa-heart text-2xl text-pink-500 group-hover:scale-125 transition-transform"></i>
@@ -350,7 +356,7 @@
             </div>
         </section>
 
-        <!-- LECCIÓN DEL DÍA -->
+        <!-- SECCIÓN 3: LECCIÓN DEL DÍA -->
         <section class="mt-20">
             <div class="flex items-center justify-between mb-8 text-left">
                 <div class="flex items-center gap-3">
@@ -400,7 +406,7 @@
             </div>
         </section>
 
-        <!-- PROGRAMACIÓN -->
+        <!-- SECCIÓN 4: PROGRAMACIÓN -->
         <section class="mt-20 space-y-8">
             <h3 class="text-xl font-bold tracking-tight text-left px-2">Programación de Milagros</h3>
             <div class="grid md:grid-cols-2 gap-4">
@@ -421,7 +427,7 @@
             </div>
         </section>
 
-        <!-- HISTORIAL -->
+        <!-- SECCIÓN 5: HISTORIAL -->
         <section class="mt-20 space-y-8 text-left">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 px-2">
                 <h3 class="text-xl font-bold tracking-tight">Últimas Canciones</h3>
@@ -437,7 +443,7 @@
             </div>
         </section>
 
-        <!-- RELOJES MUNDIALES -->
+        <!-- SECCIÓN 6: RELOJES MUNDIALES -->
         <section class="mt-20 space-y-8">
             <h4 class="text-[10px] font-black uppercase tracking-[0.4em] opacity-30 text-center">Relojes del Despertar</h4>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -464,7 +470,7 @@
             </div>
         </section>
 
-        <!-- CONTACTO -->
+        <!-- SECCIÓN 7: CONTACTO -->
         <section class="mt-20 space-y-12 text-left">
             <h4 class="text-[10px] font-black uppercase tracking-widest opacity-40 text-center">Contacto y Conexión</h4>
             <div class="flex flex-col gap-4 max-w-2xl mx-auto">
@@ -502,6 +508,7 @@
     <audio id="main-audio" crossorigin="anonymous"></audio>
     <div style="display:none"><span id="metadata-song" class="cc_streaminfo" data-type="song" data-username="mario1">...</span></div>
     
+    <!-- Scripts Centova -->
     <script src="https://centova.servidoraweb.net/system/streaminfo.js"></script>
     <script src="https://centova.servidoraweb.net/system/recenttracks.js"></script>
 
@@ -521,20 +528,20 @@
         let currentQuality = 'q64';
         let isPlaying = false;
         let startTime = Date.now();
-        let currentLessonData = { number: "--", title: "Actualizando..." };
+        let currentLessonData = { number: "--", title: "Cargando..." };
 
+        // NOTA: Para GitHub, pega tu API Key entre las comillas.
         const apiKey = ""; 
         const geminiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent";
 
-        // Función robusta de llamada a Gemini con limpieza de JSON y backoff
         async function callGemini(prompt, systemPrompt, useSearch = false) {
+            if (!apiKey && typeof __apiKey === 'undefined') return null;
+
             const payload = {
                 contents: [{ parts: [{ text: prompt }] }],
                 systemInstruction: { parts: [{ text: systemPrompt }] }
             };
-            if (useSearch) {
-                payload.tools = [{ "google_search": {} }];
-            }
+            if (useSearch) payload.tools = [{ "google_search": {} }];
 
             for (let i = 0; i < 5; i++) {
                 try {
@@ -554,35 +561,93 @@
             return null;
         }
 
-        // Extractor de JSON seguro
         function extractJson(text, type = 'array') {
+            if (!text) return null;
             try {
                 const regex = type === 'array' ? /\[[\s\S]*\]/ : /\{[\s\S]*\}/;
                 const match = text.match(regex);
                 if (match) return JSON.parse(match[0]);
-            } catch (e) { console.error("JSON Error:", e); }
+            } catch (e) {}
             return null;
+        }
+
+        function getCalculatedLesson() {
+            const now = new Date();
+            const start = new Date(now.getFullYear(), 0, 0);
+            const diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+            const oneDay = 1000 * 60 * 60 * 24;
+            let dayOfYear = Math.floor(diff / oneDay);
+            
+            // Ajuste simple para títulos conocidos
+            const commonLessons = {
+                105: "Mía es la paz de Dios",
+                106: "Déjame aquietarme y escuchar la verdad",
+                107: "La verdad corregirá todos los errores de mi mente"
+            };
+            
+            return {
+                number: dayOfYear,
+                title: commonLessons[dayOfYear] || "Tu lección de paz para hoy."
+            };
         }
 
         async function fetchLessonFromACIMI() {
             const loader = document.getElementById('lesson-loader');
             loader?.classList.remove('hidden');
+
+            // Fallback inmediato
+            const fallbackLesson = getCalculatedLesson();
+            document.getElementById('ucdm-lesson-number').innerText = `Lección ${fallbackLesson.number}`;
+            document.getElementById('ucdm-lesson-title').innerText = fallbackLesson.title;
+            currentLessonData = fallbackLesson;
+
             const dateStr = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-            const prompt = `Busca exactamente la lección de hoy ${dateStr} de Un Curso de Milagros.`;
-            const system = `Busca en Google la lección de hoy según el calendario oficial de UCDM. Responde estrictamente con este JSON: {"number": "número", "title": "título"}`;
+            const prompt = `Busca en https://acimi.com/es/un-curso-de-milagros/leccion-del-dia el título exacto de la lección de hoy ${dateStr}.`;
+            const system = `Experto UCDM. Responde estrictamente JSON: {"number": "número", "title": "título"}`;
 
             try {
-                let resultText = await callGemini(prompt, system, true);
-                if (resultText) {
-                    const data = extractJson(resultText, 'object');
-                    if (data) {
-                        currentLessonData = data;
-                        document.getElementById('ucdm-lesson-number').innerText = `Lección ${data.number}`;
-                        document.getElementById('ucdm-lesson-title').innerText = data.title;
-                    }
+                const resultText = await callGemini(prompt, system, true);
+                const data = extractJson(resultText, 'object');
+                if (data) {
+                    currentLessonData = data;
+                    document.getElementById('ucdm-lesson-number').innerText = `Lección ${data.number}`;
+                    document.getElementById('ucdm-lesson-title').innerText = data.title;
                 }
-            } catch (e) { console.error(e); }
+            } catch (e) {}
             finally { loader?.classList.add('hidden'); }
+        }
+
+        function renderTestimonials(data) {
+            const container = document.getElementById('testimonials-container');
+            container.innerHTML = data.map(t => `
+                <div class="testimonial-glass">
+                    <p class="text-sm italic font-bold leading-snug">"${t.text}"</p>
+                    <div class="flex items-center gap-3 mt-4">
+                        <img src="https://flagcdn.com/w40/${(t.code || 'mx').toLowerCase()}.png" class="w-6 h-4 rounded shadow-sm">
+                        <div class="text-left">
+                            <span class="block text-[10px] font-black text-cyan-400 uppercase">${t.name}</span>
+                            <span class="block text-[8px] opacity-40 uppercase">${t.country}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function generateTestimonials() {
+            const fallback = [
+                { name: "Carmen", country: "México", code: "mx", text: "La paz que siento al escuchar la lección diaria es indescriptible." },
+                { name: "Andrés", country: "España", code: "es", text: "Frecuencia Milagro es mi refugio espiritual diario durante el trabajo." },
+                { name: "Lucía", country: "Argentina", code: "ar", text: "Gratitud infinita por expandir este mensaje de amor y luz." }
+            ];
+
+            renderTestimonials(fallback);
+
+            const system = "Genera 3 testimonios cortos UCDM en JSON: [{\"name\":\"...\", \"country\":\"...\", \"code\":\"MX\", \"text\":\"...\"}]";
+            try {
+                const resultText = await callGemini("Genera testimonios.", system);
+                const data = extractJson(resultText, 'array');
+                if (data) renderTestimonials(data);
+            } catch (e) {}
         }
 
         async function getLessonInsight() {
@@ -590,67 +655,33 @@
             const textEl = document.getElementById('insight-text');
             display.classList.remove('hidden');
             display.classList.add('loading-shimmer');
-            textEl.innerText = "✨ Profundizando...";
             try {
-                const system = "Maestro UCDM. Da 2 frases de aplicación práctica breves y potentes.";
+                const system = "Maestro UCDM. Da 2 frases potentes de aplicación práctica sobre esta lección.";
                 const insight = await callGemini(`Lección ${currentLessonData.number}: ${currentLessonData.title}`, system);
                 textEl.innerText = insight || "La paz es tu herencia natural.";
-            } catch (e) { textEl.innerText = "Descansa en tu paz verdadera."; }
+            } catch (e) { textEl.innerText = "Descansa en tu centro."; }
             finally { display.classList.remove('loading-shimmer'); }
         }
 
         async function getSongReflection() {
             const songTitle = document.getElementById('live-song-title').innerText;
-            const display = document.getElementById('song-reflection-display');
-            const textEl = document.getElementById('reflection-text');
             if (songTitle.includes("Sintonizando")) return;
-            
+            const display = document.getElementById('song-reflection-display');
             display.classList.remove('hidden');
             display.classList.add('loading-shimmer');
-            textEl.innerText = "✨ Inspirando...";
             try {
-                const system = "Guía UCDM. Reflexión máx 20 palabras sobre este título musical enfocado en el perdón. No nombres la canción.";
+                const system = "Guía UCDM. Reflexión máx 20 palabras sobre este título musical enfocado en el perdón.";
                 const reflection = await callGemini(`Título: "${songTitle}"`, system);
-                textEl.innerText = reflection || "La música es el eco de la voz de Dios.";
-            } catch (e) { textEl.innerText = "Permite que la paz te envuelva."; }
+                document.getElementById('reflection-text').innerText = reflection || "La música es el eco de Dios.";
+            } catch (e) {}
             finally { display.classList.remove('loading-shimmer'); }
-        }
-
-        async function generateTestimonials() {
-            const container = document.getElementById('testimonials-container');
-            const fallback = [
-                { name: "Carmen", country: "México", code: "mx", text: "La paz que siento al escuchar la lección diaria es indescriptible." },
-                { name: "Andrés", country: "España", code: "es", text: "Frecuencia Milagro es mi refugio espiritual durante el trabajo." },
-                { name: "Lucía", country: "Argentina", code: "ar", text: "Gratitud infinita por expandir este mensaje de amor y luz." }
-            ];
-
-            const system = "Experto UCDM. Genera 3 testimonios creativos cortos en JSON array: [{\"name\":\"...\", \"country\":\"...\", \"code\":\"MX\", \"text\":\"...\"}]";
-            try {
-                const resultText = await callGemini("Genera testimonios de gratitud.", system);
-                const data = resultText ? extractJson(resultText, 'array') : null;
-                const finalData = (data && data.length > 0) ? data : fallback;
-                
-                container.innerHTML = finalData.map(t => `
-                    <div class="testimonial-glass">
-                        <p class="text-sm italic text-white/95 font-bold leading-snug">"${t.text}"</p>
-                        <div class="flex items-center gap-3 mt-4">
-                            <img src="https://flagcdn.com/w40/${t.code.toLowerCase()}.png" class="w-6 h-4 rounded shadow-sm" alt="${t.country}">
-                            <div class="text-left">
-                                <span class="block text-[10px] font-black text-cyan-400 uppercase tracking-widest">${t.name}</span>
-                                <span class="block text-[8px] opacity-40 uppercase tracking-tighter">${t.country}</span>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            } catch (e) { console.error(e); }
         }
 
         function updateClocks() {
             const zones = {'time-mex':'America/Mexico_City','time-esp':'Europe/Madrid','time-arg':'America/Buenos_Aires','time-col':'America/Bogota'};
             for(const [id, tz] of Object.entries(zones)){
                 try {
-                    const el = document.getElementById(id);
-                    if(el) el.innerText = new Intl.DateTimeFormat('es-MX',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:tz}).format(new Date());
+                    document.getElementById(id).innerText = new Intl.DateTimeFormat('es-MX',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:tz}).format(new Date());
                 } catch(e) {}
             }
         }
@@ -687,6 +718,7 @@
             generateTestimonials();
             updateClocks();
             setInterval(updateClocks, 30000);
+            
             setInterval(() => {
                 const song = document.getElementById('metadata-song').innerText;
                 if (song && song !== "...") {
@@ -694,6 +726,7 @@
                     document.getElementById('nav-song-title').innerText = `Sintonía: ${song} • ✨ Frecuencia Milagro `;
                 }
             }, 10000);
+
             setInterval(() => {
                 if (isPlaying) {
                     const elapsed = Math.floor((Date.now() - startTime) / 1000);
