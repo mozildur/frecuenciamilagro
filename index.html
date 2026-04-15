@@ -71,7 +71,7 @@
             100% { transform: translate(-100%, 0); }
         }
 
-        /* --- TOCADISCOS LOGIC --- */
+        /* Tocadiscos */
         .turntable-base {
             position: relative;
             padding: 20px;
@@ -147,39 +147,8 @@
             pointer-events: none;
         }
 
-        @media (min-width: 768px) {
-            .tonearm { width: 140px; height: 320px; right: 20px; }
-        }
-
         .playing .tonearm {
             transform: rotate(5deg);
-        }
-
-        .tonearm-base {
-            width: 40px;
-            height: 40px;
-            background: #333;
-            border-radius: 50%;
-            margin: 0 auto;
-            border: 4px solid #444;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-
-        .tonearm-rod {
-            width: 8px;
-            height: 80%;
-            background: linear-gradient(to right, #666, #999, #666);
-            margin: -5px auto 0;
-            border-radius: 4px;
-        }
-
-        .tonearm-head {
-            width: 25px;
-            height: 45px;
-            background: #222;
-            border-radius: 4px;
-            margin: -10px auto 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
         }
 
         @keyframes spin {
@@ -187,41 +156,11 @@
             to { transform: rotate(360deg); }
         }
 
-        /* UI Elements */
-        .quality-btn {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s;
-            color: rgba(255,255,255,0.4);
-            cursor: pointer;
-        }
-
         .quality-btn.active {
             background: var(--accent-cyan);
             color: #000;
             border-color: var(--accent-cyan);
             box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
-        }
-
-        input[type="range"] {
-            -webkit-appearance: none;
-            height: 4px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 5px;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 14px;
-            width: 14px;
-            border-radius: 50%;
-            background: #fff;
-            cursor: pointer;
         }
 
         .btn-play {
@@ -239,28 +178,29 @@
             cursor: pointer;
         }
 
-        .btn-action {
-            background: rgba(255,255,255,0.05);
-            padding: 10px 20px;
-            border-radius: 2rem;
-            font-weight: 700;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border: 1px solid rgba(255,255,255,0.1);
-            cursor: pointer;
-        }
-
         .loading-shimmer {
-            background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
             background-size: 200% 100%;
-            animation: shimmer 2s infinite;
+            animation: shimmer 2s infinite linear;
         }
 
-        /* Comunidad Overlay */
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .testimonial-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 1.25rem;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
         .community-container {
             position: relative;
             width: 100%;
@@ -288,28 +228,9 @@
             padding: 2rem;
             z-index: 10;
         }
-        .testimonial-glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1.5rem;
-            padding: 1.25rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 160px;
-        }
 
         .custom-scroll::-webkit-scrollbar { width: 5px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        
-        .cc_recenttracks_list { width: 100% !important; }
-        .cc_recenttracks_entry { border-bottom: 1px solid rgba(255,255,255,0.05) !important; padding: 15px 0 !important; }
-        .cc_recenttracks_title { color: #fff !important; font-weight: 600 !important; display: block; font-size: 0.95rem !important; }
-        .cc_recenttracks_artist { color: #888 !important; font-size: 0.8rem !important; }
     </style>
 </head>
 <body class="antialiased text-center">
@@ -343,9 +264,9 @@
         <section id="player-container" class="flex flex-col items-center py-6">
             <div class="turntable-base">
                 <div class="tonearm">
-                    <div class="tonearm-base"></div>
-                    <div class="tonearm-rod"></div>
-                    <div class="tonearm-head"></div>
+                    <div class="w-10 h-10 bg-[#333] rounded-full mx-auto border-4 border-[#444] shadow-lg"></div>
+                    <div class="w-2 h-[80%] bg-gradient-to-r from-[#666] via-[#999] to-[#666] mx-auto -mt-1 rounded-full"></div>
+                    <div class="w-6 h-11 bg-[#222] rounded mx-auto -mt-2 shadow-xl"></div>
                 </div>
 
                 <div class="vinyl-art">
@@ -370,14 +291,14 @@
                 </div>
 
                 <div class="flex flex-col items-center gap-4">
-                    <button onclick="getSongReflection()" class="btn-action">
+                    <button onclick="getSongReflection()" class="bg-white/5 border border-white/10 px-6 py-2.5 rounded-full font-bold text-xs flex items-center gap-2 hover:bg-white/10 transition-all">
                         <i class="fas fa-wand-magic-sparkles text-cyan-400"></i>
                         <span>Inspiración de la canción ✨</span>
                     </button>
                     
                     <div class="flex items-center gap-2 bg-white/5 p-1 rounded-full border border-white/10 mt-2">
-                        <button onclick="changeQuality('q64')" id="q64-btn" class="quality-btn active">64k</button>
-                        <button onclick="changeQuality('q128')" id="q128-btn" class="quality-btn">128k</button>
+                        <button onclick="changeQuality('q64')" id="q64-btn" class="quality-btn active px-4 py-1.5 rounded-full text-[10px] font-black uppercase transition-all">64k</button>
+                        <button onclick="changeQuality('q128')" id="q128-btn" class="quality-btn px-4 py-1.5 rounded-full text-[10px] font-black uppercase transition-all">128k</button>
                     </div>
                 </div>
 
@@ -402,14 +323,14 @@
                     
                     <div class="flex items-center gap-4 w-full max-w-[280px] bg-white/5 px-5 py-3 rounded-2xl border border-white/5">
                         <i class="fas fa-volume-off text-white/20 text-xs"></i>
-                        <input type="range" id="volume-slider" class="flex-1" min="0" max="1" step="0.01" value="0.8">
+                        <input type="range" id="volume-slider" class="flex-1 accent-white" min="0" max="1" step="0.01" value="0.8">
                         <i class="fas fa-volume-up text-white/20 text-xs"></i>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN 2: ACCIONES RÁPIDAS -->
+        <!-- ACCIONES RÁPIDAS -->
         <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
             <a href="https://paypal.me/primerotupaz" target="_blank" class="glass-panel p-6 flex flex-col items-center gap-3 group">
                 <i class="fas fa-heart text-2xl text-pink-500 group-hover:scale-125 transition-transform"></i>
@@ -429,12 +350,12 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 3: LECCIÓN DEL DÍA -->
+        <!-- LECCIÓN DEL DÍA -->
         <section class="mt-20">
             <div class="flex items-center justify-between mb-8 text-left">
                 <div class="flex items-center gap-3">
                     <h3 class="text-xl font-bold tracking-tight">Lección del Día</h3>
-                    <div id="lesson-loader" class="animate-spin text-cyan-400 text-xs">
+                    <div id="lesson-loader" class="hidden animate-spin text-cyan-400 text-xs">
                         <i class="fas fa-sync-alt"></i>
                     </div>
                 </div>
@@ -450,39 +371,36 @@
                 <div class="pt-6 flex flex-wrap gap-4">
                     <a href="https://whatsapp.com/channel/0029VaZLyl6CXC3DMsGiaO3l" target="_blank" class="flex-1 min-w-[140px] flex items-center justify-center gap-3 bg-green-500/10 hover:bg-green-500/20 px-4 py-3 rounded-xl border border-green-500/20 transition-all">
                         <i class="fab fa-whatsapp text-green-400"></i>
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-center text-center">WhatsApp ✨</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-center">WhatsApp ✨</span>
                     </a>
                     <a href="https://www.youtube.com/channel/UCWMdQmpS04i2j0ehwMmuMEw" target="_blank" class="flex-1 min-w-[140px] flex items-center justify-center gap-3 bg-red-500/10 hover:bg-red-500/20 px-4 py-3 rounded-xl border border-red-500/20 transition-all">
                         <i class="fab fa-youtube text-red-500"></i>
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-center text-center">YouTube ✨</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-center">YouTube ✨</span>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN: COMUNIDAD MILAGRONAUTAS -->
+        <!-- COMUNIDAD MILAGRONAUTAS -->
         <section class="mt-20 space-y-10">
             <h3 class="text-xl font-bold tracking-tight text-center">Comunidad Milagronautas</h3>
-            
             <div class="community-container group">
-                <img src="https://lh3.googleusercontent.com/d/13ZGWMVTLQ5chWaeTyCArfFPAzJADPFrs" 
-                     class="community-bg" 
-                     alt="Fondo Milagronautas">
-                
+                <img src="https://lh3.googleusercontent.com/d/13ZGWMVTLQ5chWaeTyCArfFPAzJADPFrs" class="community-bg" alt="Fondo Milagronautas">
                 <div class="community-overlay">
                     <div class="mb-10 text-center">
                         <p class="text-cyan-400 font-black text-[10px] uppercase tracking-[0.7em] mb-4 animate-pulse">Unidos en Sintonía</p>
                         <h4 class="text-2xl md:text-4xl font-black text-white italic drop-shadow-2xl px-4 leading-tight text-center">Extendiendo la Paz del Milagro</h4>
                     </div>
-
                     <div id="testimonials-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl px-4 text-left">
-                        <!-- Cargados por IA -->
+                        <div class="testimonial-glass loading-shimmer"></div>
+                        <div class="testimonial-glass loading-shimmer"></div>
+                        <div class="testimonial-glass loading-shimmer"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN 4: PROGRAMACIÓN -->
+        <!-- PROGRAMACIÓN -->
         <section class="mt-20 space-y-8">
             <h3 class="text-xl font-bold tracking-tight text-left px-2">Programación de Milagros</h3>
             <div class="grid md:grid-cols-2 gap-4">
@@ -503,7 +421,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 5: HISTORIAL -->
+        <!-- HISTORIAL -->
         <section class="mt-20 space-y-8 text-left">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 px-2">
                 <h3 class="text-xl font-bold tracking-tight">Últimas Canciones</h3>
@@ -519,7 +437,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 6: RELOJES MUNDIALES -->
+        <!-- RELOJES MUNDIALES -->
         <section class="mt-20 space-y-8">
             <h4 class="text-[10px] font-black uppercase tracking-[0.4em] opacity-30 text-center">Relojes del Despertar</h4>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -546,7 +464,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 7: CONTACTO -->
+        <!-- CONTACTO -->
         <section class="mt-20 space-y-12 text-left">
             <h4 class="text-[10px] font-black uppercase tracking-widest opacity-40 text-center">Contacto y Conexión</h4>
             <div class="flex flex-col gap-4 max-w-2xl mx-auto">
@@ -608,44 +526,63 @@
         const apiKey = ""; 
         const geminiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent";
 
-        async function callGemini(prompt, systemPrompt) {
+        // Función robusta de llamada a Gemini con limpieza de JSON y backoff
+        async function callGemini(prompt, systemPrompt, useSearch = false) {
             const payload = {
                 contents: [{ parts: [{ text: prompt }] }],
                 systemInstruction: { parts: [{ text: systemPrompt }] }
             };
-            try {
-                const response = await fetch(`${geminiUrl}?key=${apiKey}`, {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                const data = await response.json();
-                return data.candidates?.[0]?.content?.parts?.[0]?.text;
-            } catch (e) { return null; }
+            if (useSearch) {
+                payload.tools = [{ "google_search": {} }];
+            }
+
+            for (let i = 0; i < 5; i++) {
+                try {
+                    const response = await fetch(`${geminiUrl}?key=${apiKey}`, {
+                        method: 'POST', 
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error('API Error');
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text;
+                } catch (e) {
+                    const delay = Math.pow(2, i) * 1000;
+                    await new Promise(r => setTimeout(r, delay));
+                }
+            }
+            return null;
         }
 
-        function changeQuality(quality) {
-            if (currentQuality === quality) return;
-            currentQuality = quality;
-            document.getElementById('q64-btn').classList.toggle('active', quality === 'q64');
-            document.getElementById('q128-btn').classList.toggle('active', quality === 'q128');
-            document.getElementById('bitrate-val').innerText = quality === 'q64' ? '64' : '128';
-            if (isPlaying) togglePlay(true);
+        // Extractor de JSON seguro
+        function extractJson(text, type = 'array') {
+            try {
+                const regex = type === 'array' ? /\[[\s\S]*\]/ : /\{[\s\S]*\}/;
+                const match = text.match(regex);
+                if (match) return JSON.parse(match[0]);
+            } catch (e) { console.error("JSON Error:", e); }
+            return null;
         }
 
-        async function getSongReflection() {
-            const songTitle = document.getElementById('live-song-title').innerText;
-            const display = document.getElementById('song-reflection-display');
-            const textEl = document.getElementById('reflection-text');
-            if (songTitle.includes("Sintonizando")) return;
-            display.classList.remove('hidden');
-            display.classList.add('loading-shimmer');
-            textEl.innerText = "✨ Inspirando un pensamiento de luz...";
+        async function fetchLessonFromACIMI() {
+            const loader = document.getElementById('lesson-loader');
+            loader?.classList.remove('hidden');
+            const dateStr = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+            const prompt = `Busca exactamente la lección de hoy ${dateStr} de Un Curso de Milagros.`;
+            const system = `Busca en Google la lección de hoy según el calendario oficial de UCDM. Responde estrictamente con este JSON: {"number": "número", "title": "título"}`;
+
             try {
-                const system = "Guía UCDM. Reflexión máx 20 palabras sobre este título. No nombres la canción.";
-                const reflection = await callGemini(`Título: "${songTitle}"`, system);
-                display.classList.remove('loading-shimmer');
-                textEl.innerText = reflection || "Descansa en tu paz verdadera.";
-            } catch (e) { textEl.innerText = "Descansa en tu paz verdadera."; display.classList.remove('loading-shimmer'); }
+                let resultText = await callGemini(prompt, system, true);
+                if (resultText) {
+                    const data = extractJson(resultText, 'object');
+                    if (data) {
+                        currentLessonData = data;
+                        document.getElementById('ucdm-lesson-number').innerText = `Lección ${data.number}`;
+                        document.getElementById('ucdm-lesson-title').innerText = data.title;
+                    }
+                }
+            } catch (e) { console.error(e); }
+            finally { loader?.classList.add('hidden'); }
         }
 
         async function getLessonInsight() {
@@ -655,69 +592,57 @@
             display.classList.add('loading-shimmer');
             textEl.innerText = "✨ Profundizando...";
             try {
-                const system = "Maestro UCDM. Da 2 frases de aplicación práctica.";
+                const system = "Maestro UCDM. Da 2 frases de aplicación práctica breves y potentes.";
                 const insight = await callGemini(`Lección ${currentLessonData.number}: ${currentLessonData.title}`, system);
-                display.classList.remove('loading-shimmer');
-                textEl.innerText = insight || "La verdad te hará libre.";
-            } catch (e) { textEl.innerText = "La verdad te hará libre."; display.classList.remove('loading-shimmer'); }
+                textEl.innerText = insight || "La paz es tu herencia natural.";
+            } catch (e) { textEl.innerText = "Descansa en tu paz verdadera."; }
+            finally { display.classList.remove('loading-shimmer'); }
+        }
+
+        async function getSongReflection() {
+            const songTitle = document.getElementById('live-song-title').innerText;
+            const display = document.getElementById('song-reflection-display');
+            const textEl = document.getElementById('reflection-text');
+            if (songTitle.includes("Sintonizando")) return;
+            
+            display.classList.remove('hidden');
+            display.classList.add('loading-shimmer');
+            textEl.innerText = "✨ Inspirando...";
+            try {
+                const system = "Guía UCDM. Reflexión máx 20 palabras sobre este título musical enfocado en el perdón. No nombres la canción.";
+                const reflection = await callGemini(`Título: "${songTitle}"`, system);
+                textEl.innerText = reflection || "La música es el eco de la voz de Dios.";
+            } catch (e) { textEl.innerText = "Permite que la paz te envuelva."; }
+            finally { display.classList.remove('loading-shimmer'); }
         }
 
         async function generateTestimonials() {
             const container = document.getElementById('testimonials-container');
-            if (!container) return;
+            const fallback = [
+                { name: "Carmen", country: "México", code: "mx", text: "La paz que siento al escuchar la lección diaria es indescriptible." },
+                { name: "Andrés", country: "España", code: "es", text: "Frecuencia Milagro es mi refugio espiritual durante el trabajo." },
+                { name: "Lucía", country: "Argentina", code: "ar", text: "Gratitud infinita por expandir este mensaje de amor y luz." }
+            ];
+
+            const system = "Experto UCDM. Genera 3 testimonios creativos cortos en JSON array: [{\"name\":\"...\", \"country\":\"...\", \"code\":\"MX\", \"text\":\"...\"}]";
             try {
-                const system = "Actúa como experto UCDM. Genera 3 testimonios cortos (máx 10 palabras). Temas: Aman las canciones, oyen mientras trabajan/estudian UCDM, o recomendación de coaches. Usa modismos locales potentes. Devuelve array JSON: [{\"name\":\"...\", \"country\":\"...\", \"code\":\"...\", \"text\":\"...\"}]";
-                const resultText = await callGemini("Genera testimonios de luz.", system);
-                if (resultText) {
-                    const data = JSON.parse(resultText.match(/\[.*\]/s)[0]);
-                    container.innerHTML = data.map(t => `
-                        <div class="testimonial-glass">
-                            <p class="text-sm italic text-white/95 leading-snug mb-4 font-bold text-left">"${t.text}"</p>
-                            <div class="flex items-center gap-3 mt-auto">
-                                <img src="https://flagcdn.com/w40/${t.code.toLowerCase()}.png" class="w-6 h-4 object-cover rounded shadow border border-white/10" alt="${t.country}">
-                                <div class="text-left">
-                                    <span class="block text-[10px] font-black text-cyan-400 uppercase tracking-widest">${t.name}</span>
-                                    <span class="block text-[8px] opacity-40 uppercase tracking-tighter">${t.country}</span>
-                                </div>
+                const resultText = await callGemini("Genera testimonios de gratitud.", system);
+                const data = resultText ? extractJson(resultText, 'array') : null;
+                const finalData = (data && data.length > 0) ? data : fallback;
+                
+                container.innerHTML = finalData.map(t => `
+                    <div class="testimonial-glass">
+                        <p class="text-sm italic text-white/95 font-bold leading-snug">"${t.text}"</p>
+                        <div class="flex items-center gap-3 mt-4">
+                            <img src="https://flagcdn.com/w40/${t.code.toLowerCase()}.png" class="w-6 h-4 rounded shadow-sm" alt="${t.country}">
+                            <div class="text-left">
+                                <span class="block text-[10px] font-black text-cyan-400 uppercase tracking-widest">${t.name}</span>
+                                <span class="block text-[8px] opacity-40 uppercase tracking-tighter">${t.country}</span>
                             </div>
                         </div>
-                    `).join('');
-                }
-            } catch (e) {}
-        }
-
-        function togglePlay(forceState) {
-            if (isPlaying && forceState !== true) {
-                audio.pause(); audio.src = ""; 
-                playIcon.className = 'fas fa-play ml-1';
-                playerContainer.classList.remove('playing');
-                isPlaying = false;
-            } else {
-                playIcon.className = 'fas fa-spinner animate-spin';
-                audio.src = STREAMS[currentQuality] + "?t=" + Date.now();
-                audio.load();
-                audio.play().then(() => {
-                    playIcon.className = 'fas fa-pause';
-                    playerContainer.classList.add('playing');
-                    isPlaying = true;
-                    startTime = Date.now();
-                }).catch(() => {
-                    playIcon.className = 'fas fa-play ml-1';
-                });
-            }
-        }
-
-        async function fetchLessonFromACIMI() {
-            const dateStr = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-            try {
-                const resultText = await callGemini(`¿Lección UCDM hoy ${dateStr}?`, "Experto UCDM. Responde JSON: {\"number\":\"...\", \"title\":\"...\"}");
-                if (resultText) {
-                    const data = JSON.parse(resultText.match(/\{.*\}/s)[0]);
-                    currentLessonData = data;
-                    document.getElementById('ucdm-lesson-number').innerText = `Lección ${data.number}`;
-                    document.getElementById('ucdm-lesson-title').innerText = data.title;
-                }
-            } catch (e) {}
+                    </div>
+                `).join('');
+            } catch (e) { console.error(e); }
         }
 
         function updateClocks() {
@@ -730,7 +655,34 @@
             }
         }
 
-        window.addEventListener('load', () => {
+        function togglePlay() {
+            if (isPlaying) {
+                audio.pause(); audio.src = "";
+                playIcon.className = 'fas fa-play ml-1';
+                playerContainer.classList.remove('playing');
+                isPlaying = false;
+            } else {
+                playIcon.className = 'fas fa-spinner animate-spin';
+                audio.src = STREAMS[currentQuality] + "?t=" + Date.now();
+                audio.play().then(() => {
+                    playIcon.className = 'fas fa-pause';
+                    playerContainer.classList.add('playing');
+                    isPlaying = true;
+                    startTime = Date.now();
+                }).catch(() => { playIcon.className = 'fas fa-play ml-1'; });
+            }
+        }
+
+        function changeQuality(quality) {
+            if (currentQuality === quality) return;
+            currentQuality = quality;
+            document.getElementById('q64-btn').classList.toggle('active', quality === 'q64');
+            document.getElementById('q128-btn').classList.toggle('active', quality === 'q128');
+            document.getElementById('bitrate-val').innerText = quality === 'q64' ? '64' : '128';
+            if (isPlaying) togglePlay();
+        }
+
+        window.onload = () => {
             fetchLessonFromACIMI();
             generateTestimonials();
             updateClocks();
@@ -749,9 +701,9 @@
                     progressBar.style.width = `${(elapsed % 450) / 4.5}%`; 
                 }
             }, 1000);
-        });
+        };
 
-        playBtn.addEventListener('click', () => togglePlay());
+        playBtn.addEventListener('click', togglePlay);
         document.getElementById('volume-slider').addEventListener('input', (e) => audio.volume = e.target.value);
     </script>
 </body>
